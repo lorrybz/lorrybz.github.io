@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+    
+    <entry>
+      <title>Linux_git</title>
+      <link href="/2018/12/20/linux-git/"/>
+      <url>/2018/12/20/linux-git/</url>
+      
+        <content type="html"><![CDATA[<h3 id="Git简介"><a href="#Git简介" class="headerlink" title="Git简介"></a>Git简介</h3><p>Git是目前世界上最先进的分布式版本控制系统。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。</p><h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>现在，Git可以在Linux、Unix、Mac和Windows这<br>几大平台上正常运行了。<br>1.linux上安装Git<br>2.windows上安装Git<br><a href="https://git-scm.com/download/" target="_blank" rel="noopener">下载Git</a>,然后一路默认。<br><a href="">中文参考</a></p><h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="设定自己机器的全局变量"><a href="#设定自己机器的全局变量" class="headerlink" title="设定自己机器的全局变量"></a>设定自己机器的全局变量</h4><p> git config –global user.name “Your Name” —— 设定用户名字，随便写<br> git config –global user.email “<a href="mailto:email@example.com" target="_blank" rel="noopener">email@example.com</a>“ ——设定用户邮箱，随便写<br>注意git config命令的–global参数，用了这个参数，表明你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p><h4 id="查看自己机器的配置信息"><a href="#查看自己机器的配置信息" class="headerlink" title="查看自己机器的配置信息"></a>查看自己机器的配置信息</h4><p>config 配置有system级别 global（用户级别） 和local（当前仓库）三个 设置先从system-&gt;global-&gt;local  底层配置会覆盖顶层配置 分别使用–system/global/local 可以定位到配置文件<br>git config –system –list——查看系统config<br>git config –global  –list——查看当前用户（global）配置<br>git config –local  –list—— 查看当前仓库配置信息<br>git config –list ——查看全配置</p><h4 id="额外配置"><a href="#额外配置" class="headerlink" title="额外配置"></a>额外配置</h4><p>git config –global color.ui true ——开启颜色支持<br>git config –global core.quotepath false ——支持utf-8编码</p><h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>git config –global –replace-all user.email “输入你的邮箱”<br>git config –global –replace-all user.name “输入你的用户名”</p><h3 id="创建版本库（repository）"><a href="#创建版本库（repository）" class="headerlink" title="创建版本库（repository）"></a>创建版本库（repository）</h3><p>mkdir directory——创建一个空目录<br>cd directory<br>windows下目录最好不用中文<br>git init——初始化仓库</p><h3 id="查看仓库状态"><a href="#查看仓库状态" class="headerlink" title="查看仓库状态"></a>查看仓库状态</h3><p>git status</p><h3 id="本地操作"><a href="#本地操作" class="headerlink" title="本地操作"></a>本地操作</h3><p>touch ddf.txt<br>git add ddf.txt——把文件添加到仓库<br>git add -A——添加所有文件到仓库<br>这里如果有警告则添加git config –global core.autocrlf false；原因是路径中存在 / 的符号转义问题，false就是不转换符号默认是true，相当于把路径的 / 符号进行转义，这样添加的时候就有问题。<br>git commit -m “first”——把文件提交到仓库<br>git commit命令，-m后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。</p><h3 id="回溯操作"><a href="#回溯操作" class="headerlink" title="回溯操作"></a>回溯操作</h3><p>git dif——查看difference，即查看修改内容<br>git log——查看提交历史，以便确定要回退到哪个版本。<br>记住：commit_id（版本号）<br>git reset –hard HEAD^——HEAD指向的版本就是当前版本，该指令即为回到上个操作版本<br>git reset –hard commit_id——回溯到相应版本<br>git reflog——查看命令历史，以便确定要回到未来的哪个版本。</p><h3 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h3><p> git checkout – ddf.txt</p><h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><p> rm ddf.txt</p><h3 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h3><p>git push——推送，第一次后即用<br>git push  -u origin master——第一次推送master分支的所有内容</p><h3 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a>从远程库克隆</h3><p>1.通过https克隆<br>git clone url<br>2.通过ssh克隆</p><h3 id="从远程添加到本地"><a href="#从远程添加到本地" class="headerlink" title="从远程添加到本地"></a>从远程添加到本地</h3><p> git pull——拉</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    <entry>
+      <title>lorry</title>
+      <link href="/2018/12/20/lorry/"/>
+      <url>/2018/12/20/lorry/</url>
+      
+        <content type="html"><![CDATA[<p>遇见那天的雨真大</p>]]></content>
+      
+      
+      
+    </entry>
+    
+  
+  
+</search>
