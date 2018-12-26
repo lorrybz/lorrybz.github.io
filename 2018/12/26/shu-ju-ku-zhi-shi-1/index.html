@@ -5,8 +5,16 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="分类: Linux_git介绍, lorry_python">
-    <meta name="description" content="分类: Linux_git介绍 | lorry_python">
+    <meta name="keywords" content="数据库知识1, lorry_python">
+    <meta name="description" content="###1.数据库数据库是为了实现项目中的数据持久性 
+###2.数据库的类型
+####2.1关系型数据库
+
+特点：
+1.理论基础：集合论和关系型代数
+2.用二维表来阻止数据（行（记录）和列（字段））
+3.SQL - 结构化查询语言
+关系型数">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -14,7 +22,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>分类: Linux_git介绍 | lorry_python</title>
+    <title>数据库知识1 | lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -261,124 +269,356 @@
     </nav>
 </header>
 
-<div class="bg-cover  about-cover" style="background-image: url('/medias/cover.jpg')">
+
+
+
+
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container">
         <div class="row">
-            <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
+            <div class="col s12 m12 l12">
                 <div class="brand">
-                    <div class="title center-align">
-                    
-                        遇见那天的雨真大
-                    
-                    </div>
-
-                    <div class="description center-align">
-                    
-                        遇见就是很好的孩子
-                    
+                    <div class="description center-align post-title">
+                        数据库知识1
                     </div>
                 </div>
             </div>
         </div>
-        
+    </div>
+</div>
+
+
+
+<main class="container content">
+
+    
+    <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            
+            <div class="article-tag">
+                
+                <a href="/tags/sql/" target="_blank">
+                    <span class="chip bg-color">sql</span>
+                </a>
+                
+            </div>
+            
+            <div class="post-info">
+                
+                <span class="post-cate">
+                    <i class="fa fa-bookmark fa-fw icon-category"></i>
+                    
+                    <a href="/categories/MySql/" class="post-category" target="_blank">
+                        MySql
+                    </a>
+                    
+                </span>
+                
+
+                <span class="post-date">
+                    <i class="fa fa-clock-o fa-fw"></i>2018-12-26
+                </span>
+            </div>
+        </div>
+        <hr>
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>###1.数据库<br>数据库是为了实现项目中的数据持久性 </p>
+<p>###2.数据库的类型</p>
+<p>####2.1关系型数据库</p>
+<ul>
+<li>特点：<ul>
+<li>1.理论基础：集合论和关系型代数</li>
+<li>2.用二维表来阻止数据（行（记录）和列（字段））</li>
+<li>3.SQL - 结构化查询语言</li>
+<li>关系型数据库产品：</li>
+<li>1.Oracle - 甲骨文</li>
+<li>2.mysql  - 甲骨文 - MariaDB</li>
+<li>3.DB2，SQLServer、PsotgreSQL、SQLite<br><strong>能够唯一标记一条记录的列成为主键（primary key）</strong></li>
+<li>4.SQL - 结构化查询语言</li>
+<li>DDL - 数据定义语言 - create，drop，alter</li>
+<li>DML - 数据操作语言 - insert，delete，updata，select</li>
+<li>DCL - 数据控制语言 - grant，revoke，commit，rollback<br> <strong>介绍两个关键词，crash course  和 best practice</strong></li>
+</ul>
+</li>
+</ul>
+<p>####2.2NoAQL非关系型数据库</p>
+<ul>
+<li>1.MongoDB - 文档数据库 - 适合大量但是价值低的数据库<ul>
+<li>2.Redis - kv 数据库 - 性能好适合做高速缓存服务</li>
+<li>3.ElsaticSearch - 搜索引擎</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <hr>
+
+            
+            <style>
+    #reward {
+        margin: 40px 0;
+        text-align: center;
+    }
+
+    #reward .reward-link {
+        font-size: 1.88rem;
+    }
+
+    #reward .btn-floating:hover {
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #rewardModal {
+        width: 320px;
+        height: 350px;
+    }
+
+    #rewardModal .reward-title {
+        margin: 15px auto;
+        padding-bottom: 5px;
+    }
+
+    #rewardModal .modal-content {
+        padding: 10px;
+    }
+
+    #rewardModal .close {
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        color: rgba(0, 0, 0, 0.5);
+        font-size: 1.3rem;
+        line-height: 20px;
+        cursor: pointer;
+    }
+
+    #rewardModal .reward-tabs {
+        margin: 0 auto;
+        width: 210px;
+    }
+
+    .reward-tabs .tabs {
+        height: 38px;
+        margin: 10px auto;
+        padding-left: 0;
+    }
+
+    .reward-tabs .tabs .tab {
+        height: 38px;
+        line-height: 38px;
+    }
+
+    .reward-tabs .tab a {
+        color: #fff;
+        background-color: #ccc;
+    }
+
+    .reward-tabs .tab a:hover {
+        color: #fff;
+    }
+
+    .reward-tabs .wechat-tab .active {
+        color: #fff;
+        background-color: #22AB38;
+    }
+
+    .reward-tabs .alipay-tab .active {
+        color: #fff;
+        background-color: #019FE8;
+    }
+
+    .reward-tabs .reward-img {
+        width: 210px;
+        height: 210px;
+    }
+</style>
+
+<div id="reward">
+    <a class="reward-link btn-floating btn-large waves-effect waves-light red">赏</a>
+
+    <!-- Modal Structure -->
+    <div id="rewardModal" class="modal">
+        <div class="modal-content">
+            <a class="close"><i class="fa fa-close"></i></a>
+            <h4 class="reward-title">你的赏识是我前进的动力</h4>
+            <div class="reward-content">
+                <div class="reward-tabs">
+                    <ul class="tabs">
+                        <li class="tab wechat-tab waves-effect waves-light"><a class="active" href="#wechat">微信</a></li>
+                        <li class="tab alipay-tab waves-effect waves-light"><a href="#alipay">支付宝</a></li>
+                    </ul>
+                    <div id="wechat">
+                        <img src="/medias/reward/wechat.jpg" class="reward-img" alt="微信打赏二维码">
+                    </div>
+                    <div id="alipay">
+                        <img src="/medias/reward/alipay.jpg" class="reward-img" alt="支付宝打赏二维码">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-// Dynamically switch banner pictures every day.
-$('.bg-cover').css('background-image', 'url(/medias/banner/' + new Date().getDay() + '.jpg)');
+    $(function () {
+        $('#reward .reward-link').on('click', function () {
+            $('#rewardModal').openModal();
+        });
+
+        $('#rewardModal .close').on('click', function () {
+            $('#rewardModal').closeModal();
+        });
+    });
 </script>
+            
 
-<main class="content">
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
 
+<div id="article-share">
     
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
 
-<div id="category-cloud" class="container chip-container">
-    <div class="card">
-        <div class="card-content">
-            <div class="tag-title center-align">文章分类</div>
-            <div class="tag-chips">
-                
-                
-                
-                <a href="/categories/Linux-git介绍/" title="Linux_git介绍: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-active " style="background-color: #F9EBEA;">Linux_git介绍
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/2/" title="2: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default " style="background-color: #F5EEF8;">2
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
-                <a href="/categories/blog-setting介绍/" title="blog_setting介绍: 1">
-                    <span class="chip center-align waves-effect waves-light
-                             chip-default " style="background-color: #D5F5E3;">blog_setting介绍
-                        <span class="tag-length">1</span>
-                    </span>
-                </a>
-                
-                
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            <div class="reprint">
+                <p>
+                    <span class="reprint-tip">转载请注明: </span>
+                    <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
+                    <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
+                    <a href="/2018/12/26/shu-ju-ku-zhi-shi-1/" class="b-link-green">数据库知识1</a>
+                </p>
             </div>
         </div>
     </div>
-</div>
 
     
 
-    <article id="articles" class="container articles">
-        <div class="row tags-posts">
-            
-            <div class="article tag-post col s12 m6 l4" data-aos="zoom-in">
-                <div class="card">
-                    <a href="/2018/12/20/linux-git/">
-                        <div class="card-image tag-image">
-                            
-                            
-                            <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Linux_git介绍">
-                            
-                            <span class="card-title">Linux_git介绍</span>
-                        </div>
-                    </a>
-                    <div class="card-content article-content">
-                        <div class="summary">Git简介Git是目前世界上最先进的分布式版本控制系统。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的</div>
-                        <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-20
-                            </span>
-                            <span class="publish-author">
-                                
-                                <i class="fa fa-bookmark fa-fw icon-category"></i>
-                                
-                                <a href="/categories/Linux-git介绍/" class="post-category" target="_blank">
-                                    Linux_git介绍
-                                </a>
-                                
-                                
-                            </span>
-                        </div>
-                    </div>
+    
 
-                    
-                    <div class="card-action article-tags">
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">上一篇</div>
+            <div class="card">
+                <a href="/2018/12/26/linux-zhuang-ruan-jian/">
+                    <div class="card-image">
                         
-                        <a href="/tags/Git/" target="_blank">
-                            <span class="chip bg-color">Git</span>
-                        </a>
                         
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Linux基操">
+                        
+                        <span class="card-title">Linux基操</span>
                     </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">###Linux安装软件docker：虚拟化服务，创建虚拟化容器，并安装软件
+####1.包管理管理工具 -yum、rpm
+
+yum -y install docker-io   安装docker
+yum -y removie docker</div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-26
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Linux/" class="post-category" target="_blank">
+                                    Linux
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/yum/" target="_blank">
+                        <span class="chip bg-color">yum</span>
+                    </a>
+                    
+                    <a href="/tags/rpm/" target="_blank">
+                        <span class="chip bg-color">rpm</span>
+                    </a>
+                    
+                    <a href="/tags/docker/" target="_blank">
+                        <span class="chip bg-color">docker</span>
+                    </a>
                     
                 </div>
+                
             </div>
-            
         </div>
-    </article>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">下一篇</div>
+            <div class="card">
+                <a href="/2018/12/22/blog-setting/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="blog_setting介绍">
+                        
+                        <span class="card-title">blog_setting介绍</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">特性
+简单漂亮，文章内容美观易读
+Material Design设计
+响应式设计，博客在桌面端、平板、手机等设备上均能很好的展现
+每天动态切换Banner图片
+瀑布流式的博客文章列表(文章无特色图片时会有24张漂亮的图片代替)
+时间轴式的归</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/blog搭建/" class="post-category" target="_blank">
+                                    blog搭建
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/blog/" target="_blank">
+                        <span class="chip bg-color">blog</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+    
+
 </main>
 
 

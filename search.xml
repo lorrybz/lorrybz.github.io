@@ -3,6 +3,56 @@
   
     
     <entry>
+      <title>Linux基操</title>
+      <link href="/2018/12/26/linux-zhuang-ruan-jian/"/>
+      <url>/2018/12/26/linux-zhuang-ruan-jian/</url>
+      
+        <content type="html"><![CDATA[<p>###Linux安装软件<br><strong>docker</strong>：虚拟化服务，创建虚拟化容器，并安装软件</p><p>####1.包管理管理工具 -yum、rpm</p><ul><li>yum -y install docker-io   安装docker<ul><li>yum -y removie docker-io  卸载docker</li><li>yum info…    </li><li>yum search… </li><li>yum list installed | grep docker    查看docker中挂在的软件<br>####2.管理docker服务</li><li>systemctl start docker</li><li>systemctl stop docker</li><li>systemctl restart docker</li><li>systemctl status docker   状态</li><li>systemctl enable docker</li><li>systemctl disable docker</li></ul></li></ul><p><strong>补充</strong>：<br><strong>Mysql数据库超级管理云账号 - root<br>Oracle数据库超级管理员账号 - sys<br>SQLServer数据库管理员账号 </strong></p><p>####3.阿里云中docker安装mysql5.7步骤<br>  a 下载mysql的镜像文件：docker pull mysql：5.7<br>  b 查看已经下载的镜像文件:  docker images<br>  c 创建并运行容器:docker run -d -p 3306:3306 –name mysql57 -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7    (需要打开3306端口)<br>  d 安装MySQL客户端工具</p><pre><code>- navicat  -猫- SQLyog   -海豚- Toad for MySQL -蛤蟆</code></pre><p>####4.查看运行中的程序</p><ul><li>docker ps<br>####5.查看所有的容器</li><li>docker container ls -a<br>####6.停止启动容器</li><li>docker stop masql57<ul><li>docker start mysql57</li><li>docker restart mysql57<br>####7.删除容器 </li></ul></li><li>docker rm -f  mysql</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> yum </tag>
+            
+            <tag> rpm </tag>
+            
+            <tag> docker </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
+      <title>数据库知识1</title>
+      <link href="/2018/12/26/shu-ju-ku-zhi-shi-1/"/>
+      <url>/2018/12/26/shu-ju-ku-zhi-shi-1/</url>
+      
+        <content type="html"><![CDATA[<p>###1.数据库<br>数据库是为了实现项目中的数据持久性 </p><p>###2.数据库的类型</p><p>####2.1关系型数据库</p><ul><li>特点：<ul><li>1.理论基础：集合论和关系型代数</li><li>2.用二维表来阻止数据（行（记录）和列（字段））</li><li>3.SQL - 结构化查询语言</li><li>关系型数据库产品：</li><li>1.Oracle - 甲骨文</li><li>2.mysql  - 甲骨文 - MariaDB</li><li>3.DB2，SQLServer、PsotgreSQL、SQLite<br><strong>能够唯一标记一条记录的列成为主键（primary key）</strong></li><li>4.SQL - 结构化查询语言</li><li>DDL - 数据定义语言 - create，drop，alter</li><li>DML - 数据操作语言 - insert，delete，updata，select</li><li>DCL - 数据控制语言 - grant，revoke，commit，rollback<br> <strong>介绍两个关键词，crash course  和 best practice</strong></li></ul></li></ul><p>####2.2NoAQL非关系型数据库</p><ul><li>1.MongoDB - 文档数据库 - 适合大量但是价值低的数据库<ul><li>2.Redis - kv 数据库 - 性能好适合做高速缓存服务</li><li>3.ElsaticSearch - 搜索引擎</li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> MySql </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> sql </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>blog_setting介绍</title>
       <link href="/2018/12/22/blog-setting/"/>
       <url>/2018/12/22/blog-setting/</url>
@@ -12,7 +62,7 @@
       
       <categories>
           
-          <category> blog_setting介绍 </category>
+          <category> blog搭建 </category>
           
       </categories>
       
@@ -35,7 +85,7 @@
       
       <categories>
           
-          <category> Linux_git介绍 </category>
+          <category> Linux </category>
           
       </categories>
       
@@ -43,29 +93,6 @@
         <tags>
             
             <tag> Git </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    <entry>
-      <title>lorry</title>
-      <link href="/2018/12/20/lorry/"/>
-      <url>/2018/12/20/lorry/</url>
-      
-        <content type="html"><![CDATA[<p>遇见那天的雨真大</p>]]></content>
-      
-      
-      <categories>
-          
-          <category> 2 </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> 1 </tag>
             
         </tags>
       
