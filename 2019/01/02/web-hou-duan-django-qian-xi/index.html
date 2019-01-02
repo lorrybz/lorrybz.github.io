@@ -5,15 +5,11 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="数据库知识1, lorry_python">
-    <meta name="description" content="1.数据库数据库是为了实现项目中的数据持久性 
-2.数据库的类型2.1关系型数据库
-特点：
-1.理论基础：集合论和关系型代数
-2.用二维表来阻止数据（行（记录）和列（字段））
-3.SQL - 结构化查询语言
-关系型数据库产品：
-1.Orac">
+    <meta name="keywords" content="web后端Django-前戏, lorry_python">
+    <meta name="description" content="1.配置虚拟环境（1）pycharm中直接配置
+A.在pycharm中创建工程时，就开始创建虚拟环境。
+B.安装django pymysql django-redis    
+pycharm终端命令：pip install django p">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -21,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>数据库知识1 | lorry_python</title>
+    <title>web后端Django-前戏 | lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -272,13 +268,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        数据库知识1
+                        web后端Django-前戏
                     </div>
                 </div>
             </div>
@@ -298,8 +294,8 @@
             
             <div class="article-tag">
                 
-                <a href="/tags/sql/" target="_blank">
-                    <span class="chip bg-color">sql</span>
+                <a href="/tags/Django/" target="_blank">
+                    <span class="chip bg-color">Django</span>
                 </a>
                 
             </div>
@@ -309,44 +305,132 @@
                 <span class="post-cate">
                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                     
-                    <a href="/categories/MySql/" class="post-category" target="_blank">
-                        MySql
+                    <a href="/categories/web后端/" class="post-category" target="_blank">
+                        web后端
                     </a>
                     
                 </span>
                 
 
                 <span class="post-date">
-                    <i class="fa fa-clock-o fa-fw"></i>2018-12-26
+                    <i class="fa fa-clock-o fa-fw"></i>2019-01-02
                 </span>
             </div>
         </div>
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-数据库"><a href="#1-数据库" class="headerlink" title="1.数据库"></a>1.数据库</h3><p>数据库是为了实现项目中的数据持久性 </p>
-<h3 id="2-数据库的类型"><a href="#2-数据库的类型" class="headerlink" title="2.数据库的类型"></a>2.数据库的类型</h3><h4 id="2-1关系型数据库"><a href="#2-1关系型数据库" class="headerlink" title="2.1关系型数据库"></a>2.1关系型数据库</h4><ul>
-<li>特点：<ul>
-<li>1.理论基础：集合论和关系型代数</li>
-<li>2.用二维表来阻止数据（行（记录）和列（字段））</li>
-<li>3.SQL - 结构化查询语言</li>
-<li>关系型数据库产品：</li>
-<li>1.Oracle - 甲骨文</li>
-<li>2.mysql  - 甲骨文 - MariaDB</li>
-<li>3.DB2，SQLServer、PsotgreSQL、SQLite<br><strong>能够唯一标记一条记录的列成为主键（primary key）</strong></li>
-<li>4.SQL - 结构化查询语言</li>
-<li>DDL - 数据定义语言 - create，drop，alter</li>
-<li>DML - 数据操作语言 - insert，delete，updata，select</li>
-<li>DCL - 数据控制语言 - grant，revoke，commit，rollback<br> <strong>介绍两个关键词，crash course  和 best practice</strong></li>
+                <h3 id="1-配置虚拟环境"><a href="#1-配置虚拟环境" class="headerlink" title="1.配置虚拟环境"></a>1.配置虚拟环境</h3><h4 id="（1）pycharm中直接配置"><a href="#（1）pycharm中直接配置" class="headerlink" title="（1）pycharm中直接配置"></a>（1）pycharm中直接配置</h4><ul>
+<li>A.在pycharm中创建工程时，就开始创建虚拟环境。</li>
+<li>B.安装django pymysql django-redis    <ul>
+<li>pycharm终端命令：pip install django pymysql django-redis</li>
+</ul>
+</li>
+<li>C.将依赖库重定向到文件中，方便别人copy时直接通过txt配置虚拟环境<ul>
+<li>终端命令：pip freeze &gt; requirements.txt</li>
+<li>例如：将文件中的依赖库一句话安装到虚拟环境中</li>
+<li>pip install -r requirements.txt </li>
+</ul>
+</li>
+<li>D.开始Django项目,注意最后有一个空格 + .。<ul>
+<li>终端命令：django-admin startproject hellodjango .</li>
+</ul>
+</li>
+<li>E.执行项目，manage.py是自动创好的。<ul>
+<li>终端命令：python manage.py runserver</li>
+<li>执行后可以通过<a href="http://localhost:8000或者http://127.0.0.1:8000进行查看" target="_blank" rel="noopener">http://localhost:8000或者http://127.0.0.1:8000进行查看</a></li>
+</ul>
+</li>
+<li>F.数据库迁移（是在数据库配置好之后执行的命令），建立十张表<ul>
+<li>终端命令：python manage.py migrate</li>
+</ul>
+</li>
+<li>G.Django创建管理员账号<ul>
+<li>python manage.py createsuperuser</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-2NoAQL非关系型数据库"><a href="#2-2NoAQL非关系型数据库" class="headerlink" title="2.2NoAQL非关系型数据库"></a>2.2NoAQL非关系型数据库</h4><ul>
-<li>1.MongoDB - 文档数据库 - 适合大量但是价值低的数据库<ul>
-<li>2.Redis - kv 数据库 - 性能好适合做高速缓存服务</li>
-<li>3.ElsaticSearch - 搜索引擎</li>
+<h4 id="（2）windows中cmd、redhat、centos等中虚拟环境的配置"><a href="#（2）windows中cmd、redhat、centos等中虚拟环境的配置" class="headerlink" title="（2）windows中cmd、redhat、centos等中虚拟环境的配置"></a>（2）windows中cmd、redhat、centos等中虚拟环境的配置</h4><ul>
+<li>A：准备工作1<ul>
+<li>在自己记得住的文件夹下创建两个文件夹用于区分虚拟环境和工作环境分别为env(虚拟环境)和workspace工作环境</li>
 </ul>
 </li>
+<li>AA：准备工作2<ul>
+<li>给全局配置安装虚拟环境</li>
+<li>终端命令：pip install virtualenv</li>
+</ul>
+</li>
+<li>B：配置项目的单独的虚拟环境<ul>
+<li>在cmd或者其余的系统中将路径切换到enc目录下。建议使用git或者xsheel，不使用cmd**终端。</li>
+<li>终端指令：virtualenv –no-site-packages -p C:\Users\ThinkPad\AppData\Local\Programs\Python\Python37\python.exe DJenv1808</li>
+<li>代码解释：</li>
+<li>–no-site-packages：创建纯净环境，无杂质。</li>
+<li>-p：python版本的绝对路径，是针对系统上有多个python版本。若只有一个直接不写。</li>
+<li>DJenv1808  ：存放工程的虚拟环境的文件夹。</li>
+</ul>
+</li>
+<li>C：激活、杀死环境<ul>
+<li>进入enc/Scripts文件夹</li>
+<li>cmd中：进入文件夹后直接输入：activate。然后回车即激活环境。</li>
+<li>mac以及无界面系统中进入文件夹后输入：source activate。然后回车即激活环境。</li>
+<li><strong>状态激活标识：在终端中显示将会出现    （(DJenv1808)）</strong></li>
+<li>退出环境：所有的退出环境操作均一样。终端操作命令：deactivate   </li>
+</ul>
+</li>
+<li>D：在激活状态下<ul>
+<li>a（pycharm中可在中断中执行上述的操作进行。</li>
+<li>b在cmd以及其他中：<h6 id="（1）将目录切换至之前创建的workspace下，创建django文件夹"><a href="#（1）将目录切换至之前创建的workspace下，创建django文件夹" class="headerlink" title="（1）将目录切换至之前创建的workspace下，创建django文件夹"></a>（1）将目录切换至之前创建的workspace下，创建django文件夹</h6><h6 id="（2）执行代码：django-admin-startproject-test"><a href="#（2）执行代码：django-admin-startproject-test" class="headerlink" title="（2）执行代码：django-admin startproject test"></a>（2）执行代码：django-admin startproject test</h6></li>
+</ul>
+</li>
+<li>E：用pycharm打开为项目名称的这个工程<ul>
+<li>在pycharm终端中启动命令：python manange.py runserver   8080 or 0.0.0.0:8080即可看到页面。</li>
+</ul>
+</li>
+<li>G：创建app子工程<ul>
+<li>在pycharm的终端中执行代码：python manage.py startapp app</li>
+</ul>
+</li>
+<li>H：对数据库做迁移。<ul>
+<li>a.迁移命令（建立十张表）：python manage.py migrate </li>
+</ul>
+</li>
+<li>I :对后台数据创建超级管理员<ul>
+<li>.终端执行代码：python manage.py createsuperuser<h3 id="2-MVT和MVC模式："><a href="#2-MVT和MVC模式：" class="headerlink" title="2.MVT和MVC模式："></a>2.MVT和MVC模式：</h3><strong>MVT模式是由MVC模式演变出来的，MVC模式是所有框架遵循的模式</strong><br>MVT：M：models.py——模型层<br> V：views.py————视图层<br> C：templates————模板，定义页面HTML的地方<br>MVC：<br>M:模型层<br>V：模板：HTML页面<br>C：controller，控制器，写业务逻辑的地方<h3 id="3-pip相关用法"><a href="#3-pip相关用法" class="headerlink" title="3.pip相关用法"></a>3.pip相关用法</h3></li>
+</ul>
+</li>
+<li>查看虚拟环境下安装的所有的包　：pip list<ul>
+<li>查看虚拟环境重通过pip安装的包 ：pip freeze    </li>
+<li>查看是否冲突：pip check<h4 id="4-数据库配置"><a href="#4-数据库配置" class="headerlink" title="4.数据库配置"></a>4.数据库配置</h4></li>
+</ul>
+</li>
+<li>当完成相关配置后即可配置数据库：找到test下setting.py.大概80行的位置。修改database为<pre><code>DATABASES = {
+  &#39;default&#39;: {
+      &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;,
+      &#39;NAME&#39;: &#39;dj8&#39;,
+      &#39;USER&#39;:&#39;root&#39;,
+      &#39;PASSWORD&#39;:&#39;*****&#39;, #数据库密码
+      &#39;HOST&#39;:&#39;120.0.0.0&#39;, #服务器或者本地地址
+      &#39;PORT&#39;:3306,
+      &#39;TIME_ZONE&#39;:&#39;Asia/Chongqing&#39;
+  }
+}
+</code></pre><h4 id="5修改访问权限"><a href="#5修改访问权限" class="headerlink" title="5修改访问权限"></a>5修改访问权限</h4><pre><code>ALLOWED_HOSTS = [&#39;*&#39;]   #允许访问的主机ip地址
+</code></pre><h4 id="6-语言时区修改"><a href="#6-语言时区修改" class="headerlink" title="6.语言时区修改"></a>6.语言时区修改</h4><pre><code>LANGUAGE_CODE = &#39;zh-hans&#39;
+TIME_ZONE = &#39;Asia/Chongqing&#39;
+</code></pre><h4 id="7-数据库模块配置"><a href="#7-数据库模块配置" class="headerlink" title="7.数据库模块配置"></a>7.数据库模块配置</h4></li>
+<li>a.在pycharm终端中执行代码：pip install pymysql <ul>
+<li>此操作时连接国外网站进行下载可以通过其他方法进行提升</li>
+<li>方法（1）：pip install -i <a href="https://pypi.doubanio.com/sample" target="_blank" rel="noopener">https://pypi.doubanio.com/sample</a> pymysql提升下载速度</li>
+<li>方法（2）：修改系统配置文件</li>
+<li>在C盘user或者用户下找到当前的管家（我的是thinkpad）新建一个文件夹pip,再新建一个后缀为ini文件名为pip的文件。</li>
+<li>编辑文件为下内容即可<pre><code>[global]
+index-url=https://pypi.doubanio.com/simple
+</code></pre></li>
+</ul>
+</li>
+<li>b.在ini.py文件中写下一下代码：<pre><code>import pymysql
+pymysql.install_as_MySQLdb()
+</code></pre>前戏配置完毕</li>
 </ul>
 
             </div>
@@ -486,7 +570,7 @@
                     <span class="reprint-tip">转载请注明: </span>
                     <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2018/12/26/shu-ju-ku-zhi-shi-1/" class="b-link-green">数据库知识1</a>
+                    <a href="/2019/01/02/web-hou-duan-django-qian-xi/" class="b-link-green">web后端Django-前戏</a>
                 </p>
             </div>
         </div>
@@ -508,7 +592,54 @@
     <div class="row article-row">
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">上一篇</div>
+            <div class="article-badge left-badge text-color">本篇</div>
+            <div class="card">
+                <a href="/2019/01/02/web-hou-duan-django-qian-xi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="web后端Django-前戏">
+                        
+                        <span class="card-title">web后端Django-前戏</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">1.配置虚拟环境（1）pycharm中直接配置
+A.在pycharm中创建工程时，就开始创建虚拟环境。
+B.安装django pymysql django-redis    
+pycharm终端命令：pip install django p</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/web后端/" class="post-category" target="_blank">
+                                    web后端
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Django/" target="_blank">
+                        <span class="chip bg-color">Django</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">下一篇</div>
             <div class="card">
                 <a href="/2018/12/26/linux-zhuang-ruan-jian/">
                     <div class="card-image">
@@ -525,9 +656,9 @@
 yum -y install docker-io   安装docker
 yum -y removie docker-io  卸载d</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-26
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-26
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -553,55 +684,6 @@ yum -y removie docker-io  卸载d</div>
                     
                     <a href="/tags/docker/" target="_blank">
                         <span class="chip bg-color">docker</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">下一篇</div>
-            <div class="card">
-                <a href="/2018/12/22/blog-setting/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="blog_setting介绍">
-                        
-                        <span class="card-title">blog_setting介绍</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary">特性
-简单漂亮，文章内容美观易读
-Material Design设计
-响应式设计，博客在桌面端、平板、手机等设备上均能很好的展现
-每天动态切换Banner图片
-瀑布流式的博客文章列表(文章无特色图片时会有24张漂亮的图片代替)
-时间轴式的归</div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-22
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/blog搭建/" class="post-category" target="_blank">
-                                    blog搭建
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/blog/" target="_blank">
-                        <span class="chip bg-color">blog</span>
                     </a>
                     
                 </div>
