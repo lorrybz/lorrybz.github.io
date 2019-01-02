@@ -5,11 +5,9 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="web后端Django-前戏, lorry_python">
-    <meta name="description" content="1.配置虚拟环境（1）pycharm中直接配置
-A.在pycharm中创建工程时，就开始创建虚拟环境。
-B.安装django pymysql django-redis    
-pycharm终端命令：pip install django p">
+    <meta name="keywords" content="非关系型数据库, lorry_python">
+    <meta name="description" content="第一部分redis的安装以及挂载1.进入Linux系统或者在服务器中下载文件wget http://download.redis.io/releases/redis-5.0.3.tar.gz
+2.解压文件gunzip redis-5.0.3">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +15,7 @@ pycharm终端命令：pip install django p">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>web后端Django-前戏 | lorry_python</title>
+    <title>非关系型数据库 | lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -268,13 +266,13 @@ pycharm终端命令：pip install django p">
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        web后端Django-前戏
+                        非关系型数据库
                     </div>
                 </div>
             </div>
@@ -294,8 +292,8 @@ pycharm终端命令：pip install django p">
             
             <div class="article-tag">
                 
-                <a href="/tags/Django/" target="_blank">
-                    <span class="chip bg-color">Django</span>
+                <a href="/tags/redis/" target="_blank">
+                    <span class="chip bg-color">redis</span>
                 </a>
                 
             </div>
@@ -305,8 +303,8 @@ pycharm终端命令：pip install django p">
                 <span class="post-cate">
                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                     
-                    <a href="/categories/web后端/" class="post-category" target="_blank">
-                        web后端
+                    <a href="/categories/Mysql/" class="post-category" target="_blank">
+                        Mysql
                     </a>
                     
                 </span>
@@ -320,117 +318,41 @@ pycharm终端命令：pip install django p">
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-配置虚拟环境"><a href="#1-配置虚拟环境" class="headerlink" title="1.配置虚拟环境"></a>1.配置虚拟环境</h3><h4 id="（1）pycharm中直接配置"><a href="#（1）pycharm中直接配置" class="headerlink" title="（1）pycharm中直接配置"></a>（1）pycharm中直接配置</h4><ul>
-<li>A.在pycharm中创建工程时，就开始创建虚拟环境。</li>
-<li>B.安装django pymysql django-redis    <ul>
-<li>pycharm终端命令：pip install django pymysql django-redis</li>
+                <h2 id="第一部分redis的安装以及挂载"><a href="#第一部分redis的安装以及挂载" class="headerlink" title="第一部分redis的安装以及挂载"></a>第一部分redis的安装以及挂载</h2><h3 id="1-进入Linux系统或者在服务器中下载文件"><a href="#1-进入Linux系统或者在服务器中下载文件" class="headerlink" title="1.进入Linux系统或者在服务器中下载文件"></a>1.进入Linux系统或者在服务器中下载文件</h3><p>wget <a href="http://download.redis.io/releases/redis-5.0.3.tar.gz" target="_blank" rel="noopener">http://download.redis.io/releases/redis-5.0.3.tar.gz</a></p>
+<h3 id="2-解压文件"><a href="#2-解压文件" class="headerlink" title="2.解压文件"></a>2.解压文件</h3><p>gunzip redis-5.0.3.tar.gz</p>
+<h3 id="3-解归档文件，以及切换至redis-5-0-3-文件夹中"><a href="#3-解归档文件，以及切换至redis-5-0-3-文件夹中" class="headerlink" title="3.解归档文件，以及切换至redis-5.0.3/文件夹中"></a>3.解归档文件，以及切换至redis-5.0.3/文件夹中</h3><p>tar -xvf redis-5.0.3.tar  ； cd redis-5.0.3/<br><strong>补充：1.gcc -v  or  gcc –version;查看当前gcc版本</strong><br>     <strong>2.ps -ef | grep redis</strong></p>
+<h3 id="4-执行安装redis-执行第一句安装，接着第二句"><a href="#4-执行安装redis-执行第一句安装，接着第二句" class="headerlink" title="4.执行安装redis,执行第一句安装，接着第二句"></a>4.执行安装redis,执行第一句安装，接着第二句</h3><p>make &amp;&amp; make install  </p>
+<h3 id="5-启动服务"><a href="#5-启动服务" class="headerlink" title="5.启动服务"></a>5.启动服务</h3><ul>
+<li>（1）redis-server;  直接在前台运行且裸奔；</li>
+<li>（2）redis-server &amp;; 在后台运行且裸奔；</li>
+<li>（3）redis-server &gt; redis.log 2&gt; redis-error.log &amp;;在后台运行且裸奔，实质是将日志重定向到redis.log，且若是错误的结束将错误日志重定向到redis-error.log中；</li>
+<li>（7）redis-server –requirepass 123456 &gt; redis.log 2&gt; redis-error.log &amp; 在后台运行，重定向日志，设置密码且不裸奔，但若是错误结束将u自动保存；</li>
+<li>（8）redis-server –requirepass lorry1234 –appendonly yes &gt; redis.log 2&gt; redis-error.log &amp;  在后台运行，重定向日志，不裸奔，自动保存；<h3 id="6-进入客户端"><a href="#6-进入客户端" class="headerlink" title="6.进入客户端,"></a>6.进入客户端,</h3>redis-cli;链接自己<br>redis-cli -h 120.77.45.55 -p 6379 -a 1qaz2wsx<h3 id="7-当出现遗传ip时即可输入密码进入"><a href="#7-当出现遗传ip时即可输入密码进入" class="headerlink" title="7.当出现遗传ip时即可输入密码进入"></a>7.当出现遗传ip时即可输入密码进入</h3>auth lorry1234;</li>
 </ul>
-</li>
-<li>C.将依赖库重定向到文件中，方便别人copy时直接通过txt配置虚拟环境<ul>
-<li>终端命令：pip freeze &gt; requirements.txt</li>
-<li>例如：将文件中的依赖库一句话安装到虚拟环境中</li>
-<li>pip install -r requirements.txt </li>
-</ul>
-</li>
-<li>D.开始Django项目,注意最后有一个空格 + .。<ul>
-<li>终端命令：django-admin startproject hellodjango .</li>
-</ul>
-</li>
-<li>E.执行项目，manage.py是自动创好的。<ul>
-<li>终端命令：python manage.py runserver</li>
-<li>执行后可以通过<a href="http://localhost:8000或者http://127.0.0.1:8000进行查看" target="_blank" rel="noopener">http://localhost:8000或者http://127.0.0.1:8000进行查看</a></li>
-</ul>
-</li>
-<li>F.数据库迁移（是在数据库配置好之后执行的命令），建立十张表<ul>
-<li>终端命令：python manage.py migrate</li>
-</ul>
-</li>
-<li>G.Django创建管理员账号<ul>
-<li>python manage.py createsuperuser</li>
-</ul>
-</li>
-</ul>
-<h4 id="（2）windows中cmd、redhat、centos等中虚拟环境的配置"><a href="#（2）windows中cmd、redhat、centos等中虚拟环境的配置" class="headerlink" title="（2）windows中cmd、redhat、centos等中虚拟环境的配置"></a>（2）windows中cmd、redhat、centos等中虚拟环境的配置</h4><ul>
-<li>A：准备工作1<ul>
-<li>在自己记得住的文件夹下创建两个文件夹用于区分虚拟环境和工作环境分别为env(虚拟环境)和workspace工作环境</li>
-</ul>
-</li>
-<li>AA：准备工作2<ul>
-<li>给全局配置安装虚拟环境</li>
-<li>终端命令：pip install virtualenv</li>
-</ul>
-</li>
-<li>B：配置项目的单独的虚拟环境<ul>
-<li>在cmd或者其余的系统中将路径切换到enc目录下。建议使用git或者xsheel，不使用cmd**终端。</li>
-<li>终端指令：virtualenv –no-site-packages -p C:\Users\ThinkPad\AppData\Local\Programs\Python\Python37\python.exe DJenv1808</li>
-<li>代码解释：</li>
-<li>–no-site-packages：创建纯净环境，无杂质。</li>
-<li>-p：python版本的绝对路径，是针对系统上有多个python版本。若只有一个直接不写。</li>
-<li>DJenv1808  ：存放工程的虚拟环境的文件夹。</li>
-</ul>
-</li>
-<li>C：激活、杀死环境<ul>
-<li>进入enc/Scripts文件夹</li>
-<li>cmd中：进入文件夹后直接输入：activate。然后回车即激活环境。</li>
-<li>mac以及无界面系统中进入文件夹后输入：source activate。然后回车即激活环境。</li>
-<li><strong>状态激活标识：在终端中显示将会出现    （(DJenv1808)）</strong></li>
-<li>退出环境：所有的退出环境操作均一样。终端操作命令：deactivate   </li>
-</ul>
-</li>
-<li>D：在激活状态下<ul>
-<li>a（pycharm中可在中断中执行上述的操作进行。</li>
-<li>b在cmd以及其他中：<h6 id="（1）将目录切换至之前创建的workspace下，创建django文件夹"><a href="#（1）将目录切换至之前创建的workspace下，创建django文件夹" class="headerlink" title="（1）将目录切换至之前创建的workspace下，创建django文件夹"></a>（1）将目录切换至之前创建的workspace下，创建django文件夹</h6><h6 id="（2）执行代码：django-admin-startproject-test"><a href="#（2）执行代码：django-admin-startproject-test" class="headerlink" title="（2）执行代码：django-admin startproject test"></a>（2）执行代码：django-admin startproject test</h6></li>
-</ul>
-</li>
-<li>E：用pycharm打开为项目名称的这个工程<ul>
-<li>在pycharm终端中启动命令：python manange.py runserver   8080 or 0.0.0.0:8080即可看到页面。</li>
-</ul>
-</li>
-<li>G：创建app子工程<ul>
-<li>在pycharm的终端中执行代码：python manage.py startapp app</li>
-</ul>
-</li>
-<li>H：对数据库做迁移。<ul>
-<li>a.迁移命令（建立十张表）：python manage.py migrate </li>
-</ul>
-</li>
-<li>I :对后台数据创建超级管理员<ul>
-<li>.终端执行代码：python manage.py createsuperuser<h3 id="2-MVT和MVC模式："><a href="#2-MVT和MVC模式：" class="headerlink" title="2.MVT和MVC模式："></a>2.MVT和MVC模式：</h3><strong>MVT模式是由MVC模式演变出来的，MVC模式是所有框架遵循的模式</strong><br>MVT：M：models.py——模型层<br> V：views.py————视图层<br> C：templates————模板，定义页面HTML的地方<br>MVC：<br>M:模型层<br>V：模板：HTML页面<br>C：controller，控制器，写业务逻辑的地方<h3 id="3-pip相关用法"><a href="#3-pip相关用法" class="headerlink" title="3.pip相关用法"></a>3.pip相关用法</h3></li>
-</ul>
-</li>
-<li>查看虚拟环境下安装的所有的包　：pip list<ul>
-<li>查看虚拟环境重通过pip安装的包 ：pip freeze    </li>
-<li>查看是否冲突：pip check<h4 id="4-数据库配置"><a href="#4-数据库配置" class="headerlink" title="4.数据库配置"></a>4.数据库配置</h4></li>
-</ul>
-</li>
-<li>当完成相关配置后即可配置数据库：找到test下setting.py.大概80行的位置。修改database为<pre><code>DATABASES = {
-  &#39;default&#39;: {
-      &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;,
-      &#39;NAME&#39;: &#39;dj8&#39;,
-      &#39;USER&#39;:&#39;root&#39;,
-      &#39;PASSWORD&#39;:&#39;*****&#39;, #数据库密码
-      &#39;HOST&#39;:&#39;120.0.0.0&#39;, #服务器或者本地地址
-      &#39;PORT&#39;:3306,
-      &#39;TIME_ZONE&#39;:&#39;Asia/Chongqing&#39;
-  }
-}
-</code></pre><h4 id="5修改访问权限"><a href="#5修改访问权限" class="headerlink" title="5修改访问权限"></a>5修改访问权限</h4><pre><code>ALLOWED_HOSTS = [&#39;*&#39;]   #允许访问的主机ip地址
-</code></pre><h4 id="6-语言时区修改"><a href="#6-语言时区修改" class="headerlink" title="6.语言时区修改"></a>6.语言时区修改</h4><pre><code>LANGUAGE_CODE = &#39;zh-hans&#39;
-TIME_ZONE = &#39;Asia/Chongqing&#39;
-</code></pre><h4 id="7-数据库模块配置"><a href="#7-数据库模块配置" class="headerlink" title="7.数据库模块配置"></a>7.数据库模块配置</h4></li>
-<li>a.在pycharm终端中执行代码：pip install pymysql <ul>
-<li>此操作时连接国外网站进行下载可以通过其他方法进行提升</li>
-<li>方法（1）：pip install -i <a href="https://pypi.doubanio.com/sample" target="_blank" rel="noopener">https://pypi.doubanio.com/sample</a> pymysql提升下载速度</li>
-<li>方法（2）：修改系统配置文件</li>
-<li>在C盘user或者用户下找到当前的管家（我的是thinkpad）新建一个文件夹pip,再新建一个后缀为ini文件名为pip的文件。</li>
-<li>编辑文件为下内容即可<pre><code>[global]
-index-url=https://pypi.doubanio.com/simple
-</code></pre></li>
-</ul>
-</li>
-<li>b.在ini.py文件中写下一下代码：<pre><code>import pymysql
-pymysql.install_as_MySQLdb()
-</code></pre>前戏配置完毕</li>
+<h2 id="第二部分redis简介"><a href="#第二部分redis简介" class="headerlink" title="第二部分redis简介"></a>第二部分redis简介</h2><p>kv存储系统 - REmote DIctionary Server<br>提供高速缓存服务、缓存热点数据<br>缓解了数据的压力，访问数据不用直接访问数据库</p>
+<h2 id="第三部分redis一部分基操"><a href="#第三部分redis一部分基操" class="headerlink" title="第三部分redis一部分基操"></a>第三部分redis一部分基操</h2><ul>
+<li>心跳事件：ping</li>
+<li>查看历史：history -c</li>
+<li>设置键值对：set username lorry</li>
+<li>取值：get username </li>
+<li>设置键值对生存时间：set email <a href="mailto:lorry@qq.com" target="_blank" rel="noopener">lorry@qq.com</a> ex 20</li>
+<li>设置未设置生存时间的键值对的生存时间：expire key </li>
+<li>查看键值生存时间:ttl email</li>
+<li>删除键值对:del key</li>
+<li>查看所有的键值对:keys *</li>
+<li>key y<em>  ,key u</em> :等我查查</li>
+<li>清空数据库：flushdb</li>
+<li>清楚所有数据库中的所有键值对：flushall</li>
+<li>判断键是否存在：exists key；返回值是布尔值；</li>
+<li>换底层数据库，默认中有16个数据库：select 1   ；编号为（0-15）</li>
+<li>关闭服务器：shutdown</li>
+<li>退出：quit</li>
+<li>保存：save ，后台保存：bgsave </li>
+<li>查看当前数据库有多少键值对：dbsize  </li>
+<li>执行时加1 ：incr   </li>
+<li>执行时加100：incrby 100；100可以自定义</li>
+<li>减1：decr</li>
+<li>减200：decrby 200；<h3 id="redis提供了两种是九华数据的方案："><a href="#redis提供了两种是九华数据的方案：" class="headerlink" title="redis提供了两种是九华数据的方案："></a>redis提供了两种是九华数据的方案：</h3>1.RDB - 默认开启<br>2.AOF - 默认关闭  –appendonly yes   意外情况只是丢失1秒钟的数据</li>
 </ul>
 
             </div>
@@ -570,7 +492,7 @@ pymysql.install_as_MySQLdb()
                     <span class="reprint-tip">转载请注明: </span>
                     <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/01/02/web-hou-duan-django-qian-xi/" class="b-link-green">web后端Django-前戏</a>
+                    <a href="/2019/01/02/fei-guan-xi-xing-shu-ju-ku-2redis/" class="b-link-green">非关系型数据库</a>
                 </p>
             </div>
         </div>
@@ -592,7 +514,7 @@ pymysql.install_as_MySQLdb()
     <div class="row article-row">
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">上一篇</div>
+            <div class="article-badge left-badge text-color">本篇</div>
             <div class="card">
                 <a href="/2019/01/02/fei-guan-xi-xing-shu-ju-ku-2redis/">
                     <div class="card-image">
@@ -607,9 +529,9 @@ pymysql.install_as_MySQLdb()
                     <div class="summary">第一部分redis的安装以及挂载1.进入Linux系统或者在服务器中下载文件wget http://download.redis.io/releases/redis-5.0.3.tar.gz
 2.解压文件gunzip redis-5.0.3</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -622,6 +544,7 @@ pymysql.install_as_MySQLdb()
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -638,30 +561,30 @@ pymysql.install_as_MySQLdb()
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">下一篇</div>
             <div class="card">
-                <a href="/2018/12/26/linux-zhuang-ruan-jian/">
+                <a href="/2019/01/02/web-hou-duan-django-qian-xi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Linux基操">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="web后端Django-前戏">
                         
-                        <span class="card-title">Linux基操</span>
+                        <span class="card-title">web后端Django-前戏</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Linux安装软件docker：虚拟化服务，创建虚拟化容器，并安装软件
-1.包管理管理工具 -yum、rpm
-yum -y install docker-io   安装docker
-yum -y removie docker-io  卸载d</div>
+                    <div class="summary">1.配置虚拟环境（1）pycharm中直接配置
+A.在pycharm中创建工程时，就开始创建虚拟环境。
+B.安装django pymysql django-redis    
+pycharm终端命令：pip install django p</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-26
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Linux/" class="post-category" target="_blank">
-                                    Linux
+                            <a href="/categories/web后端/" class="post-category" target="_blank">
+                                    web后端
                                 </a>
                             
                             
@@ -671,16 +594,8 @@ yum -y removie docker-io  卸载d</div>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/yum/" target="_blank">
-                        <span class="chip bg-color">yum</span>
-                    </a>
-                    
-                    <a href="/tags/rpm/" target="_blank">
-                        <span class="chip bg-color">rpm</span>
-                    </a>
-                    
-                    <a href="/tags/docker/" target="_blank">
-                        <span class="chip bg-color">docker</span>
+                    <a href="/tags/Django/" target="_blank">
+                        <span class="chip bg-color">Django</span>
                     </a>
                     
                 </div>
