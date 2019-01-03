@@ -5,9 +5,11 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="web后端Django-前戏之数据库增删改查, lorry_python">
-    <meta name="description" content="概念引入ORM(objects relationship mapping): 对象关系映射；objects: 管理器，默认模型的属性；
-1.数据增加中间表（即自己需要管理的表）举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新">
+    <meta name="keywords" content="数据库操作-建表, lorry_python">
+    <meta name="description" content="1.创建数据库– 如果存在srs的数据库就删除它（慎重），之后创建数据库并且进入数据库。
+drop database if exists srs;
+create database srs default charset utf8;
+use ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>web后端Django-前戏之数据库增删改查 | lorry_python</title>
+    <title>数据库操作-建表 | lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -266,13 +268,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        web后端Django-前戏之数据库增删改查
+                        数据库操作-建表
                     </div>
                 </div>
             </div>
@@ -292,8 +294,8 @@
             
             <div class="article-tag">
                 
-                <a href="/tags/Django/" target="_blank">
-                    <span class="chip bg-color">Django</span>
+                <a href="/tags/sql/" target="_blank">
+                    <span class="chip bg-color">sql</span>
                 </a>
                 
             </div>
@@ -303,209 +305,105 @@
                 <span class="post-cate">
                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                     
-                    <a href="/categories/web后端/" class="post-category" target="_blank">
-                        web后端
+                    <a href="/categories/MySql/" class="post-category" target="_blank">
+                        MySql
                     </a>
                     
                 </span>
                 
 
                 <span class="post-date">
-                    <i class="fa fa-clock-o fa-fw"></i>2019-01-03
+                    <i class="fa fa-clock-o fa-fw"></i>2018-12-26
                 </span>
             </div>
         </div>
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="概念引入"><a href="#概念引入" class="headerlink" title="概念引入"></a>概念引入</h3><p>ORM(objects relationship mapping): 对象关系映射；<br>objects: 管理器，默认模型的属性；</p>
-<h3 id="1-数据增加中间表（即自己需要管理的表）"><a href="#1-数据增加中间表（即自己需要管理的表）" class="headerlink" title="1.数据增加中间表（即自己需要管理的表）"></a>1.数据增加中间表（即自己需要管理的表）</h3><h5 id="举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；"><a href="#举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；" class="headerlink" title="举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；"></a>举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；</h5><ul>
-<li>a：在django-admin startproject app . 或者 python manage.py startapp app之后即可看见工程中有app文件，其中有一个model.py文件，进入即可。</li>
-<li>b：创建类以及创建表名字，需要导入model模块<pre><code>from django.db import models
-# Create your models here.
-class Student(models.Model):
-  s_name = models.CharField(max_length=10,unique=True)
-  s_age = models.IntegerField(default=20)
-  s_gender = models.BooleanField(default=0)
-  create_time = models.DateTimeField(auto_now_add=True)
-  # auto_now_add   创建时，默认字段赋值为最新的事件
-  # create_time = models.DateField
-  updata_time = models.DateTimeField(auto_now=True)
-  # 修改数据是，自动赋值为更新字段时 的时间。
-  math = models.DecimalField(max_digits=3,decimal_places=1,null=True)
-  wuli = models.DecimalField(max_digits=3,decimal_places=1,null=True)
-  class Meta:
-      db_table = &#39;student&#39;
+                <h3 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1.创建数据库"></a>1.创建数据库</h3><p>– 如果存在srs的数据库就删除它（慎重），之后创建数据库并且进入数据库。</p>
+<pre><code>drop database if exists srs;
+create database srs default charset utf8;
+use srs;
+</code></pre><h3 id="2-创建二维表"><a href="#2-创建二维表" class="headerlink" title="2.创建二维表"></a>2.创建二维表</h3><p>例子：创建学生管理表并且添加信息</p>
+<h4 id="1-创建学员表"><a href="#1-创建学员表" class="headerlink" title="1.创建学员表"></a>1.创建学员表</h4><pre><code>create table tb_college
+(
+collid int not null auto_increment comment &#39;学院编号&#39;,
+collname varchar(50) not null comment &#39;学院名称&#39;,
+collmaster varchar(20) not null comment &#39;院长姓名&#39;,
+collweb varchar(511) default &#39;&#39; comment &#39;学院网站&#39;,
+primary key (collid)
+);
+</code></pre><ul>
+<li>添加唯一性约束到学院名称<pre><code>alter table tb_college add constraint uni_college_collname unique (collname);
+</code></pre><h4 id="2-创建学生表"><a href="#2-创建学生表" class="headerlink" title="2.创建学生表"></a>2.创建学生表</h4><pre><code>create table tb_student
+(
+stuid int not null comment &#39;学号&#39;,
+sname varchar(20) not null comment &#39;学生姓名&#39;,
+gender bit default 1 comment &#39;性别&#39;,
+birth date not null comment &#39;出生日期&#39;,
+addr varchar(255) default &#39;&#39; comment &#39;籍贯&#39;,
+collid int not null comment &#39;所属学院编号&#39;,
+primary key (stuid)
+);
 </code></pre></li>
-<li>c：在pycharm终端中执行两条迁移命令,即可在数据库中创建表；<ul>
-<li>生成迁移文件：python manage.py makemigrations；</li>
-<li>执行迁移文件“：python manage.py migrate；<h3 id="2-数据库的增操作"><a href="#2-数据库的增操作" class="headerlink" title="2.数据库的增操作"></a>2.数据库的增操作</h3></li>
+<li>检查约束，mysql不支持：<pre><code>alter table tb_student add constraint ck_student_birth check (birth between &#39;1990-1-1&#39; and &#39;1999-12-31&#39;);
+</code></pre></li>
+<li>添加外键约束<pre><code>alter table tb_student add constraint fk_student_collid foreign key (collid) references tb_college (collid);
+</code></pre><h4 id="3-创建教师表"><a href="#3-创建教师表" class="headerlink" title="3.创建教师表"></a>3.创建教师表</h4><pre><code>create table tb_teacher
+(
+teaid int not null comment &#39;教师工号&#39;,
+tname varchar(20) not null comment &#39;教师姓名&#39;,
+title varchar(10) default &#39;&#39; comment &#39;职称&#39;,
+collid int not null comment &#39;所属学院编号&#39;
+);
+</code></pre></li>
+<li>添加外键约束<pre><code>alter table tb_teacher add constraint pk_teacher primary key (teaid);
+</code></pre></li>
+<li>添加外键约束<pre><code>alter table tb_teacher add constraint fk_teacher_collid foreign key (collid) references tb_college (collid);
+</code></pre><h4 id="4-插入学院数据"><a href="#4-插入学院数据" class="headerlink" title="4.插入学院数据"></a>4.插入学院数据</h4></li>
+<li>插入学院数据<br><code>`</code><br>insert into tb_college (collname, collmaster, collweb) values<br>(‘计算机学院’, ‘左冷禅’, ‘<a href="http://www.abc.com" target="_blank" rel="noopener">http://www.abc.com</a> </li>
 </ul>
-</li>
-<li>a：进入url.py文件，在urlpatterns中增加路径同时导入相应模块。<pre><code>模块导入：
-from django.contrib import admin
-from django.urls import path
-from app import views
-</code></pre>增加添加学生模块：<pre><code># https://120.0.0.1:8080/add_stu/  访问路由即可插入学生信息
-# 增加学生信息
-path(&#39;add_stu/&#39;,views.add_stu)
-</code></pre></li>
-<li><p>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：</p>
-<pre><code>from django.shortcuts import render
-from django.http import HttpResponse
-# Create your viewshere.
-from app.models import Student
-</code></pre><p>写入添加学生方法：</p>
-<pre><code>def add_stu(request):
-  #实现插入学生信息，第一种方式；
-  Student.objects.create(s_name=&#39;小明&#39;)
-
-  #实现插入学生信息，第二种方式，使用对象的方式进行添加学生信息。
-def add_stu(request):
-  stu = Student()
-  stu.s_name = &#39;lorry&#39;
-  stu.s_age = 26
-  stu.s_gender = 1
-  stu.save()
-  return  HttpResponse(&#39;创建学生成功&#39;)
-</code></pre><h3 id="3-数据库的删操作"><a href="#3-数据库的删操作" class="headerlink" title="3.数据库的删操作"></a>3.数据库的删操作</h3></li>
-<li>a：进入url.py文件，在urlpatterns中增加路由路径。<pre><code>  #删除学生信息
-  path(&#39;del_stu/&#39;,views.del_stu),
-</code></pre></li>
-<li>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：<pre><code>def del_stu(requset):
-  #实现删除
-  #1.获取删除的对象，filter(条件)
-  #2.实现删除方法，delete()
-  Student.objects.filter(id=3).delete()
-  return HttpResponse(&#39;删除学生成功&#39;)
-</code></pre><h3 id="4-数据库的更新操作"><a href="#4-数据库的更新操作" class="headerlink" title="4.数据库的更新操作"></a>4.数据库的更新操作</h3></li>
-<li>a：进入url.py文件，在urlpatterns中增加路径。<pre><code>  更新学生
-  path(&#39;up_stu/&#39;,views.up_stu),
-</code></pre></li>
-<li>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：<ul>
-<li>更新的第一种方法：</li>
-<li>说明：</li>
-<li>1.获取更新的数据，filter(条件)</li>
-<li>2.实现更新方法，update()<pre><code>def up_stu(requset):
-#Student.objects.filter(id=2).update(s_name=&#39;lorry&#39;)
-</code></pre></li>
-</ul>
-</li>
-<li>更新的第二种方式,即可更新时间字段<pre><code>def up_stu(requset):
-  #更新的第二种方式,即可更新时间字段
-  stu = Student.objects.filter(id=2).first()
-  stu.s_name = &#39;lorrybz&#39;
-  stu.save()
-  return HttpResponse(&#39;更新学生成功&#39;)
-</code></pre><h3 id="5-数据库的查询操作"><a href="#5-数据库的查询操作" class="headerlink" title="5.数据库的查询操作"></a>5.数据库的查询操作</h3></li>
-<li>a：进入url.py文件，在urlpatterns中增加路径。<pre><code>  #查询学生
-  path(&#39;sel_stu/&#39;,views.sel_stu),
-</code></pre></li>
-<li>b：进入views.py文件中导入模块以及写入相应函数方法<br>######查询学生<pre><code>#导入模块
-from django.db.models import Avg, Max, Min, Sum, Count, Q, F
-def sel_stu(requset):
-  # 查询学生信息
-  #  查询所有的学生信息
-  stus = Student.objects.all()
-  for stu in stus:
-      print(stu.s_name)
-      print(stu.s_gender)
-</code></pre></li>
-<li>使用过滤器查询学生fillter和git<pre><code>  # 查询id=2的学生，fillter
-  # 若是条件不成立不会报错，返回值为空
-  stu = Student.objects.filter(id=2).first()
-  print(stu.s_gender)
-  # 1.取唯一的一个对象
-  # 2.get(条件必须成立)，若是条件不成立会报错
-  stu = Student.objects.get(id=2)
-  print(stu)
-</code></pre></li>
-<li>过滤出满足条件和不满条件的fillter和exclude。<pre><code>  # 过滤出不满足条件的信息上面是满足条件，下面是不满足条件的
-  stus = Student.objects.filter(s_gender=1)
-  print(stus)
-  stus = Student.objects.exclude(s_gender=0)
-  print(stus)
-</code></pre></li>
-<li>排序：默认是升序，在id或者筛选条件前加 ‘-’即可将序<pre><code>  #排序order_by
-  stus = Student.objects.order_by(&#39;-id&#39;)
-  print(stus)
-</code></pre></li>
-<li>取出对象中的某个字段<pre><code> stus = Student.objects.all().values(&#39;s_name&#39;,&#39;s_age&#39;)
- print(stus)
- stus = Student.objects.all().values()
- print(stus)
-</code></pre></li>
-<li>判断查询结果是否存在<pre><code>  a = Student.objects.filter(s_name=&#39;校长&#39;).exists()
-  print(a)
-</code></pre></li>
-<li><p>对过滤的条件进行计数，有两种方法</p>
-<pre><code>方法1：
-  stus = Student.objects.filter(s_gender=1)
-  print(len(stus))
-方法2：
-  count = Student.objects.filter(s_gender=1).count()
-  print(count)
-
-  stus = Student.objects.filter(s_name=&#39;lorrybz&#39;).first()
-  print(stus)
-</code></pre></li>
-<li><p>第二大类模糊查询contains</p>
-<pre><code>  ##contains
-  # 字段——运算符
-  stus = Student.objects.filter(s_name__contains=&#39;小&#39;)
-  print(stus)
-
-  #like &#39;小%&#39;   &#39;%明&#39;
-  # startwith  endwith
-
-  stus = Student.objects.filter(s_name__startswith=&#39;小&#39;)
-  print(stus)
-  stus = Student.objects.filter(s_name__endswith=&#39;z&#39;)
-  print(stus)
-  # sql where id in (12345679)
-  # 模糊判断
-  stus = Student.objects.filter(id__in=[1,2,3,4,5])
-  print(stus)
-  stus = Student.objects.filter(pk__in=[1,2,3,4,5])
-  print(stus)
-</code></pre></li>
-<li>或与非操作<pre><code>  #gt &gt;;gte &gt;=;   lt &lt;; lte &lt;=;#并且操作
-  stus = Student.objects.filter(s_age__gte=18,s_age__lt=20)
-  print(stus)
-  stus = Student.objects.filter(s_age__gte=18).filter(s_age__lt=20)
-  print(stus)
-</code></pre></li>
-<li><p>聚合函数 avg max min sum count</p>
-<pre><code>  # 聚合函数 avg max min sum count
-  age_avg = Student.objects.all().aggregate(Avg(&#39;s_age&#39;))
-  print(age_avg)
-  sum_avg = Student.objects.all().aggregate(Sum(&#39;s_age&#39;))
-  print(sum_avg)
-  max_avg = Student.objects.all().aggregate(Max(&#39;s_age&#39;))
-  print(max_avg)
-  min_avg = Student.objects.all().aggregate(Min(&#39;s_age&#39;))
-  print(min_avg)
-
-  #查询年龄大于等于18  且 小于20
-  stus = Student.objects.filter(s_age__gte=18, s_age__lt=20)
-  print(stus)
-  #  ，&amp; 和and 是且的操作   or 或者， 查询年龄大于等于18 或者  小于等20
-
-  stus = Student.objects.filter(Q(s_age__gte=18) | Q(s_age__lte=20))
-  print(stus)
-  stus = Student.objects.filter(~Q(s_age__gt=18))
-  print(stus)
-
-  #查询物理成绩大于数学成绩的学生
-  stus = Student.objects.all()
-  for stu in stus:
-      if stu.wuli &gt; stu.math:
-          print(stu.s_name)
-  stus = Student.objects.filter(wuli__gt=F(&#39;math&#39;)+10).first()
-  print(stus.s_name)
-</code></pre></li>
-<li>最后一句通用的：<pre><code>  return HttpResponse(&#39;查询所有学生信息&#39;)
-</code></pre></li>
+<p>‘),<br>(‘外国语学院’, ‘岳不群’, ‘<a href="http://www.xyz.com" target="_blank" rel="noopener">http://www.xyz.com</a> </p>
+<p>‘),<br>(‘经济管理学院’, ‘风清扬’, ‘<a href="http://www.foo.com" target="_blank" rel="noopener">http://www.foo.com</a> </p>
+<p>‘);</p>
+<pre><code>#### 5.插入学生数据
+</code></pre><p>insert into tb_student (stuid, sname, gender, birth, addr, collid) values<br>(1001, ‘杨逍’, 1, ‘1990-3-4’, ‘四川成都’, 1),<br>(1002, ‘任我行’, 1, ‘1992-2-2’, ‘湖南长沙’, 1),<br>(1033, ‘王语嫣’, 0, ‘1989-12-3’, ‘四川成都’, 1),<br>(1572, ‘岳不群’, 1, ‘1993-7-19’, ‘陕西咸阳’, 1),<br>(1378, ‘纪嫣然’, 0, ‘1995-8-12’, ‘四川绵阳’, 1),<br>(1954, ‘林平之’, 1, ‘1994-9-20’, ‘福建莆田’, 1),<br>(2035, ‘东方不败’, 1, ‘1988-6-30’, null, 2),<br>(3011, ‘林震南’, 1, ‘1985-12-12’, ‘福建莆田’, 3),<br>(3755, ‘项少龙’, 1, ‘1993-1-25’, null, 3),<br>(3923, ‘杨不悔’, 0, ‘1985-4-17’, ‘四川成都’, 3);</p>
+<pre><code>#### 6.插入老师数据
+</code></pre><p>insert into tb_teacher (teaid, tname, title, collid) values<br>(1122, ‘张三丰’, ‘教授’, 1),<br>(1133, ‘宋远桥’, ‘副教授’, 1),<br>(1144, ‘杨逍’, ‘副教授’, 1),<br>(2255, ‘范遥’, ‘副教授’, 2),<br>(3366, ‘韦一笑’, ‘讲师’, 3);</p>
+<pre><code>#### 7. 插入课程数据
+</code></pre><p>insert into tb_course (couid, cname, credit, teaid) values<br>(1111, ‘Python程序设计’, 3, 1122),<br>(2222, ‘Web前端开发’, 2, 1122),<br>(3333, ‘操作系统’, 4, 1122),<br>(4444, ‘计算机网络’, 2, 1133),<br>(5555, ‘编译原理’, 4, 1144),<br>(6666, ‘算法和数据结构’, 3, 1144),<br>(7777, ‘经贸法语’, 3, 2255),<br>(8888, ‘成本会计’, 2, 3366),<br>(9999, ‘审计学’, 3, 3366);</p>
+<pre><code>#### 8.插入选课数据
+</code></pre><p>insert into tb_score (sid, cid, seldate, mark) values<br>(1001, 1111, ‘2017-09-01’, 95),<br>(1001, 2222, ‘2017-09-01’, 87.5),<br>(1001, 3333, ‘2017-09-01’, 100),<br>(1001, 4444, ‘2018-09-03’, null),<br>(1001, 6666, ‘2017-09-02’, 100),<br>(1002, 1111, ‘2017-09-03’, 65),<br>(1002, 5555, ‘2017-09-01’, 42),<br>(1033, 1111, ‘2017-09-03’, 92.5),<br>(1033, 4444, ‘2017-09-01’, 78),<br>(1033, 5555, ‘2017-09-01’, 82.5),<br>(1572, 1111, ‘2017-09-02’, 78),<br>(1378, 1111, ‘2017-09-05’, 82),<br>(1378, 7777, ‘2017-09-02’, 65.5),<br>(2035, 7777, ‘2018-09-03’, 88),<br>(2035, 9999, curdate(now()), null),<br>(3755, 1111, date(now()), null),<br>(3755, 8888, date(now()), null),<br>(3755, 9999, ‘2017-09-01’, 92);<br><code>`</code></p>
+<h3 id="相关sql语句练习"><a href="#相关sql语句练习" class="headerlink" title="相关sql语句练习"></a>相关sql语句练习</h3><p>– 总结 分组之前的筛选用where子句，分组之后的子句筛选用having。</p>
+<ul>
+<li>查询所有学生信息</li>
+<li>查询所有课程名称及学分(投影和别名)</li>
+<li>查询所有女学生的姓名和出生日期(筛选)</li>
+<li>查询所有80后学生的姓名、性别和出生日期(筛选)</li>
+<li>查询所有80后学生的姓名、性别和出生日期(筛选)，使用mysql中的分支函数</li>
+<li>查询名字有四个中文字符字符的学生学号和姓名,一个中文三个字节</li>
+<li>查询姓”杨“的学生姓名和性别(模糊)</li>
+<li>查询姓”杨“名字两个字的学生姓名和性别(模糊)</li>
+<li>查询姓”杨“名字三个字的学生姓名和性别(模糊)</li>
+<li>查询名字中有”不“字或“嫣”字的学生的姓名(模糊)</li>
+<li>查询没有录入家庭住址的学生姓名(空值)  更加的严谨</li>
+<li>查询录入了家庭住址的学生姓名(空值) 摩根定律</li>
+<li>查询学生选课的所有日期(去重)– distinct</li>
+<li>查询学生的家庭住址(去重)</li>
+<li>查询男学生的姓名和生日按年龄从大到小排列(排序)– 升序   asc 默认</li>
+<li>聚合函数 max min sum avg count</li>
+<li>查询年龄最大的学生的出生日期(聚合函数)</li>
+<li>查询男女学生的人数(分组和聚合函数)</li>
+<li>查询课程编号为1111的课程的平均成绩(筛选和聚合函数)</li>
+<li>查询学号为1001的学生所有课程的平均分(筛选和聚合函数)</li>
+<li>查询每个学生的学号和平均成绩(分组和聚合函数)</li>
+<li>查询平均成绩大于等于90分的且学号为1开头的学生的学号和平均成绩</li>
+<li>查询年龄最大的学生的姓名(子查询) 把一个查询的结果当做另一个查询的一部分来使用</li>
+<li>查询年龄最大的学生姓名和年龄(子查询+运算)</li>
+<li>查询选了两门以上的课程的学生姓名(子查询/分组条件/集合运算)</li>
+<li>查询学生姓名、课程名称以及成绩(链接查询) 链接查询时，如果不使用链接条件，将会产生笛卡尔积</li>
+<li>查询选课学生的姓名和平均成绩(子查询和连接查询)</li>
+<li>查询每个学生的姓名和选课数量(左外连接和子查询)<br>(左表：多表查询时，写在前面的表称为左表left outer join，right outer join ，mysql不支持全外连接 ：full outer join<br>– 左外连接，将左表不满足连接条件的记录也要查出来，不满足链表条件的的地方补null<br>– 右外连接，将右表不满足连接条件的记录也要查出来，不满足链表条件的的地方补null<br>– 内连接只能将满足条件的表链接起来，不满足的链接条件的不能查出)</li>
 </ul>
 
             </div>
@@ -645,7 +543,7 @@ def sel_stu(requset):
                     <span class="reprint-tip">转载请注明: </span>
                     <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/01/03/web-hou-duan-django-qian-xi-zhi-shu-ju-ku-zeng-shan-gai-cha/" class="b-link-green">web后端Django-前戏之数据库增删改查</a>
+                    <a href="/2018/12/26/shu-ju-ku-cao-zuo-jian-biao/" class="b-link-green">数据库操作-建表</a>
                 </p>
             </div>
         </div>
@@ -667,24 +565,26 @@ def sel_stu(requset):
     <div class="row article-row">
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">本篇</div>
+            <div class="article-badge left-badge text-color">上一篇</div>
             <div class="card">
-                <a href="/2019/01/03/web-hou-duan-django-qian-xi-zhi-shu-ju-ku-zeng-shan-gai-cha/">
+                <a href="/2019/01/02/web-hou-duan-django-qian-xi-zhi-huan-jing-da-jian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="web后端Django-前戏之数据库增删改查">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="web后端Django-前戏">
                         
-                        <span class="card-title">web后端Django-前戏之数据库增删改查</span>
+                        <span class="card-title">web后端Django-前戏</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">概念引入ORM(objects relationship mapping): 对象关系映射；objects: 管理器，默认模型的属性；
-1.数据增加中间表（即自己需要管理的表）举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新</div>
+                    <div class="summary">1.配置虚拟环境（1）pycharm中直接配置
+A.在pycharm中创建工程时，就开始创建虚拟环境。
+B.安装django pymysql django-redis    
+pycharm终端命令：pip install django p</div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-03
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -697,7 +597,6 @@ def sel_stu(requset):
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -714,28 +613,30 @@ def sel_stu(requset):
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">下一篇</div>
             <div class="card">
-                <a href="/2019/01/02/fei-guan-xi-xing-shu-ju-ku-2redis/">
+                <a href="/2018/12/26/linux-zhuang-ruan-jian/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="非关系型数据库">
+                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Linux基操">
                         
-                        <span class="card-title">非关系型数据库</span>
+                        <span class="card-title">Linux基操</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">第一部分redis的安装以及挂载1.进入Linux系统或者在服务器中下载文件wget http://download.redis.io/releases/redis-5.0.3.tar.gz
-2.解压文件gunzip redis-5.0.3</div>
+                    <div class="summary">Linux安装软件docker：虚拟化服务，创建虚拟化容器，并安装软件
+1.包管理管理工具 -yum、rpm
+yum -y install docker-io   安装docker
+yum -y removie docker-io  卸载d</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-26
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Mysql/" class="post-category" target="_blank">
-                                    Mysql
+                            <a href="/categories/Linux/" class="post-category" target="_blank">
+                                    Linux
                                 </a>
                             
                             
@@ -745,8 +646,16 @@ def sel_stu(requset):
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/redis/" target="_blank">
-                        <span class="chip bg-color">redis</span>
+                    <a href="/tags/yum/" target="_blank">
+                        <span class="chip bg-color">yum</span>
+                    </a>
+                    
+                    <a href="/tags/rpm/" target="_blank">
+                        <span class="chip bg-color">rpm</span>
+                    </a>
+                    
+                    <a href="/tags/docker/" target="_blank">
+                        <span class="chip bg-color">docker</span>
                     </a>
                     
                 </div>
