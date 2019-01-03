@@ -469,41 +469,54 @@ def sel_stu(requset):
   stus = Student.objects.filter(pk__in=[1,2,3,4,5])
   print(stus)
 </code></pre></li>
-<li>或与非操作<pre><code>  #gt &gt;;gte &gt;=;   lt &lt;; lte &lt;=;#并且操作
+<li>比较运算符<pre><code>  #gt &gt;;gte &gt;=;   lt &lt;; lte &lt;=;#并且操作
   stus = Student.objects.filter(s_age__gte=18,s_age__lt=20)
   print(stus)
   stus = Student.objects.filter(s_age__gte=18).filter(s_age__lt=20)
   print(stus)
 </code></pre></li>
-<li><p>聚合函数 avg max min sum count</p>
-<pre><code>  # 聚合函数 avg max min sum count
-  age_avg = Student.objects.all().aggregate(Avg(&#39;s_age&#39;))
-  print(age_avg)
-  sum_avg = Student.objects.all().aggregate(Sum(&#39;s_age&#39;))
-  print(sum_avg)
-  max_avg = Student.objects.all().aggregate(Max(&#39;s_age&#39;))
-  print(max_avg)
-  min_avg = Student.objects.all().aggregate(Min(&#39;s_age&#39;))
-  print(min_avg)
-
-  #查询年龄大于等于18  且 小于20
-  stus = Student.objects.filter(s_age__gte=18, s_age__lt=20)
-  print(stus)
-  #  ，&amp; 和and 是且的操作   or 或者， 查询年龄大于等于18 或者  小于等20
-
-  stus = Student.objects.filter(Q(s_age__gte=18) | Q(s_age__lte=20))
-  print(stus)
-  stus = Student.objects.filter(~Q(s_age__gt=18))
-  print(stus)
-
-  #查询物理成绩大于数学成绩的学生
-  stus = Student.objects.all()
-  for stu in stus:
-      if stu.wuli &gt; stu.math:
-          print(stu.s_name)
-  stus = Student.objects.filter(wuli__gt=F(&#39;math&#39;)+10).first()
-  print(stus.s_name)
+<li>聚合函数 avg max min sum count<ul>
+<li>语法: 模型名.objects.all().aggregate(Sum(字段))<pre><code># 聚合函数 avg max min sum count
+age_avg = Student.objects.all().aggregate(Avg(&#39;s_age&#39;))
+print(age_avg)
+sum_avg = Student.objects.all().aggregate(Sum(&#39;s_age&#39;))
+print(sum_avg)
+max_avg = Student.objects.all().aggregate(Max(&#39;s_age&#39;))
+print(max_avg)
+min_avg = Student.objects.all().aggregate(Min(&#39;s_age&#39;))
+print(min_avg)
 </code></pre></li>
+</ul>
+</li>
+<li><p>与或非的计算</p>
+<ul>
+<li>要点（1）Q将条件包起来进行与或非函数的比较</li>
+<li>要点（2）与1: Q(条件1), Q(条件2)</li>
+<li>要点（3）与2: Q(条件1) &amp; Q(条件2) ；: Q(条件1)  and  Q(条件2) ；  </li>
+<li>要点（4）或: Q(条件1) | Q(条件2)   ；Q(条件1)  or  Q(条件2) </li>
+<li>要点（5）非: ~Q(条件1)</li>
+<li>要点（6）用于比较两个字段,可使用+,-符号</li>
+<li><p>模型名.objects.filter(wuli__gt=F(‘math’)-10)</p>
+<pre><code>#查询年龄大于等于18  且 小于20
+stus = Student.objects.filter(s_age__gte=18, s_age__lt=20)
+print(stus)
+#  ，&amp; 和and 是且的操作   or 或者， 查询年龄大于等于18 或者  小于等20
+
+stus = Student.objects.filter(Q(s_age__gte=18) | Q(s_age__lte=20))
+print(stus)
+stus = Student.objects.filter(~Q(s_age__gt=18))
+print(stus)
+
+#查询物理成绩大于数学成绩的学生
+stus = Student.objects.all()
+for stu in stus:
+    if stu.wuli &gt; stu.math:
+        print(stu.s_name)
+stus = Student.objects.filter(wuli__gt=F(&#39;math&#39;)+10).first()
+print(stus.s_name)
+</code></pre></li>
+</ul>
+</li>
 <li>最后一句通用的：<pre><code>  return HttpResponse(&#39;查询所有学生信息&#39;)
 </code></pre></li>
 </ul>
