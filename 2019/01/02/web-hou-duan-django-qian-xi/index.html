@@ -341,8 +341,11 @@ pycharm终端命令：pip install django p">
 <li>执行后可以通过<a href="http://localhost:8000或者http://127.0.0.1:8000进行查看" target="_blank" rel="noopener">http://localhost:8000或者http://127.0.0.1:8000进行查看</a></li>
 </ul>
 </li>
-<li>F.数据库迁移（是在数据库配置好之后执行的命令），建立十张表<ul>
-<li>终端命令：python manage.py migrate</li>
+<li>F.（1）第一次迁移<ul>
+<li>数据库迁移（是在数据库配置好之后执行的命令），建立十张表</li>
+<li>终端命令：python manage.py migrate<br>-（2）以后的迁移：当建立中间表需要在数据库持久化则需要再次迁移</li>
+<li>生成迁移文件：python manage.py makemigrations</li>
+<li>执行迁移文件“：python manage.py migrate</li>
 </ul>
 </li>
 <li>G.Django创建管理员账号<ul>
@@ -390,8 +393,11 @@ pycharm终端命令：pip install django p">
 <li>在pycharm的终端中执行代码：python manage.py startapp app</li>
 </ul>
 </li>
-<li>H：对数据库做迁移。<ul>
-<li>a.迁移命令（建立十张表）：python manage.py migrate </li>
+<li>H.（1）第一次迁移<ul>
+<li>数据库迁移（是在数据库配置好之后执行的命令），建立十张表</li>
+<li>终端命令：python manage.py migrate<br>-（2）以后的迁移：当建立中间表需要在数据库持久化则需要再次迁移</li>
+<li>生成迁移文件：python manage.py makemigrations</li>
+<li>执行迁移文件“：python manage.py migrate</li>
 </ul>
 </li>
 <li>I :对后台数据创建超级管理员<ul>
