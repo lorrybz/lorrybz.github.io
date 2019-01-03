@@ -5,11 +5,13 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Linux基操, lorry_python">
-    <meta name="description" content="Linux安装软件docker：虚拟化服务，创建虚拟化容器，并安装软件
-1.包管理管理工具 -yum、rpm
-yum -y install docker-io   安装docker
-yum -y removie docker-io  卸载d">
+    <meta name="keywords" content="lorry_python">
+    <meta name="description" content="GIT使用指南
+layout: wtitle: git仓库管理date: 2018-12-18 23:45:20tags: GITcategories: 仓库管理
+
+基础操作
+克隆github或者码云上代码到本地
+git clone 分支名">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +19,7 @@ yum -y removie docker-io  卸载d">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Linux基操 | lorry_python</title>
+    <title>lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -268,13 +270,13 @@ yum -y removie docker-io  卸载d">
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Linux基操
+                        
                     </div>
                 </div>
             </div>
@@ -292,76 +294,112 @@ yum -y removie docker-io  卸载d">
     <div class="card">
         <div class="card-content article-info">
             
-            <div class="article-tag">
-                
-                <a href="/tags/yum/" target="_blank">
-                    <span class="chip bg-color">yum</span>
-                </a>
-                
-                <a href="/tags/rpm/" target="_blank">
-                    <span class="chip bg-color">rpm</span>
-                </a>
-                
-                <a href="/tags/docker/" target="_blank">
-                    <span class="chip bg-color">docker</span>
-                </a>
-                
-            </div>
-            
             <div class="post-info">
-                
-                <span class="post-cate">
-                    <i class="fa fa-bookmark fa-fw icon-category"></i>
-                    
-                    <a href="/categories/Linux/" class="post-category" target="_blank">
-                        Linux
-                    </a>
-                    
-                </span>
                 
 
                 <span class="post-date">
-                    <i class="fa fa-clock-o fa-fw"></i>2018-12-26
+                    <i class="fa fa-clock-o fa-fw"></i>2019-01-03
                 </span>
             </div>
         </div>
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="Linux安装软件"><a href="#Linux安装软件" class="headerlink" title="Linux安装软件"></a>Linux安装软件</h3><p><strong>docker</strong>：虚拟化服务，创建虚拟化容器，并安装软件</p>
-<h4 id="1-包管理管理工具-yum、rpm"><a href="#1-包管理管理工具-yum、rpm" class="headerlink" title="1.包管理管理工具 -yum、rpm"></a>1.包管理管理工具 -yum、rpm</h4><ul>
-<li>yum -y install docker-io   安装docker<ul>
-<li>yum -y removie docker-io  卸载docker</li>
-<li>yum info…    </li>
-<li>yum search… </li>
-<li>yum list installed | grep docker    查看docker中挂在的软件<h4 id="2-管理docker服务"><a href="#2-管理docker服务" class="headerlink" title="2.管理docker服务"></a>2.管理docker服务</h4></li>
-</ul>
+                <h1 id="GIT使用指南"><a href="#GIT使用指南" class="headerlink" title="GIT使用指南"></a>GIT使用指南</h1><hr>
+<p>layout: w<br>title: git仓库管理<br>date: 2018-12-18 23:45:20<br>tags: GIT<br>categories: 仓库管理</p>
+<hr>
+<h6 id="基础操作"><a href="#基础操作" class="headerlink" title="基础操作"></a>基础操作</h6><ol>
+<li><p>克隆github或者码云上代码到本地</p>
+<pre><code>git clone 分支名仓库名地址
+</code></pre><p>一般拉取下来的代码，当前分支都在master分支上</p>
 </li>
-<li>systemctl start docker<ul>
-<li>systemctl stop docker</li>
-<li>systemctl restart docker</li>
-<li>systemctl status docker   状态</li>
-<li>systemctl enable docker</li>
-<li>systemctl disable docker</li>
-</ul>
+<li><p>创建自己的分支</p>
+<pre><code>git checkout -b wanghaifei
+</code></pre></li>
+<li><p>查看当前修改文件的状态</p>
+<pre><code>git status
+</code></pre></li>
+<li><p>添加要上传的文件</p>
+<pre><code>git add 修改后的文件
+</code></pre></li>
+<li><p>提交添加文件的注解</p>
+<pre><code>git commit -m &#39;注解&#39;
+</code></pre></li>
+<li><p>文件到本地分支中</p>
+<pre><code>git push origin wanghaifei
+</code></pre></li>
+<li><p>合并添加上传文件和添加上传文件注解到本地分支的操作</p>
+<pre><code>git commit -am &#39;注解&#39;
+</code></pre></li>
+<li><p>下拉远程自己分支代码到本地自己分支</p>
+<pre><code>git pull origin wanghaifei
+</code></pre></li>
+</ol>
+<hr>
+<h6 id="代码分支合并，tag提交"><a href="#代码分支合并，tag提交" class="headerlink" title="代码分支合并，tag提交"></a>代码分支合并，tag提交</h6><ol start="9">
+<li><p>将自己分支代码合并到测试分支以便测试人员测试<br>先切换版本到dev分支</p>
+<pre><code>git checkout dev
+</code></pre><p>当前dev分支在合并wanghaifei分支</p>
+<pre><code>git merge wanghaifei
+</code></pre><p>提交dev分支合并的代码到远程dev分支上</p>
+<pre><code>git push origin dev
+</code></pre></li>
+<li><p>上线代码需要打tag，在master分支打tag<br>打版本v1.0.0.0</p>
+<pre><code>git tag -a 版本号 -m &#39;注解&#39;
+</code></pre><p>提交版本v1.0.0.0</p>
+<pre><code>git push origin v1.0.0.0
+</code></pre></li>
+</ol>
+<hr>
+<h6 id="分支版本处理"><a href="#分支版本处理" class="headerlink" title="分支版本处理"></a>分支版本处理</h6><ol start="11">
+<li><p>删除本地分支</p>
+<pre><code>git branch -D wanghaifei
+</code></pre></li>
+<li><p>删除git远程分支</p>
+<pre><code>git push origin --delete wanghaifei
+</code></pre></li>
+<li><p>删除本地tag</p>
+<pre><code>git tag -d v1.0.0.0
+</code></pre></li>
+<li><p>删除git远程tag</p>
+<pre><code>git push origin --delete tag v1.0.0.0
+</code></pre></li>
+</ol>
+<ol start="15">
+<li>查看dev分支和wanghaifei分支的不同<pre><code>git diff dev wanghaifei
+</code></pre></li>
+</ol>
+<hr>
+<h6 id="缓存机制，在某一个分支修改了代码，但是不想提交该分支，又想切换到另外一个分支在修改相同的代码，就需要使用stash命令"><a href="#缓存机制，在某一个分支修改了代码，但是不想提交该分支，又想切换到另外一个分支在修改相同的代码，就需要使用stash命令" class="headerlink" title="缓存机制，在某一个分支修改了代码，但是不想提交该分支，又想切换到另外一个分支在修改相同的代码，就需要使用stash命令"></a>缓存机制，在某一个分支修改了代码，但是不想提交该分支，又想切换到另外一个分支在修改相同的代码，就需要使用stash命令</h6><ol start="16">
+<li><p>缓存本地修改的代码</p>
+<pre><code>git stash
+</code></pre><p>缓存之后，在git status去查看修改代码记录会发现提示 nothing to commit，working tree clean。说明刚才修改的代码都缓存起来了</p>
 </li>
-</ul>
-<p><strong>补充</strong>：<br><strong>Mysql数据库超级管理云账号 - root<br>Oracle数据库超级管理员账号 - sys<br>SQLServer数据库管理员账号 </strong></p>
-<h4 id="3-阿里云中docker安装mysql5-7步骤"><a href="#3-阿里云中docker安装mysql5-7步骤" class="headerlink" title="3.阿里云中docker安装mysql5.7步骤"></a>3.阿里云中docker安装mysql5.7步骤</h4><p>  a 下载mysql的镜像文件：docker pull mysql：5.7<br>  b 查看已经下载的镜像文件:  docker images<br>  c 创建并运行容器:docker run -d -p 3306:3306 –name mysql57 -e MYSQL_ROOT_PASSWORD=123456 mysql:5.7    (需要打开3306端口)<br>  d 安装MySQL客户端工具</p>
-<pre><code>- navicat  -猫
-- SQLyog   -海豚
-- Toad for MySQL -蛤蟆
-</code></pre><h4 id="4-查看运行中的程序"><a href="#4-查看运行中的程序" class="headerlink" title="4.查看运行中的程序"></a>4.查看运行中的程序</h4><ul>
-<li>docker ps<h4 id="5-查看所有的容器"><a href="#5-查看所有的容器" class="headerlink" title="5.查看所有的容器"></a>5.查看所有的容器</h4></li>
-<li>docker container ls -a<h4 id="6-停止启动容器"><a href="#6-停止启动容器" class="headerlink" title="6.停止启动容器"></a>6.停止启动容器</h4></li>
-<li>docker stop masql57<ul>
-<li>docker start mysql57</li>
-<li>docker restart mysql57<h4 id="7-删除容器"><a href="#7-删除容器" class="headerlink" title="7.删除容器"></a>7.删除容器</h4></li>
-</ul>
+<li><p>查看缓存的片段</p>
+<pre><code>git stash list
+</code></pre><p>发现有缓存列表，刚才缓存的记录为 stash@{0}: XXXXXXXXXX</p>
 </li>
-<li>docker rm -f  mysql</li>
-</ul>
-<h3 id="Linux操作常识补充"><a href="#Linux操作常识补充" class="headerlink" title="Linux操作常识补充"></a>Linux操作常识补充</h3><p>1.将前台任务放到后台，且暂停   ctrl+z；<br>2.前台任务直接gg。                     ctrl+c；<br>3.查看网络端口；ip，                  netstat -nap | grep 3306<br>4.查看后台程序                        jobs<br>5.将后台程序在后台启动              bg %num，num是后台进程编号<br>6.man 命令既可以查询相关的方法 man netstat<br>7.info netstat</p>
+<li><p>还原缓存的代码</p>
+<pre><code>git stash apply stash@{0}
+</code></pre></li>
+</ol>
+<hr>
+<h6 id="查看某次提交的详情，退回代码到某一次提交"><a href="#查看某次提交的详情，退回代码到某一次提交" class="headerlink" title="查看某次提交的详情，退回代码到某一次提交"></a>查看某次提交的详情，退回代码到某一次提交</h6><ol start="19">
+<li><p>查看提交的日志记录</p>
+<pre><code>git log
+</code></pre><p>例如结果提交信息的日志如下：<br><code>`</code><br>commit f9838aa51ca5ccd603e1e8cbd347a43c9cd2e0be<br>Merge: f5847ec 52dc6fa<br>Author: wanghaifei <a href="mailto:&#x37;&#55;&#x39;&#53;&#57;&#x38;&#x31;&#x36;&#48;&#64;&#x71;&#113;&#x2e;&#99;&#x6f;&#109;" target="_blank" rel="noopener">&#x37;&#55;&#x39;&#53;&#57;&#x38;&#x31;&#x36;&#48;&#64;&#x71;&#113;&#x2e;&#99;&#x6f;&#109;</a><br>Date:   Mon Jan 29 17:15:34 2018 +0800</p>
+<p>Merge branch ‘whf_p0’ into dev</p>
+</li>
+</ol>
+<p>commit 52dc6fa34f36fae981d1c347825af93a150308fa<br>Author: wanghaifei <a href="mailto:&#55;&#x37;&#57;&#53;&#57;&#x38;&#x31;&#54;&#48;&#64;&#113;&#x71;&#46;&#99;&#x6f;&#x6d;" target="_blank" rel="noopener">&#55;&#x37;&#57;&#53;&#57;&#x38;&#x31;&#54;&#48;&#64;&#113;&#x71;&#46;&#99;&#x6f;&#x6d;</a><br>Date:   Mon Jan 29 17:15:22 2018 +0800</p>
+<pre><code>完成预约增加预约到店时间
+</code></pre><pre><code>
+20. 查看某次提交的内容
+</code></pre><p>git show commit-id</p>
+<pre><code>
+21. 退回代码
+回退到当前版本用HEAD表示当前版本，上一个版本是HEAD^,或者使用&lt;u&gt;HEAD~1&lt;/u&gt;，表示上一个版本。HEAD后面是数字可以一直往大了写，只要有那么多老版本
+</code></pre><p>git reset –hard<br><code>`</code></p>
 
             </div>
             <hr>
@@ -500,7 +538,7 @@ yum -y removie docker-io  卸载d">
                     <span class="reprint-tip">转载请注明: </span>
                     <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2018/12/26/linux-zhuang-ruan-jian/" class="b-link-green">Linux基操</a>
+                    <a href="/2019/01/03/git-cao-zuo-cang-ku-guan-li-2/" class="b-link-green"></a>
                 </p>
             </div>
         </div>
@@ -522,26 +560,61 @@ yum -y removie docker-io  卸载d">
     <div class="row article-row">
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">上一篇</div>
+            <div class="article-badge left-badge text-color">本篇</div>
             <div class="card">
-                <a href="/2019/01/02/web-hou-duan-django-qian-xi-zhi-huan-jing-da-jian/">
+                <a href="/2019/01/03/git-cao-zuo-cang-ku-guan-li-2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="web后端Django-前戏">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">web后端Django-前戏</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">1.配置虚拟环境（1）pycharm中直接配置
-A.在pycharm中创建工程时，就开始创建虚拟环境。
-B.安装django pymysql django-redis    
-pycharm终端命令：pip install django p</div>
+                    <div class="summary">GIT使用指南
+layout: wtitle: git仓库管理date: 2018-12-18 23:45:20tags: GITcategories: 仓库管理
+
+基础操作
+克隆github或者码云上代码到本地
+git clone 分支名</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-03
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            lorry
+                            
                         </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">下一篇</div>
+            <div class="card">
+                <a href="/2019/01/03/web-hou-duan-django-qian-xi-zhi-shu-ju-ku-zeng-shan-gai-cha/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="web后端Django-前戏之数据库增删改查">
+                        
+                        <span class="card-title">web后端Django-前戏之数据库增删改查</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">概念引入ORM(objects relationship mapping): 对象关系映射；objects: 管理器，默认模型的属性；
+1.数据增加中间表（即自己需要管理的表）举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新</div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-03
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -559,56 +632,6 @@ pycharm终端命令：pip install django p</div>
                     
                     <a href="/tags/Django/" target="_blank">
                         <span class="chip bg-color">Django</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">下一篇</div>
-            <div class="card">
-                <a href="/2018/12/26/shu-ju-ku-zhi-shi-1/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="数据库知识1">
-                        
-                        <span class="card-title">数据库知识1</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary">1.数据库数据库是为了实现项目中的数据持久性 
-2.数据库的类型2.1关系型数据库
-特点：
-1.理论基础：集合论和关系型代数
-2.用二维表来阻止数据（行（记录）和列（字段））
-3.SQL - 结构化查询语言
-关系型数据库产品：
-1.Orac</div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-26
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/MySql/" class="post-category" target="_blank">
-                                    MySql
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/sql/" target="_blank">
-                        <span class="chip bg-color">sql</span>
                     </a>
                     
                 </div>

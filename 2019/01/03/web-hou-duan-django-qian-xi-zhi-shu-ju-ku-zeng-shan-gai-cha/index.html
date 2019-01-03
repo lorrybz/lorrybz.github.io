@@ -5,9 +5,9 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="Linux_git介绍, lorry_python">
-    <meta name="description" content="Git简介Git是目前世界上最先进的分布式版本控制系统。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。
-安装Git现在，Git可以在Linux、Unix、Mac和Window">
+    <meta name="keywords" content="web后端Django-前戏之数据库增删改查, lorry_python">
+    <meta name="description" content="概念引入ORM(objects relationship mapping): 对象关系映射；objects: 管理器，默认模型的属性；
+1.数据增加中间表（即自己需要管理的表）举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Linux_git介绍 | lorry_python</title>
+    <title>web后端Django-前戏之数据库增删改查 | lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -272,7 +272,7 @@
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        Linux_git介绍
+                        web后端Django-前戏之数据库增删改查
                     </div>
                 </div>
             </div>
@@ -292,8 +292,8 @@
             
             <div class="article-tag">
                 
-                <a href="/tags/Git/" target="_blank">
-                    <span class="chip bg-color">Git</span>
+                <a href="/tags/Django/" target="_blank">
+                    <span class="chip bg-color">Django</span>
                 </a>
                 
             </div>
@@ -303,36 +303,204 @@
                 <span class="post-cate">
                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                     
-                    <a href="/categories/Linux/" class="post-category" target="_blank">
-                        Linux
+                    <a href="/categories/web后端/" class="post-category" target="_blank">
+                        web后端
                     </a>
                     
                 </span>
                 
 
                 <span class="post-date">
-                    <i class="fa fa-clock-o fa-fw"></i>2018-12-20
+                    <i class="fa fa-clock-o fa-fw"></i>2019-01-03
                 </span>
             </div>
         </div>
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="Git简介"><a href="#Git简介" class="headerlink" title="Git简介"></a>Git简介</h3><p>Git是目前世界上最先进的分布式版本控制系统。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。</p>
-<h3 id="安装Git"><a href="#安装Git" class="headerlink" title="安装Git"></a>安装Git</h3><p>现在，Git可以在Linux、Unix、Mac和Windows这<br>几大平台上正常运行了。<br>1.linux上安装Git<br>2.windows上安装Git<br><a href="https://git-scm.com/download/" target="_blank" rel="noopener">下载Git</a>,然后一路默认。<br><a href="">中文参考</a></p>
-<h3 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h3><h4 id="设定自己机器的全局变量"><a href="#设定自己机器的全局变量" class="headerlink" title="设定自己机器的全局变量"></a>设定自己机器的全局变量</h4><p> git config –global user.name “Your Name” —— 设定用户名字，随便写<br> git config –global user.email “<a href="mailto:email@example.com" target="_blank" rel="noopener">email@example.com</a>“ ——设定用户邮箱，随便写<br>注意git config命令的–global参数，用了这个参数，表明你这台机器上所有的Git仓库都会使用这个配置，当然也可以对某个仓库指定不同的用户名和Email地址。</p>
-<h4 id="查看自己机器的配置信息"><a href="#查看自己机器的配置信息" class="headerlink" title="查看自己机器的配置信息"></a>查看自己机器的配置信息</h4><p>config 配置有system级别 global（用户级别） 和local（当前仓库）三个 设置先从system-&gt;global-&gt;local  底层配置会覆盖顶层配置 分别使用–system/global/local 可以定位到配置文件<br>git config –system –list——查看系统config<br>git config –global  –list——查看当前用户（global）配置<br>git config –local  –list—— 查看当前仓库配置信息<br>git config –list ——查看全配置</p>
-<h4 id="额外配置"><a href="#额外配置" class="headerlink" title="额外配置"></a>额外配置</h4><p>git config –global color.ui true ——开启颜色支持<br>git config –global core.quotepath false ——支持utf-8编码</p>
-<h3 id="修改配置"><a href="#修改配置" class="headerlink" title="修改配置"></a>修改配置</h3><p>git config –global –replace-all user.email “输入你的邮箱”<br>git config –global –replace-all user.name “输入你的用户名”</p>
-<h3 id="创建版本库（repository）"><a href="#创建版本库（repository）" class="headerlink" title="创建版本库（repository）"></a>创建版本库（repository）</h3><p>mkdir directory——创建一个空目录<br>cd directory<br>windows下目录最好不用中文<br>git init——初始化仓库</p>
-<h3 id="查看仓库状态"><a href="#查看仓库状态" class="headerlink" title="查看仓库状态"></a>查看仓库状态</h3><p>git status</p>
-<h3 id="本地操作"><a href="#本地操作" class="headerlink" title="本地操作"></a>本地操作</h3><p>touch ddf.txt<br>git add ddf.txt——把文件添加到仓库<br>git add -A——添加所有文件到仓库<br>这里如果有警告则添加git config –global core.autocrlf false；原因是路径中存在 / 的符号转义问题，false就是不转换符号默认是true，相当于把路径的 / 符号进行转义，这样添加的时候就有问题。<br>git commit -m “first”——把文件提交到仓库<br>git commit命令，-m后面输入的是本次提交的说明，可以输入任意内容，当然最好是有意义的，这样你就能从历史记录里方便地找到改动记录。</p>
-<h3 id="回溯操作"><a href="#回溯操作" class="headerlink" title="回溯操作"></a>回溯操作</h3><p>git dif——查看difference，即查看修改内容<br>git log——查看提交历史，以便确定要回退到哪个版本。<br>记住：commit_id（版本号）<br>git reset –hard HEAD^——HEAD指向的版本就是当前版本，该指令即为回到上个操作版本<br>git reset –hard commit_id——回溯到相应版本<br>git reflog——查看命令历史，以便确定要回到未来的哪个版本。</p>
-<h3 id="撤销修改"><a href="#撤销修改" class="headerlink" title="撤销修改"></a>撤销修改</h3><p> git checkout – ddf.txt</p>
-<h3 id="删除文件"><a href="#删除文件" class="headerlink" title="删除文件"></a>删除文件</h3><p> rm ddf.txt</p>
-<h3 id="远程仓库"><a href="#远程仓库" class="headerlink" title="远程仓库"></a>远程仓库</h3><p>git push——推送，第一次后即用<br>git push  -u origin master——第一次推送master分支的所有内容</p>
-<h3 id="从远程库克隆"><a href="#从远程库克隆" class="headerlink" title="从远程库克隆"></a>从远程库克隆</h3><p>1.通过https克隆<br>git clone url<br>2.通过ssh克隆</p>
-<h3 id="从远程添加到本地"><a href="#从远程添加到本地" class="headerlink" title="从远程添加到本地"></a>从远程添加到本地</h3><p> git pull——拉</p>
+                <h3 id="概念引入"><a href="#概念引入" class="headerlink" title="概念引入"></a>概念引入</h3><p>ORM(objects relationship mapping): 对象关系映射；<br>objects: 管理器，默认模型的属性；</p>
+<h3 id="1-数据增加中间表（即自己需要管理的表）"><a href="#1-数据增加中间表（即自己需要管理的表）" class="headerlink" title="1.数据增加中间表（即自己需要管理的表）"></a>1.数据增加中间表（即自己需要管理的表）</h3><h5 id="举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；"><a href="#举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；" class="headerlink" title="举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；"></a>举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；</h5><ul>
+<li>a：在django-admin startproject app . 或者 python manage.py startapp app之后即可看见工程中有app文件，其中有一个model.py文件，进入即可。</li>
+<li>b：创建类以及创建表名字，需要导入model模块<pre><code>from django.db import models
+# Create your models here.
+class Student(models.Model):
+  s_name = models.CharField(max_length=10,unique=True)
+  s_age = models.IntegerField(default=20)
+  s_gender = models.BooleanField(default=0)
+  create_time = models.DateTimeField(auto_now_add=True)
+  # auto_now_add   创建时，默认字段赋值为最新的事件
+  # create_time = models.DateField
+  updata_time = models.DateTimeField(auto_now=True)
+  # 修改数据是，自动赋值为更新字段时 的时间。
+  math = models.DecimalField(max_digits=3,decimal_places=1,null=True)
+  wuli = models.DecimalField(max_digits=3,decimal_places=1,null=True)
+  class Meta:
+      db_table = &#39;student&#39;
+</code></pre></li>
+<li>c：在pycharm终端中执行两条迁移命令,即可在数据库中创建表；<ul>
+<li>生成迁移文件：python manage.py makemigrations；</li>
+<li>执行迁移文件“：python manage.py migrate；<h3 id="2-数据库的增操作"><a href="#2-数据库的增操作" class="headerlink" title="2.数据库的增操作"></a>2.数据库的增操作</h3></li>
+</ul>
+</li>
+<li>a：进入url.py文件，在urlpatterns中增加路径同时导入相应模块。<pre><code>模块导入：
+from django.contrib import admin
+from django.urls import path
+from app import views
+</code></pre>增加添加学生模块：<pre><code># https://120.0.0.1:8080/add_stu/  访问路由即可插入学生信息
+# 增加学生信息
+path(&#39;add_stu/&#39;,views.add_stu)
+</code></pre></li>
+<li><p>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：</p>
+<pre><code>from django.shortcuts import render
+from django.http import HttpResponse
+# Create your viewshere.
+from app.models import Student
+</code></pre><p>写入添加学生方法：</p>
+<pre><code>def add_stu(request):
+  #实现插入学生信息，第一种方式；
+  Student.objects.create(s_name=&#39;小明&#39;)
+
+  #实现插入学生信息，第二种方式，使用对象的方式进行添加学生信息。
+def add_stu(request):
+  stu = Student()
+  stu.s_name = &#39;lorry&#39;
+  stu.s_age = 26
+  stu.s_gender = 1
+  stu.save()
+  return  HttpResponse(&#39;创建学生成功&#39;)
+</code></pre><h3 id="3-数据库的删操作"><a href="#3-数据库的删操作" class="headerlink" title="3.数据库的删操作"></a>3.数据库的删操作</h3></li>
+<li>a：进入url.py文件，在urlpatterns中增加路由路径。<pre><code>  #删除学生信息
+  path(&#39;del_stu/&#39;,views.del_stu),
+</code></pre></li>
+<li>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：<pre><code>def del_stu(requset):
+  #实现删除
+  #1.获取删除的对象，filter(条件)
+  #2.实现删除方法，delete()
+  Student.objects.filter(id=3).delete()
+  return HttpResponse(&#39;删除学生成功&#39;)
+</code></pre><h3 id="4-数据库的更新操作"><a href="#4-数据库的更新操作" class="headerlink" title="4.数据库的更新操作"></a>4.数据库的更新操作</h3></li>
+<li>a：进入url.py文件，在urlpatterns中增加路径。<pre><code>  更新学生
+  path(&#39;up_stu/&#39;,views.up_stu),
+</code></pre></li>
+<li>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：<ul>
+<li>更新的第一种方法：</li>
+<li>说明：</li>
+<li>1.获取更新的数据，filter(条件)</li>
+<li>2.实现更新方法，update()<pre><code>def up_stu(requset):
+#Student.objects.filter(id=2).update(s_name=&#39;lorry&#39;)
+</code></pre></li>
+</ul>
+</li>
+<li>更新的第二种方式,即可更新时间字段<pre><code>def up_stu(requset):
+  #更新的第二种方式,即可更新时间字段
+  stu = Student.objects.filter(id=2).first()
+  stu.s_name = &#39;lorrybz&#39;
+  stu.save()
+  return HttpResponse(&#39;更新学生成功&#39;)
+</code></pre><h3 id="5-数据库的查询操作"><a href="#5-数据库的查询操作" class="headerlink" title="5.数据库的查询操作"></a>5.数据库的查询操作</h3></li>
+<li>a：进入url.py文件，在urlpatterns中增加路径。<pre><code>  #查询学生
+  path(&#39;sel_stu/&#39;,views.sel_stu),
+</code></pre></li>
+<li><p>b：进入views.py文件中导入模块以及写入相应函数方法<br>######查询学生</p>
+<pre><code>from django.db.models import Avg, Max, Min, Sum, Count, Q, F
+def sel_stu(requset):
+  # 查询学生信息
+  #  查询所有的学生信息
+  stus = Student.objects.all()
+  for stu in stus:
+      print(stu.s_name)
+      print(stu.s_gender)
+  # 查询id=2的学生，fillter
+  # 若是条件不成立不会报错，返回值为空
+  stu = Student.objects.filter(id=2).first()
+  print(stu.s_gender)
+  # 1.取唯一的一个对象
+  # 2.get(条件必须成立)
+  stu = Student.objects.get(id=2)
+  print(stu)
+
+  # 过滤出不满足条件的信息上面是满足条件，下面是不满足条件的
+  stus = Student.objects.filter(s_gender=1)
+  print(stus)
+  stus = Student.objects.exclude(s_gender=0)
+  print(stus)
+
+  #排序order_by
+  stus = Student.objects.order_by(&#39;-id&#39;)
+  print(stus)
+
+  # 取出对象中的某个字段
+  stus = Student.objects.all().values(&#39;s_name&#39;,&#39;s_age&#39;)
+  print(stus)
+  stus = Student.objects.all().values()
+  print(stus)
+
+  # 判断查询结果是否存在
+  a = Student.objects.filter(s_name=&#39;校长&#39;).exists()
+  print(a)
+
+  # 对过滤的条件进行计数，有两种方法
+  stus = Student.objects.filter(s_gender=1)
+  print(len(stus))
+  count = Student.objects.filter(s_gender=1).count()
+  print(count)
+
+  stus = Student.objects.filter(s_name=&#39;lorrybz&#39;).first()
+  print(stus)
+
+  ## 第二大类模糊查询：contains
+  # 字段——运算符
+  stus = Student.objects.filter(s_name__contains=&#39;小&#39;)
+  print(stus)
+
+  #like &#39;小%&#39;   &#39;%明&#39;
+  # startwith  endwith
+
+  stus = Student.objects.filter(s_name__startswith=&#39;小&#39;)
+  print(stus)
+  stus = Student.objects.filter(s_name__endswith=&#39;z&#39;)
+  print(stus)
+  # sql where id in (12345679)
+  stus = Student.objects.filter(id__in=[1,2,3,4,5])
+  print(stus)
+  stus = Student.objects.filter(pk__in=[1,2,3,4,5])
+  print(stus)
+
+  #gt &gt;;gte &gt;=;   lt &lt;; lte &lt;=;#并且操作
+  stus = Student.objects.filter(s_age__gte=18,s_age__lt=20)
+  print(stus)
+  stus = Student.objects.filter(s_age__gte=18).filter(s_age__lt=20)
+  print(stus)
+  # 聚合函数 avg max min sum count
+  age_avg = Student.objects.all().aggregate(Avg(&#39;s_age&#39;))
+  print(age_avg)
+  sum_avg = Student.objects.all().aggregate(Sum(&#39;s_age&#39;))
+  print(sum_avg)
+  max_avg = Student.objects.all().aggregate(Max(&#39;s_age&#39;))
+  print(max_avg)
+  min_avg = Student.objects.all().aggregate(Min(&#39;s_age&#39;))
+  print(min_avg)
+
+  #查询年龄大于等于18  且 小于20
+  stus = Student.objects.filter(s_age__gte=18, s_age__lt=20)
+  print(stus)
+  #  ，&amp; 和and 是且的操作   or 或者， 查询年龄大于等于18 或者  小于等20
+
+  stus = Student.objects.filter(Q(s_age__gte=18) | Q(s_age__lte=20))
+  print(stus)
+  stus = Student.objects.filter(~Q(s_age__gt=18))
+  print(stus)
+
+  #查询物理成绩大于数学成绩的学生
+  stus = Student.objects.all()
+  for stu in stus:
+      if stu.wuli &gt; stu.math:
+          print(stu.s_name)
+  stus = Student.objects.filter(wuli__gt=F(&#39;math&#39;)+10).first()
+  print(stus.s_name)
+  return HttpResponse(&#39;查询所有学生信息&#39;)
+</code></pre></li>
+</ul>
 
             </div>
             <hr>
@@ -471,7 +639,7 @@
                     <span class="reprint-tip">转载请注明: </span>
                     <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2018/12/20/linux-git/" class="b-link-green">Linux_git介绍</a>
+                    <a href="/2019/01/03/web-hou-duan-django-qian-xi-zhi-shu-ju-ku-zeng-shan-gai-cha/" class="b-link-green">web后端Django-前戏之数据库增删改查</a>
                 </p>
             </div>
         </div>
@@ -495,46 +663,33 @@
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">上一篇</div>
             <div class="card">
-                <a href="/2018/12/22/blog-setting/">
+                <a href="/2019/01/03/git-cao-zuo-cang-ku-guan-li-2/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="blog_setting介绍">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="">
                         
-                        <span class="card-title">blog_setting介绍</span>
+                        <span class="card-title"></span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">特性
-简单漂亮，文章内容美观易读
-Material Design设计
-响应式设计，博客在桌面端、平板、手机等设备上均能很好的展现
-每天动态切换Banner图片
-瀑布流式的博客文章列表(文章无特色图片时会有24张漂亮的图片代替)
-时间轴式的归</div>
+                    <div class="summary">GIT使用指南
+layout: wtitle: git仓库管理date: 2018-12-18 23:45:20tags: GITcategories: 仓库管理
+
+基础操作
+克隆github或者码云上代码到本地
+git clone 分支名</div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-22
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-03
                         </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/blog搭建/" class="post-category" target="_blank">
-                                    blog搭建
-                                </a>
-                            
+                            <i class="fa fa-user fa-fw"></i>
+                            lorry
                             
                         </span>
                     </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/blog/" target="_blank">
-                        <span class="chip bg-color">blog</span>
-                    </a>
-                    
                 </div>
                 
             </div>
@@ -542,42 +697,41 @@ Material Design设计
         
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">本篇</div>
+            <div class="article-badge right-badge text-color">下一篇</div>
             <div class="card">
-                <a href="/2018/12/20/linux-git/">
+                <a href="/2019/01/02/fei-guan-xi-xing-shu-ju-ku-2redis/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="Linux_git介绍">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="非关系型数据库">
                         
-                        <span class="card-title">Linux_git介绍</span>
+                        <span class="card-title">非关系型数据库</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Git简介Git是目前世界上最先进的分布式版本控制系统。Git 是 Linus Torvalds 为了帮助管理 Linux 内核开发而开发的一个开放源码的版本控制软件。
-安装Git现在，Git可以在Linux、Unix、Mac和Window</div>
+                    <div class="summary">第一部分redis的安装以及挂载1.进入Linux系统或者在服务器中下载文件wget http://download.redis.io/releases/redis-5.0.3.tar.gz
+2.解压文件gunzip redis-5.0.3</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-20
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Linux/" class="post-category" target="_blank">
-                                    Linux
+                            <a href="/categories/Mysql/" class="post-category" target="_blank">
+                                    Mysql
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Git/" target="_blank">
-                        <span class="chip bg-color">Git</span>
+                    <a href="/tags/redis/" target="_blank">
+                        <span class="chip bg-color">redis</span>
                     </a>
                     
                 </div>
