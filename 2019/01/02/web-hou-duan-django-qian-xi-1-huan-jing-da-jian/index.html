@@ -5,11 +5,11 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="数据库操作-建表, lorry_python">
-    <meta name="description" content="1.创建数据库– 如果存在srs的数据库就删除它（慎重），之后创建数据库并且进入数据库。
-drop database if exists srs;
-create database srs default charset utf8;
-use ">
+    <meta name="keywords" content="web后端Django-前戏, lorry_python">
+    <meta name="description" content="1.配置虚拟环境（1）pycharm中直接配置
+A.在pycharm中创建工程时，就开始创建虚拟环境。
+B.安装django pymysql django-redis    
+pycharm终端命令：pip install django p">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@ use ">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>数据库操作-建表 | lorry_python</title>
+    <title>web后端Django-前戏 | lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -268,13 +268,13 @@ use ">
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        数据库操作-建表
+                        web后端Django-前戏
                     </div>
                 </div>
             </div>
@@ -294,8 +294,8 @@ use ">
             
             <div class="article-tag">
                 
-                <a href="/tags/sql/" target="_blank">
-                    <span class="chip bg-color">sql</span>
+                <a href="/tags/Django/" target="_blank">
+                    <span class="chip bg-color">Django</span>
                 </a>
                 
             </div>
@@ -305,105 +305,138 @@ use ">
                 <span class="post-cate">
                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                     
-                    <a href="/categories/MySql/" class="post-category" target="_blank">
-                        MySql
+                    <a href="/categories/web后端/" class="post-category" target="_blank">
+                        web后端
                     </a>
                     
                 </span>
                 
 
                 <span class="post-date">
-                    <i class="fa fa-clock-o fa-fw"></i>2018-12-26
+                    <i class="fa fa-clock-o fa-fw"></i>2019-01-02
                 </span>
             </div>
         </div>
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1.创建数据库"></a>1.创建数据库</h3><p>– 如果存在srs的数据库就删除它（慎重），之后创建数据库并且进入数据库。</p>
-<pre><code>drop database if exists srs;
-create database srs default charset utf8;
-use srs;
-</code></pre><h3 id="2-创建二维表"><a href="#2-创建二维表" class="headerlink" title="2.创建二维表"></a>2.创建二维表</h3><p>例子：创建学生管理表并且添加信息</p>
-<h4 id="1-创建学员表"><a href="#1-创建学员表" class="headerlink" title="1.创建学员表"></a>1.创建学员表</h4><pre><code>create table tb_college
-(
-collid int not null auto_increment comment &#39;学院编号&#39;,
-collname varchar(50) not null comment &#39;学院名称&#39;,
-collmaster varchar(20) not null comment &#39;院长姓名&#39;,
-collweb varchar(511) default &#39;&#39; comment &#39;学院网站&#39;,
-primary key (collid)
-);
-</code></pre><ul>
-<li>添加唯一性约束到学院名称<pre><code>alter table tb_college add constraint uni_college_collname unique (collname);
-</code></pre><h4 id="2-创建学生表"><a href="#2-创建学生表" class="headerlink" title="2.创建学生表"></a>2.创建学生表</h4><pre><code>create table tb_student
-(
-stuid int not null comment &#39;学号&#39;,
-sname varchar(20) not null comment &#39;学生姓名&#39;,
-gender bit default 1 comment &#39;性别&#39;,
-birth date not null comment &#39;出生日期&#39;,
-addr varchar(255) default &#39;&#39; comment &#39;籍贯&#39;,
-collid int not null comment &#39;所属学院编号&#39;,
-primary key (stuid)
-);
-</code></pre></li>
-<li>检查约束，mysql不支持：<pre><code>alter table tb_student add constraint ck_student_birth check (birth between &#39;1990-1-1&#39; and &#39;1999-12-31&#39;);
-</code></pre></li>
-<li>添加外键约束<pre><code>alter table tb_student add constraint fk_student_collid foreign key (collid) references tb_college (collid);
-</code></pre><h4 id="3-创建教师表"><a href="#3-创建教师表" class="headerlink" title="3.创建教师表"></a>3.创建教师表</h4><pre><code>create table tb_teacher
-(
-teaid int not null comment &#39;教师工号&#39;,
-tname varchar(20) not null comment &#39;教师姓名&#39;,
-title varchar(10) default &#39;&#39; comment &#39;职称&#39;,
-collid int not null comment &#39;所属学院编号&#39;
-);
-</code></pre></li>
-<li>添加外键约束<pre><code>alter table tb_teacher add constraint pk_teacher primary key (teaid);
-</code></pre></li>
-<li>添加外键约束<pre><code>alter table tb_teacher add constraint fk_teacher_collid foreign key (collid) references tb_college (collid);
-</code></pre><h4 id="4-插入学院数据"><a href="#4-插入学院数据" class="headerlink" title="4.插入学院数据"></a>4.插入学院数据</h4></li>
-<li>插入学院数据<br><code>`</code><br>insert into tb_college (collname, collmaster, collweb) values<br>(‘计算机学院’, ‘左冷禅’, ‘<a href="http://www.abc.com" target="_blank" rel="noopener">http://www.abc.com</a> </li>
+                <h3 id="1-配置虚拟环境"><a href="#1-配置虚拟环境" class="headerlink" title="1.配置虚拟环境"></a>1.配置虚拟环境</h3><h4 id="（1）pycharm中直接配置"><a href="#（1）pycharm中直接配置" class="headerlink" title="（1）pycharm中直接配置"></a>（1）pycharm中直接配置</h4><ul>
+<li>A.在pycharm中创建工程时，就开始创建虚拟环境。</li>
+<li>B.安装django pymysql django-redis    <ul>
+<li>pycharm终端命令：pip install django pymysql django-redis</li>
 </ul>
-<p>‘),<br>(‘外国语学院’, ‘岳不群’, ‘<a href="http://www.xyz.com" target="_blank" rel="noopener">http://www.xyz.com</a> </p>
-<p>‘),<br>(‘经济管理学院’, ‘风清扬’, ‘<a href="http://www.foo.com" target="_blank" rel="noopener">http://www.foo.com</a> </p>
-<p>‘);</p>
-<pre><code>#### 5.插入学生数据
-</code></pre><p>insert into tb_student (stuid, sname, gender, birth, addr, collid) values<br>(1001, ‘杨逍’, 1, ‘1990-3-4’, ‘四川成都’, 1),<br>(1002, ‘任我行’, 1, ‘1992-2-2’, ‘湖南长沙’, 1),<br>(1033, ‘王语嫣’, 0, ‘1989-12-3’, ‘四川成都’, 1),<br>(1572, ‘岳不群’, 1, ‘1993-7-19’, ‘陕西咸阳’, 1),<br>(1378, ‘纪嫣然’, 0, ‘1995-8-12’, ‘四川绵阳’, 1),<br>(1954, ‘林平之’, 1, ‘1994-9-20’, ‘福建莆田’, 1),<br>(2035, ‘东方不败’, 1, ‘1988-6-30’, null, 2),<br>(3011, ‘林震南’, 1, ‘1985-12-12’, ‘福建莆田’, 3),<br>(3755, ‘项少龙’, 1, ‘1993-1-25’, null, 3),<br>(3923, ‘杨不悔’, 0, ‘1985-4-17’, ‘四川成都’, 3);</p>
-<pre><code>#### 6.插入老师数据
-</code></pre><p>insert into tb_teacher (teaid, tname, title, collid) values<br>(1122, ‘张三丰’, ‘教授’, 1),<br>(1133, ‘宋远桥’, ‘副教授’, 1),<br>(1144, ‘杨逍’, ‘副教授’, 1),<br>(2255, ‘范遥’, ‘副教授’, 2),<br>(3366, ‘韦一笑’, ‘讲师’, 3);</p>
-<pre><code>#### 7. 插入课程数据
-</code></pre><p>insert into tb_course (couid, cname, credit, teaid) values<br>(1111, ‘Python程序设计’, 3, 1122),<br>(2222, ‘Web前端开发’, 2, 1122),<br>(3333, ‘操作系统’, 4, 1122),<br>(4444, ‘计算机网络’, 2, 1133),<br>(5555, ‘编译原理’, 4, 1144),<br>(6666, ‘算法和数据结构’, 3, 1144),<br>(7777, ‘经贸法语’, 3, 2255),<br>(8888, ‘成本会计’, 2, 3366),<br>(9999, ‘审计学’, 3, 3366);</p>
-<pre><code>#### 8.插入选课数据
-</code></pre><p>insert into tb_score (sid, cid, seldate, mark) values<br>(1001, 1111, ‘2017-09-01’, 95),<br>(1001, 2222, ‘2017-09-01’, 87.5),<br>(1001, 3333, ‘2017-09-01’, 100),<br>(1001, 4444, ‘2018-09-03’, null),<br>(1001, 6666, ‘2017-09-02’, 100),<br>(1002, 1111, ‘2017-09-03’, 65),<br>(1002, 5555, ‘2017-09-01’, 42),<br>(1033, 1111, ‘2017-09-03’, 92.5),<br>(1033, 4444, ‘2017-09-01’, 78),<br>(1033, 5555, ‘2017-09-01’, 82.5),<br>(1572, 1111, ‘2017-09-02’, 78),<br>(1378, 1111, ‘2017-09-05’, 82),<br>(1378, 7777, ‘2017-09-02’, 65.5),<br>(2035, 7777, ‘2018-09-03’, 88),<br>(2035, 9999, curdate(now()), null),<br>(3755, 1111, date(now()), null),<br>(3755, 8888, date(now()), null),<br>(3755, 9999, ‘2017-09-01’, 92);<br><code>`</code></p>
-<h3 id="相关sql语句练习"><a href="#相关sql语句练习" class="headerlink" title="相关sql语句练习"></a>相关sql语句练习</h3><p>– 总结 分组之前的筛选用where子句，分组之后的子句筛选用having。</p>
-<ul>
-<li>查询所有学生信息</li>
-<li>查询所有课程名称及学分(投影和别名)</li>
-<li>查询所有女学生的姓名和出生日期(筛选)</li>
-<li>查询所有80后学生的姓名、性别和出生日期(筛选)</li>
-<li>查询所有80后学生的姓名、性别和出生日期(筛选)，使用mysql中的分支函数</li>
-<li>查询名字有四个中文字符字符的学生学号和姓名,一个中文三个字节</li>
-<li>查询姓”杨“的学生姓名和性别(模糊)</li>
-<li>查询姓”杨“名字两个字的学生姓名和性别(模糊)</li>
-<li>查询姓”杨“名字三个字的学生姓名和性别(模糊)</li>
-<li>查询名字中有”不“字或“嫣”字的学生的姓名(模糊)</li>
-<li>查询没有录入家庭住址的学生姓名(空值)  更加的严谨</li>
-<li>查询录入了家庭住址的学生姓名(空值) 摩根定律</li>
-<li>查询学生选课的所有日期(去重)– distinct</li>
-<li>查询学生的家庭住址(去重)</li>
-<li>查询男学生的姓名和生日按年龄从大到小排列(排序)– 升序   asc 默认</li>
-<li>聚合函数 max min sum avg count</li>
-<li>查询年龄最大的学生的出生日期(聚合函数)</li>
-<li>查询男女学生的人数(分组和聚合函数)</li>
-<li>查询课程编号为1111的课程的平均成绩(筛选和聚合函数)</li>
-<li>查询学号为1001的学生所有课程的平均分(筛选和聚合函数)</li>
-<li>查询每个学生的学号和平均成绩(分组和聚合函数)</li>
-<li>查询平均成绩大于等于90分的且学号为1开头的学生的学号和平均成绩</li>
-<li>查询年龄最大的学生的姓名(子查询) 把一个查询的结果当做另一个查询的一部分来使用</li>
-<li>查询年龄最大的学生姓名和年龄(子查询+运算)</li>
-<li>查询选了两门以上的课程的学生姓名(子查询/分组条件/集合运算)</li>
-<li>查询学生姓名、课程名称以及成绩(链接查询) 链接查询时，如果不使用链接条件，将会产生笛卡尔积</li>
-<li>查询选课学生的姓名和平均成绩(子查询和连接查询)</li>
-<li>查询每个学生的姓名和选课数量(左外连接和子查询)<br>(左表：多表查询时，写在前面的表称为左表left outer join，right outer join ，mysql不支持全外连接 ：full outer join<br>– 左外连接，将左表不满足连接条件的记录也要查出来，不满足链表条件的的地方补null<br>– 右外连接，将右表不满足连接条件的记录也要查出来，不满足链表条件的的地方补null<br>– 内连接只能将满足条件的表链接起来，不满足的链接条件的不能查出)</li>
+</li>
+<li>C.将依赖库重定向到文件中，方便别人copy时直接通过txt配置虚拟环境<ul>
+<li>终端命令：pip freeze &gt; requirements.txt</li>
+<li>例如：将文件中的依赖库一句话安装到虚拟环境中</li>
+<li>pip install -r requirements.txt </li>
+</ul>
+</li>
+<li>D.开始Django项目,注意最后有一个空格 + .。<ul>
+<li>终端命令：django-admin startproject hellodjango .</li>
+</ul>
+</li>
+<li>E.执行项目，manage.py是自动创好的。<ul>
+<li>终端命令：python manage.py runserver</li>
+<li>执行后可以通过<a href="http://localhost:8000或者http://127.0.0.1:8000进行查看" target="_blank" rel="noopener">http://localhost:8000或者http://127.0.0.1:8000进行查看</a></li>
+</ul>
+</li>
+<li>F.（1）第一次迁移<ul>
+<li>数据库迁移（是在数据库配置好之后执行的命令），建立十张表</li>
+<li>终端命令：python manage.py migrate<br>-（2）以后的迁移：当建立中间表需要在数据库持久化则需要再次迁移</li>
+<li>生成迁移文件：python manage.py makemigrations</li>
+<li>执行迁移文件“：python manage.py migrate</li>
+</ul>
+</li>
+<li>G.Django创建管理员账号<ul>
+<li>python manage.py createsuperuser</li>
+</ul>
+</li>
+</ul>
+<h4 id="（2）windows中cmd、redhat、centos等中虚拟环境的配置"><a href="#（2）windows中cmd、redhat、centos等中虚拟环境的配置" class="headerlink" title="（2）windows中cmd、redhat、centos等中虚拟环境的配置"></a>（2）windows中cmd、redhat、centos等中虚拟环境的配置</h4><ul>
+<li>A：准备工作1<ul>
+<li>在自己记得住的文件夹下创建两个文件夹用于区分虚拟环境和工作环境分别为env(虚拟环境)和workspace工作环境</li>
+</ul>
+</li>
+<li>AA：准备工作2<ul>
+<li>给全局配置安装虚拟环境</li>
+<li>终端命令：pip install virtualenv</li>
+</ul>
+</li>
+<li>B：配置项目的单独的虚拟环境<ul>
+<li>在cmd或者其余的系统中将路径切换到enc目录下。建议使用git或者xsheel，不使用cmd**终端。</li>
+<li>终端指令：virtualenv –no-site-packages -p C:\Users\ThinkPad\AppData\Local\Programs\Python\Python37\python.exe DJenv1808</li>
+<li>代码解释：</li>
+<li>–no-site-packages：创建纯净环境，无杂质。</li>
+<li>-p：python版本的绝对路径，是针对系统上有多个python版本。若只有一个直接不写。</li>
+<li>DJenv1808  ：存放工程的虚拟环境的文件夹。</li>
+</ul>
+</li>
+<li>C：激活、杀死环境<ul>
+<li>进入enc/Scripts文件夹</li>
+<li>cmd中：进入文件夹后直接输入：activate。然后回车即激活环境。</li>
+<li>mac以及无界面系统中进入文件夹后输入：source activate。然后回车即激活环境。</li>
+<li><strong>状态激活标识：在终端中显示将会出现    （(DJenv1808)）</strong></li>
+<li>退出环境：所有的退出环境操作均一样。终端操作命令：deactivate   </li>
+</ul>
+</li>
+<li>D：在激活状态下<ul>
+<li>a（pycharm中可在中断中执行上述的操作进行。</li>
+<li>b在cmd以及其他中：<h6 id="（1）将目录切换至之前创建的workspace下，创建django文件夹"><a href="#（1）将目录切换至之前创建的workspace下，创建django文件夹" class="headerlink" title="（1）将目录切换至之前创建的workspace下，创建django文件夹"></a>（1）将目录切换至之前创建的workspace下，创建django文件夹</h6><h6 id="（2）执行代码：django-admin-startproject-test"><a href="#（2）执行代码：django-admin-startproject-test" class="headerlink" title="（2）执行代码：django-admin startproject test"></a>（2）执行代码：django-admin startproject test</h6></li>
+</ul>
+</li>
+<li>E：用pycharm打开为项目名称的这个工程<ul>
+<li>在pycharm终端中启动命令：python manange.py runserver   8080 or 0.0.0.0:8080即可看到页面。</li>
+</ul>
+</li>
+<li>G：创建app子工程<ul>
+<li>在pycharm的终端中执行代码：python manage.py startapp app</li>
+</ul>
+</li>
+<li>H.（1）第一次迁移<ul>
+<li>数据库迁移（是在数据库配置好之后执行的命令），建立十张表</li>
+<li>终端命令：python manage.py migrate<br>-（2）以后的迁移：当建立中间表需要在数据库持久化则需要再次迁移</li>
+<li>生成迁移文件：python manage.py makemigrations</li>
+<li>执行迁移文件“：python manage.py migrate</li>
+</ul>
+</li>
+<li>I :对后台数据创建超级管理员<ul>
+<li>.终端执行代码：python manage.py createsuperuser<h3 id="2-MVT和MVC模式："><a href="#2-MVT和MVC模式：" class="headerlink" title="2.MVT和MVC模式："></a>2.MVT和MVC模式：</h3><strong>MVT模式是由MVC模式演变出来的，MVC模式是所有框架遵循的模式</strong><br>MVT：M：models.py——模型层<br> V：views.py————视图层<br> C：templates————模板，定义页面HTML的地方<br>MVC：<br>M:模型层<br>V：模板：HTML页面<br>C：controller，控制器，写业务逻辑的地方<h3 id="3-pip相关用法"><a href="#3-pip相关用法" class="headerlink" title="3.pip相关用法"></a>3.pip相关用法</h3></li>
+</ul>
+</li>
+<li>查看虚拟环境下安装的所有的包　：pip list<ul>
+<li>查看虚拟环境重通过pip安装的包 ：pip freeze    </li>
+<li>查看是否冲突：pip check<h4 id="4-数据库配置"><a href="#4-数据库配置" class="headerlink" title="4.数据库配置"></a>4.数据库配置</h4></li>
+</ul>
+</li>
+<li>当完成相关配置后即可配置数据库：找到test下setting.py.大概80行的位置。修改database为<pre><code>DATABASES = {
+  &#39;default&#39;: {
+      &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;,
+      &#39;NAME&#39;: &#39;dj8&#39;,
+      &#39;USER&#39;:&#39;root&#39;,
+      &#39;PASSWORD&#39;:&#39;*****&#39;, #数据库密码
+      &#39;HOST&#39;:&#39;120.0.0.0&#39;, #服务器或者本地地址
+      &#39;PORT&#39;:3306,
+      &#39;TIME_ZONE&#39;:&#39;Asia/Chongqing&#39;
+  }
+}
+</code></pre><h4 id="5修改访问权限"><a href="#5修改访问权限" class="headerlink" title="5修改访问权限"></a>5修改访问权限</h4><pre><code>ALLOWED_HOSTS = [&#39;*&#39;]   #允许访问的主机ip地址
+</code></pre><h4 id="6-语言时区修改"><a href="#6-语言时区修改" class="headerlink" title="6.语言时区修改"></a>6.语言时区修改</h4><pre><code>LANGUAGE_CODE = &#39;zh-hans&#39;
+TIME_ZONE = &#39;Asia/Chongqing&#39;
+</code></pre><h4 id="7-数据库模块配置"><a href="#7-数据库模块配置" class="headerlink" title="7.数据库模块配置"></a>7.数据库模块配置</h4></li>
+<li>a.在pycharm终端中执行代码：pip install pymysql <ul>
+<li>此操作时连接国外网站进行下载可以通过其他方法进行提升</li>
+<li>方法（1）：pip install -i <a href="https://pypi.doubanio.com/sample" target="_blank" rel="noopener">https://pypi.doubanio.com/sample</a> pymysql提升下载速度</li>
+<li>方法（2）：修改系统配置文件</li>
+<li>在C盘user或者用户下找到当前的管家（我的是thinkpad）新建一个文件夹pip,再新建一个后缀为ini文件名为pip的文件。</li>
+<li>编辑文件为下内容即可<pre><code>[global]
+index-url=https://pypi.doubanio.com/simple
+</code></pre></li>
+</ul>
+</li>
+<li>b.在ini.py文件中写下一下代码：<pre><code>import pymysql
+pymysql.install_as_MySQLdb()
+</code></pre>前戏配置完毕</li>
 </ul>
 
             </div>
@@ -543,7 +576,7 @@ collid int not null comment &#39;所属学院编号&#39;
                     <span class="reprint-tip">转载请注明: </span>
                     <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2018/12/26/shu-ju-ku-cao-zuo-jian-biao/" class="b-link-green">数据库操作-建表</a>
+                    <a href="/2019/01/02/web-hou-duan-django-qian-xi-1-huan-jing-da-jian/" class="b-link-green">web后端Django-前戏</a>
                 </p>
             </div>
         </div>
@@ -567,20 +600,18 @@ collid int not null comment &#39;所属学院编号&#39;
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">上一篇</div>
             <div class="card">
-                <a href="/2019/01/02/web-hou-duan-django-qian-xi-1-huan-jing-da-jian/">
+                <a href="/2019/01/02/fei-guan-xi-xing-shu-ju-ku-2redis/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="web后端Django-前戏">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="非关系型数据库">
                         
-                        <span class="card-title">web后端Django-前戏</span>
+                        <span class="card-title">非关系型数据库</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">1.配置虚拟环境（1）pycharm中直接配置
-A.在pycharm中创建工程时，就开始创建虚拟环境。
-B.安装django pymysql django-redis    
-pycharm终端命令：pip install django p</div>
+                    <div class="summary">第一部分redis的安装以及挂载1.进入Linux系统或者在服务器中下载文件wget http://download.redis.io/releases/redis-5.0.3.tar.gz
+2.解压文件gunzip redis-5.0.3</div>
                     <div class="publish-info">
                         <span class="publish-date">
                             <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
@@ -589,8 +620,8 @@ pycharm终端命令：pip install django p</div>
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/web后端/" class="post-category" target="_blank">
-                                    web后端
+                            <a href="/categories/Mysql/" class="post-category" target="_blank">
+                                    Mysql
                                 </a>
                             
                             
@@ -600,8 +631,8 @@ pycharm终端命令：pip install django p</div>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Django/" target="_blank">
-                        <span class="chip bg-color">Django</span>
+                    <a href="/tags/redis/" target="_blank">
+                        <span class="chip bg-color">redis</span>
                     </a>
                     
                 </div>
@@ -613,20 +644,20 @@ pycharm终端命令：pip install django p</div>
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">下一篇</div>
             <div class="card">
-                <a href="/2018/12/26/linux-zhuang-ruan-jian/">
+                <a href="/2018/12/26/shu-ju-ku-cao-zuo-jian-biao/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="Linux基操">
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="数据库操作-建表">
                         
-                        <span class="card-title">Linux基操</span>
+                        <span class="card-title">数据库操作-建表</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">Linux安装软件docker：虚拟化服务，创建虚拟化容器，并安装软件
-1.包管理管理工具 -yum、rpm
-yum -y install docker-io   安装docker
-yum -y removie docker-io  卸载d</div>
+                    <div class="summary">1.创建数据库– 如果存在srs的数据库就删除它（慎重），之后创建数据库并且进入数据库。
+drop database if exists srs;
+create database srs default charset utf8;
+use </div>
                     <div class="publish-info">
                             <span class="publish-date">
                                 <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-26
@@ -635,8 +666,8 @@ yum -y removie docker-io  卸载d</div>
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Linux/" class="post-category" target="_blank">
-                                    Linux
+                            <a href="/categories/MySql/" class="post-category" target="_blank">
+                                    MySql
                                 </a>
                             
                             
@@ -646,16 +677,8 @@ yum -y removie docker-io  卸载d</div>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/yum/" target="_blank">
-                        <span class="chip bg-color">yum</span>
-                    </a>
-                    
-                    <a href="/tags/rpm/" target="_blank">
-                        <span class="chip bg-color">rpm</span>
-                    </a>
-                    
-                    <a href="/tags/docker/" target="_blank">
-                        <span class="chip bg-color">docker</span>
+                    <a href="/tags/sql/" target="_blank">
+                        <span class="chip bg-color">sql</span>
                     </a>
                     
                 </div>

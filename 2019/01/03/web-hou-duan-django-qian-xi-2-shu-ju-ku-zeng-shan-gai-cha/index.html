@@ -5,11 +5,9 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="web后端Django-前戏, lorry_python">
-    <meta name="description" content="1.配置虚拟环境（1）pycharm中直接配置
-A.在pycharm中创建工程时，就开始创建虚拟环境。
-B.安装django pymysql django-redis    
-pycharm终端命令：pip install django p">
+    <meta name="keywords" content="web后端Django-前戏之数据库增删改查, lorry_python">
+    <meta name="description" content="概念引入ORM(objects relationship mapping): 对象关系映射；objects: 管理器，默认模型的属性；
+1.数据增加中间表（即自己需要管理的表）举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +15,7 @@ pycharm终端命令：pip install django p">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>web后端Django-前戏 | lorry_python</title>
+    <title>web后端Django-前戏之数据库增删改查 | lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -268,13 +266,13 @@ pycharm终端命令：pip install django p">
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/7.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        web后端Django-前戏
+                        web后端Django-前戏之数据库增删改查
                     </div>
                 </div>
             </div>
@@ -313,130 +311,214 @@ pycharm终端命令：pip install django p">
                 
 
                 <span class="post-date">
-                    <i class="fa fa-clock-o fa-fw"></i>2019-01-02
+                    <i class="fa fa-clock-o fa-fw"></i>2019-01-03
                 </span>
             </div>
         </div>
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-配置虚拟环境"><a href="#1-配置虚拟环境" class="headerlink" title="1.配置虚拟环境"></a>1.配置虚拟环境</h3><h4 id="（1）pycharm中直接配置"><a href="#（1）pycharm中直接配置" class="headerlink" title="（1）pycharm中直接配置"></a>（1）pycharm中直接配置</h4><ul>
-<li>A.在pycharm中创建工程时，就开始创建虚拟环境。</li>
-<li>B.安装django pymysql django-redis    <ul>
-<li>pycharm终端命令：pip install django pymysql django-redis</li>
+                <h3 id="概念引入"><a href="#概念引入" class="headerlink" title="概念引入"></a>概念引入</h3><p>ORM(objects relationship mapping): 对象关系映射；<br>objects: 管理器，默认模型的属性；</p>
+<h3 id="1-数据增加中间表（即自己需要管理的表）"><a href="#1-数据增加中间表（即自己需要管理的表）" class="headerlink" title="1.数据增加中间表（即自己需要管理的表）"></a>1.数据增加中间表（即自己需要管理的表）</h3><h5 id="举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；"><a href="#举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；" class="headerlink" title="举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；"></a>举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；</h5><ul>
+<li>a：在django-admin startproject app . 或者 python manage.py startapp app之后即可看见工程中有app文件，其中有一个model.py文件，进入即可。</li>
+<li>b：创建类以及创建表名字，需要导入model模块<pre><code>from django.db import models
+# Create your models here.
+class Student(models.Model):
+  s_name = models.CharField(max_length=10,unique=True)
+  s_age = models.IntegerField(default=20)
+  s_gender = models.BooleanField(default=0)
+  create_time = models.DateTimeField(auto_now_add=True)
+  # auto_now_add   创建时，默认字段赋值为最新的事件
+  # create_time = models.DateField
+  updata_time = models.DateTimeField(auto_now=True)
+  # 修改数据是，自动赋值为更新字段时 的时间。
+  math = models.DecimalField(max_digits=3,decimal_places=1,null=True)
+  wuli = models.DecimalField(max_digits=3,decimal_places=1,null=True)
+  class Meta:
+      db_table = &#39;student&#39;
+</code></pre></li>
+<li>c：在pycharm终端中执行两条迁移命令,即可在数据库中创建表；<ul>
+<li>生成迁移文件：python manage.py makemigrations；</li>
+<li>执行迁移文件“：python manage.py migrate；<h3 id="2-数据库的增操作"><a href="#2-数据库的增操作" class="headerlink" title="2.数据库的增操作"></a>2.数据库的增操作</h3></li>
 </ul>
 </li>
-<li>C.将依赖库重定向到文件中，方便别人copy时直接通过txt配置虚拟环境<ul>
-<li>终端命令：pip freeze &gt; requirements.txt</li>
-<li>例如：将文件中的依赖库一句话安装到虚拟环境中</li>
-<li>pip install -r requirements.txt </li>
-</ul>
-</li>
-<li>D.开始Django项目,注意最后有一个空格 + .。<ul>
-<li>终端命令：django-admin startproject hellodjango .</li>
-</ul>
-</li>
-<li>E.执行项目，manage.py是自动创好的。<ul>
-<li>终端命令：python manage.py runserver</li>
-<li>执行后可以通过<a href="http://localhost:8000或者http://127.0.0.1:8000进行查看" target="_blank" rel="noopener">http://localhost:8000或者http://127.0.0.1:8000进行查看</a></li>
-</ul>
-</li>
-<li>F.（1）第一次迁移<ul>
-<li>数据库迁移（是在数据库配置好之后执行的命令），建立十张表</li>
-<li>终端命令：python manage.py migrate<br>-（2）以后的迁移：当建立中间表需要在数据库持久化则需要再次迁移</li>
-<li>生成迁移文件：python manage.py makemigrations</li>
-<li>执行迁移文件“：python manage.py migrate</li>
-</ul>
-</li>
-<li>G.Django创建管理员账号<ul>
-<li>python manage.py createsuperuser</li>
-</ul>
-</li>
-</ul>
-<h4 id="（2）windows中cmd、redhat、centos等中虚拟环境的配置"><a href="#（2）windows中cmd、redhat、centos等中虚拟环境的配置" class="headerlink" title="（2）windows中cmd、redhat、centos等中虚拟环境的配置"></a>（2）windows中cmd、redhat、centos等中虚拟环境的配置</h4><ul>
-<li>A：准备工作1<ul>
-<li>在自己记得住的文件夹下创建两个文件夹用于区分虚拟环境和工作环境分别为env(虚拟环境)和workspace工作环境</li>
-</ul>
-</li>
-<li>AA：准备工作2<ul>
-<li>给全局配置安装虚拟环境</li>
-<li>终端命令：pip install virtualenv</li>
-</ul>
-</li>
-<li>B：配置项目的单独的虚拟环境<ul>
-<li>在cmd或者其余的系统中将路径切换到enc目录下。建议使用git或者xsheel，不使用cmd**终端。</li>
-<li>终端指令：virtualenv –no-site-packages -p C:\Users\ThinkPad\AppData\Local\Programs\Python\Python37\python.exe DJenv1808</li>
-<li>代码解释：</li>
-<li>–no-site-packages：创建纯净环境，无杂质。</li>
-<li>-p：python版本的绝对路径，是针对系统上有多个python版本。若只有一个直接不写。</li>
-<li>DJenv1808  ：存放工程的虚拟环境的文件夹。</li>
-</ul>
-</li>
-<li>C：激活、杀死环境<ul>
-<li>进入enc/Scripts文件夹</li>
-<li>cmd中：进入文件夹后直接输入：activate。然后回车即激活环境。</li>
-<li>mac以及无界面系统中进入文件夹后输入：source activate。然后回车即激活环境。</li>
-<li><strong>状态激活标识：在终端中显示将会出现    （(DJenv1808)）</strong></li>
-<li>退出环境：所有的退出环境操作均一样。终端操作命令：deactivate   </li>
-</ul>
-</li>
-<li>D：在激活状态下<ul>
-<li>a（pycharm中可在中断中执行上述的操作进行。</li>
-<li>b在cmd以及其他中：<h6 id="（1）将目录切换至之前创建的workspace下，创建django文件夹"><a href="#（1）将目录切换至之前创建的workspace下，创建django文件夹" class="headerlink" title="（1）将目录切换至之前创建的workspace下，创建django文件夹"></a>（1）将目录切换至之前创建的workspace下，创建django文件夹</h6><h6 id="（2）执行代码：django-admin-startproject-test"><a href="#（2）执行代码：django-admin-startproject-test" class="headerlink" title="（2）执行代码：django-admin startproject test"></a>（2）执行代码：django-admin startproject test</h6></li>
-</ul>
-</li>
-<li>E：用pycharm打开为项目名称的这个工程<ul>
-<li>在pycharm终端中启动命令：python manange.py runserver   8080 or 0.0.0.0:8080即可看到页面。</li>
-</ul>
-</li>
-<li>G：创建app子工程<ul>
-<li>在pycharm的终端中执行代码：python manage.py startapp app</li>
-</ul>
-</li>
-<li>H.（1）第一次迁移<ul>
-<li>数据库迁移（是在数据库配置好之后执行的命令），建立十张表</li>
-<li>终端命令：python manage.py migrate<br>-（2）以后的迁移：当建立中间表需要在数据库持久化则需要再次迁移</li>
-<li>生成迁移文件：python manage.py makemigrations</li>
-<li>执行迁移文件“：python manage.py migrate</li>
-</ul>
-</li>
-<li>I :对后台数据创建超级管理员<ul>
-<li>.终端执行代码：python manage.py createsuperuser<h3 id="2-MVT和MVC模式："><a href="#2-MVT和MVC模式：" class="headerlink" title="2.MVT和MVC模式："></a>2.MVT和MVC模式：</h3><strong>MVT模式是由MVC模式演变出来的，MVC模式是所有框架遵循的模式</strong><br>MVT：M：models.py——模型层<br> V：views.py————视图层<br> C：templates————模板，定义页面HTML的地方<br>MVC：<br>M:模型层<br>V：模板：HTML页面<br>C：controller，控制器，写业务逻辑的地方<h3 id="3-pip相关用法"><a href="#3-pip相关用法" class="headerlink" title="3.pip相关用法"></a>3.pip相关用法</h3></li>
-</ul>
-</li>
-<li>查看虚拟环境下安装的所有的包　：pip list<ul>
-<li>查看虚拟环境重通过pip安装的包 ：pip freeze    </li>
-<li>查看是否冲突：pip check<h4 id="4-数据库配置"><a href="#4-数据库配置" class="headerlink" title="4.数据库配置"></a>4.数据库配置</h4></li>
-</ul>
-</li>
-<li>当完成相关配置后即可配置数据库：找到test下setting.py.大概80行的位置。修改database为<pre><code>DATABASES = {
-  &#39;default&#39;: {
-      &#39;ENGINE&#39;: &#39;django.db.backends.mysql&#39;,
-      &#39;NAME&#39;: &#39;dj8&#39;,
-      &#39;USER&#39;:&#39;root&#39;,
-      &#39;PASSWORD&#39;:&#39;*****&#39;, #数据库密码
-      &#39;HOST&#39;:&#39;120.0.0.0&#39;, #服务器或者本地地址
-      &#39;PORT&#39;:3306,
-      &#39;TIME_ZONE&#39;:&#39;Asia/Chongqing&#39;
-  }
-}
-</code></pre><h4 id="5修改访问权限"><a href="#5修改访问权限" class="headerlink" title="5修改访问权限"></a>5修改访问权限</h4><pre><code>ALLOWED_HOSTS = [&#39;*&#39;]   #允许访问的主机ip地址
-</code></pre><h4 id="6-语言时区修改"><a href="#6-语言时区修改" class="headerlink" title="6.语言时区修改"></a>6.语言时区修改</h4><pre><code>LANGUAGE_CODE = &#39;zh-hans&#39;
-TIME_ZONE = &#39;Asia/Chongqing&#39;
-</code></pre><h4 id="7-数据库模块配置"><a href="#7-数据库模块配置" class="headerlink" title="7.数据库模块配置"></a>7.数据库模块配置</h4></li>
-<li>a.在pycharm终端中执行代码：pip install pymysql <ul>
-<li>此操作时连接国外网站进行下载可以通过其他方法进行提升</li>
-<li>方法（1）：pip install -i <a href="https://pypi.doubanio.com/sample" target="_blank" rel="noopener">https://pypi.doubanio.com/sample</a> pymysql提升下载速度</li>
-<li>方法（2）：修改系统配置文件</li>
-<li>在C盘user或者用户下找到当前的管家（我的是thinkpad）新建一个文件夹pip,再新建一个后缀为ini文件名为pip的文件。</li>
-<li>编辑文件为下内容即可<pre><code>[global]
-index-url=https://pypi.doubanio.com/simple
+<li>a：进入url.py文件，在urlpatterns中增加路径同时导入相应模块。<pre><code>模块导入：
+from django.contrib import admin
+from django.urls import path
+from app import views
+</code></pre>增加添加学生模块：<pre><code># https://120.0.0.1:8080/add_stu/  访问路由即可插入学生信息
+# 增加学生信息
+path(&#39;add_stu/&#39;,views.add_stu)
+</code></pre></li>
+<li><p>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：</p>
+<pre><code>from django.shortcuts import render
+from django.http import HttpResponse
+# Create your viewshere.
+from app.models import Student
+</code></pre><p>写入添加学生方法：</p>
+<pre><code>def add_stu(request):
+  #实现插入学生信息，第一种方式；
+  Student.objects.create(s_name=&#39;小明&#39;)
+
+  #实现插入学生信息，第二种方式，使用对象的方式进行添加学生信息。
+def add_stu(request):
+  stu = Student()
+  stu.s_name = &#39;lorry&#39;
+  stu.s_age = 26
+  stu.s_gender = 1
+  stu.save()
+  return  HttpResponse(&#39;创建学生成功&#39;)
+</code></pre><h3 id="3-数据库的删操作"><a href="#3-数据库的删操作" class="headerlink" title="3.数据库的删操作"></a>3.数据库的删操作</h3></li>
+<li>a：进入url.py文件，在urlpatterns中增加路由路径。<pre><code>  #删除学生信息
+  path(&#39;del_stu/&#39;,views.del_stu),
+</code></pre></li>
+<li>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：<pre><code>def del_stu(requset):
+  #实现删除
+  #1.获取删除的对象，filter(条件)
+  #2.实现删除方法，delete()
+  Student.objects.filter(id=3).delete()
+  return HttpResponse(&#39;删除学生成功&#39;)
+</code></pre><h3 id="4-数据库的更新操作"><a href="#4-数据库的更新操作" class="headerlink" title="4.数据库的更新操作"></a>4.数据库的更新操作</h3></li>
+<li>a：进入url.py文件，在urlpatterns中增加路径。<pre><code>  更新学生
+  path(&#39;up_stu/&#39;,views.up_stu),
+</code></pre></li>
+<li>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：<ul>
+<li>更新的第一种方法：</li>
+<li>说明：</li>
+<li>1.获取更新的数据，filter(条件)</li>
+<li>2.实现更新方法，update()<pre><code>def up_stu(requset):
+#Student.objects.filter(id=2).update(s_name=&#39;lorry&#39;)
 </code></pre></li>
 </ul>
 </li>
-<li>b.在ini.py文件中写下一下代码：<pre><code>import pymysql
-pymysql.install_as_MySQLdb()
-</code></pre>前戏配置完毕</li>
+<li>更新的第二种方式,即可更新时间字段<pre><code>def up_stu(requset):
+  #更新的第二种方式,即可更新时间字段
+  stu = Student.objects.filter(id=2).first()
+  stu.s_name = &#39;lorrybz&#39;
+  stu.save()
+  return HttpResponse(&#39;更新学生成功&#39;)
+</code></pre><h3 id="5-数据库的查询操作"><a href="#5-数据库的查询操作" class="headerlink" title="5.数据库的查询操作"></a>5.数据库的查询操作</h3></li>
+<li>a：进入url.py文件，在urlpatterns中增加路径。<pre><code>  #查询学生
+  path(&#39;sel_stu/&#39;,views.sel_stu),
+</code></pre></li>
+<li>b：进入views.py文件中导入模块以及写入相应函数方法<br>######查询学生<pre><code>#导入模块
+from django.db.models import Avg, Max, Min, Sum, Count, Q, F
+def sel_stu(requset):
+  # 查询学生信息
+  #  查询所有的学生信息
+  stus = Student.objects.all()
+  for stu in stus:
+      print(stu.s_name)
+      print(stu.s_gender)
+</code></pre></li>
+<li>使用过滤器查询学生fillter和git<pre><code>  # 查询id=2的学生，fillter
+  # 若是条件不成立不会报错，返回值为空
+  stu = Student.objects.filter(id=2).first()
+  print(stu.s_gender)
+  # 1.取唯一的一个对象
+  # 2.get(条件必须成立)，若是条件不成立会报错
+  stu = Student.objects.get(id=2)
+  print(stu)
+</code></pre></li>
+<li>过滤出满足条件和不满条件的fillter和exclude。<pre><code>  # 过滤出不满足条件的信息上面是满足条件，下面是不满足条件的
+  stus = Student.objects.filter(s_gender=1)
+  print(stus)
+  stus = Student.objects.exclude(s_gender=0)
+  print(stus)
+</code></pre></li>
+<li>排序：默认是升序，在id或者筛选条件前加 ‘-’即可将序<pre><code>  #排序order_by
+  stus = Student.objects.order_by(&#39;-id&#39;)
+  print(stus)
+</code></pre></li>
+<li>取出对象中的某个字段<pre><code> stus = Student.objects.all().values(&#39;s_name&#39;,&#39;s_age&#39;)
+ print(stus)
+ stus = Student.objects.all().values()
+ print(stus)
+</code></pre></li>
+<li>判断查询结果是否存在<pre><code>  a = Student.objects.filter(s_name=&#39;校长&#39;).exists()
+  print(a)
+</code></pre></li>
+<li><p>对过滤的条件进行计数，有两种方法</p>
+<pre><code>方法1：
+  stus = Student.objects.filter(s_gender=1)
+  print(len(stus))
+方法2：
+  count = Student.objects.filter(s_gender=1).count()
+  print(count)
+
+  stus = Student.objects.filter(s_name=&#39;lorrybz&#39;).first()
+  print(stus)
+</code></pre></li>
+<li><p>第二大类模糊查询contains</p>
+<pre><code>  ##contains
+  # 字段——运算符
+  stus = Student.objects.filter(s_name__contains=&#39;小&#39;)
+  print(stus)
+
+  #like &#39;小%&#39;   &#39;%明&#39;
+  # startwith  endwith
+
+  stus = Student.objects.filter(s_name__startswith=&#39;小&#39;)
+  print(stus)
+  stus = Student.objects.filter(s_name__endswith=&#39;z&#39;)
+  print(stus)
+  # sql where id in (12345679)
+  # 模糊判断
+  stus = Student.objects.filter(id__in=[1,2,3,4,5])
+  print(stus)
+  stus = Student.objects.filter(pk__in=[1,2,3,4,5])
+  print(stus)
+</code></pre></li>
+<li>比较运算符<pre><code>  #gt &gt;;gte &gt;=;   lt &lt;; lte &lt;=;#并且操作
+  stus = Student.objects.filter(s_age__gte=18,s_age__lt=20)
+  print(stus)
+  stus = Student.objects.filter(s_age__gte=18).filter(s_age__lt=20)
+  print(stus)
+</code></pre></li>
+<li>聚合函数 avg max min sum count<ul>
+<li>语法: 模型名.objects.all().aggregate(Sum(字段))<pre><code># 聚合函数 avg max min sum count
+age_avg = Student.objects.all().aggregate(Avg(&#39;s_age&#39;))
+print(age_avg)
+sum_avg = Student.objects.all().aggregate(Sum(&#39;s_age&#39;))
+print(sum_avg)
+max_avg = Student.objects.all().aggregate(Max(&#39;s_age&#39;))
+print(max_avg)
+min_avg = Student.objects.all().aggregate(Min(&#39;s_age&#39;))
+print(min_avg)
+</code></pre></li>
+</ul>
+</li>
+<li><p>与或非的计算</p>
+<ul>
+<li>要点（1）Q将条件包起来进行与或非函数的比较</li>
+<li>要点（2）与1: Q(条件1), Q(条件2)</li>
+<li>要点（3）与2: Q(条件1) &amp; Q(条件2) ；: Q(条件1)  and  Q(条件2) ；  </li>
+<li>要点（4）或: Q(条件1) | Q(条件2)   ；Q(条件1)  or  Q(条件2) </li>
+<li>要点（5）非: ~Q(条件1)</li>
+<li>要点（6）用于比较两个字段,可使用+,-符号</li>
+<li><p>模型名.objects.filter(wuli__gt=F(‘math’)-10)</p>
+<pre><code>#查询年龄大于等于18  且 小于20
+stus = Student.objects.filter(s_age__gte=18, s_age__lt=20)
+print(stus)
+#  ，&amp; 和and 是且的操作   or 或者， 查询年龄大于等于18 或者  小于等20
+
+stus = Student.objects.filter(Q(s_age__gte=18) | Q(s_age__lte=20))
+print(stus)
+stus = Student.objects.filter(~Q(s_age__gt=18))
+print(stus)
+
+#查询物理成绩大于数学成绩的学生
+stus = Student.objects.all()
+for stu in stus:
+    if stu.wuli &gt; stu.math:
+        print(stu.s_name)
+stus = Student.objects.filter(wuli__gt=F(&#39;math&#39;)+10).first()
+print(stus.s_name)
+</code></pre></li>
+</ul>
+</li>
+<li>最后一句通用的：<pre><code>  return HttpResponse(&#39;查询所有学生信息&#39;)
+</code></pre></li>
 </ul>
 
             </div>
@@ -576,7 +658,7 @@ pymysql.install_as_MySQLdb()
                     <span class="reprint-tip">转载请注明: </span>
                     <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/01/02/web-hou-duan-django-qian-xi-zhi-huan-jing-da-jian/" class="b-link-green">web后端Django-前戏</a>
+                    <a href="/2019/01/03/web-hou-duan-django-qian-xi-2-shu-ju-ku-zeng-shan-gai-cha/" class="b-link-green">web后端Django-前戏之数据库增删改查</a>
                 </p>
             </div>
         </div>
@@ -600,6 +682,52 @@ pymysql.install_as_MySQLdb()
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">上一篇</div>
             <div class="card">
+                <a href="/2019/01/04/web-hou-duan-django-qian-xi-3-guan-lian-biao-cao-zuo/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="web后端Django-前戏3关联表操作">
+                        
+                        <span class="card-title">web后端Django-前戏3关联表操作</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary">操作背景：是在前戏2中已经创建有学生表，同时也完成了单表的查询，此篇的目的是创建关联表以及相关的关联操作
+1.创建拓展表（一对一）
+工程文件夹下app下modles.pyclass StudentInfo(models.Model):
+  </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-04
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/web后端/" class="post-category" target="_blank">
+                                    web后端
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Django/" target="_blank">
+                        <span class="chip bg-color">Django</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">下一篇</div>
+            <div class="card">
                 <a href="/2019/01/02/fei-guan-xi-xing-shu-ju-ku-2redis/">
                     <div class="card-image">
                         
@@ -613,9 +741,9 @@ pymysql.install_as_MySQLdb()
                     <div class="summary">第一部分redis的安装以及挂载1.进入Linux系统或者在服务器中下载文件wget http://download.redis.io/releases/redis-5.0.3.tar.gz
 2.解压文件gunzip redis-5.0.3</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
@@ -633,52 +761,6 @@ pymysql.install_as_MySQLdb()
                     
                     <a href="/tags/redis/" target="_blank">
                         <span class="chip bg-color">redis</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">下一篇</div>
-            <div class="card">
-                <a href="/2018/12/26/shu-ju-ku-cao-zuo-jian-biao/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="数据库操作-建表">
-                        
-                        <span class="card-title">数据库操作-建表</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary">1.创建数据库– 如果存在srs的数据库就删除它（慎重），之后创建数据库并且进入数据库。
-drop database if exists srs;
-create database srs default charset utf8;
-use </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-26
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/MySql/" class="post-category" target="_blank">
-                                    MySql
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/sql/" target="_blank">
-                        <span class="chip bg-color">sql</span>
                     </a>
                     
                 </div>

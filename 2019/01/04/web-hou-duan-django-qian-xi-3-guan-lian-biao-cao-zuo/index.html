@@ -5,9 +5,11 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="web后端Django-前戏之数据库增删改查, lorry_python">
-    <meta name="description" content="概念引入ORM(objects relationship mapping): 对象关系映射；objects: 管理器，默认模型的属性；
-1.数据增加中间表（即自己需要管理的表）举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新">
+    <meta name="keywords" content="web后端Django-前戏3关联表操作, lorry_python">
+    <meta name="description" content="操作背景：是在前戏2中已经创建有学生表，同时也完成了单表的查询，此篇的目的是创建关联表以及相关的关联操作
+1.创建拓展表（一对一）
+工程文件夹下app下modles.pyclass StudentInfo(models.Model):
+  ">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -15,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>web后端Django-前戏之数据库增删改查 | lorry_python</title>
+    <title>web后端Django-前戏3关联表操作 | lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -266,13 +268,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/17.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        web后端Django-前戏之数据库增删改查
+                        web后端Django-前戏3关联表操作
                     </div>
                 </div>
             </div>
@@ -311,214 +313,263 @@
                 
 
                 <span class="post-date">
-                    <i class="fa fa-clock-o fa-fw"></i>2019-01-03
+                    <i class="fa fa-clock-o fa-fw"></i>2019-01-04
                 </span>
             </div>
         </div>
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="概念引入"><a href="#概念引入" class="headerlink" title="概念引入"></a>概念引入</h3><p>ORM(objects relationship mapping): 对象关系映射；<br>objects: 管理器，默认模型的属性；</p>
-<h3 id="1-数据增加中间表（即自己需要管理的表）"><a href="#1-数据增加中间表（即自己需要管理的表）" class="headerlink" title="1.数据增加中间表（即自己需要管理的表）"></a>1.数据增加中间表（即自己需要管理的表）</h3><h5 id="举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；"><a href="#举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；" class="headerlink" title="举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；"></a>举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新日期；</h5><ul>
-<li>a：在django-admin startproject app . 或者 python manage.py startapp app之后即可看见工程中有app文件，其中有一个model.py文件，进入即可。</li>
-<li>b：创建类以及创建表名字，需要导入model模块<pre><code>from django.db import models
-# Create your models here.
-class Student(models.Model):
-  s_name = models.CharField(max_length=10,unique=True)
-  s_age = models.IntegerField(default=20)
-  s_gender = models.BooleanField(default=0)
-  create_time = models.DateTimeField(auto_now_add=True)
-  # auto_now_add   创建时，默认字段赋值为最新的事件
-  # create_time = models.DateField
-  updata_time = models.DateTimeField(auto_now=True)
-  # 修改数据是，自动赋值为更新字段时 的时间。
-  math = models.DecimalField(max_digits=3,decimal_places=1,null=True)
-  wuli = models.DecimalField(max_digits=3,decimal_places=1,null=True)
-  class Meta:
-      db_table = &#39;student&#39;
+                <p><strong>操作背景：是在前戏2中已经创建有学生表，同时也完成了单表的查询，此篇的目的是创建关联表以及相关的关联操作</strong></p>
+<h2 id="1-创建拓展表（一对一）"><a href="#1-创建拓展表（一对一）" class="headerlink" title="1.创建拓展表（一对一）"></a>1.创建拓展表（一对一）</h2><ul>
+<li>工程文件夹下app下modles.py<pre><code>class StudentInfo(models.Model):
+  s_no = models.CharField(max_length=10,null=False)
+  phone = models.CharField(max_length=11,null=True)
+  name = models.CharField(max_length=10,null=True)
+  #定义一对一的关联关系
+  # on_delete：
+  # models.CASCADE：删除主表，从表也会被删除
+  # models.PROTECT:都会被保护，但是从表可以删除
+  # models.SET_NULL:主表被删除，从表的外键设置为空
+  stu = models.OneToOneField(Student,
+                            on_delete=models.SET_NULL,
+                            related_name=&#39;info&#39;,
+                            null=True)
 </code></pre></li>
-<li>c：在pycharm终端中执行两条迁移命令,即可在数据库中创建表；<ul>
-<li>生成迁移文件：python manage.py makemigrations；</li>
-<li>执行迁移文件“：python manage.py migrate；<h3 id="2-数据库的增操作"><a href="#2-数据库的增操作" class="headerlink" title="2.数据库的增操作"></a>2.数据库的增操作</h3></li>
+<li>对表做修改以及添加新表后都需要迁移文件，在终端中执行代码进行迁移命令<ul>
+<li>python manage.py makemigrations</li>
+<li>python manage.py migrate<h3 id="先观察数据库"><a href="#先观察数据库" class="headerlink" title="先观察数据库"></a>先观察数据库</h3>查看当前数据库中有哪些表格查看图片如下：<br>(/images/stu_orige.png)<h3 id="1-添加学生拓展表信息"><a href="#1-添加学生拓展表信息" class="headerlink" title="1.添加学生拓展表信息"></a>1.添加学生拓展表信息</h3><h4 id="进入urls-py添加路由"><a href="#进入urls-py添加路由" class="headerlink" title="进入urls.py添加路由"></a>进入urls.py添加路由</h4><pre><code>path(&#39;add_stu_info/&#39;,views.add_stu_info),
+</code></pre><h4 id="进入views-py创建拓展信息表"><a href="#进入views-py创建拓展信息表" class="headerlink" title="进入views.py创建拓展信息表"></a>进入views.py创建拓展信息表</h4></li>
 </ul>
 </li>
-<li>a：进入url.py文件，在urlpatterns中增加路径同时导入相应模块。<pre><code>模块导入：
-from django.contrib import admin
-from django.urls import path
-from app import views
-</code></pre>增加添加学生模块：<pre><code># https://120.0.0.1:8080/add_stu/  访问路由即可插入学生信息
-# 增加学生信息
-path(&#39;add_stu/&#39;,views.add_stu)
+<li>方法一：<pre><code>  stu_info = StudentInfo()
+  stu_info.s_no = &#39;123456&#39;
+  stu_info.phone = &#39;18328099786&#39;
+  stu_info.name = &#39;小花22&#39;    #此处模型中定义为紧急联系人
+  stu_info.stu = Student.objects.get(id=4) # 获取学生对象进行关联
+  stu_info.save()
+  return HttpResponse(&#39;创建拓展信息成功&#39;)
 </code></pre></li>
-<li><p>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：</p>
-<pre><code>from django.shortcuts import render
-from django.http import HttpResponse
-# Create your viewshere.
-from app.models import Student
-</code></pre><p>写入添加学生方法：</p>
-<pre><code>def add_stu(request):
-  #实现插入学生信息，第一种方式；
-  Student.objects.create(s_name=&#39;小明&#39;)
-
-  #实现插入学生信息，第二种方式，使用对象的方式进行添加学生信息。
-def add_stu(request):
-  stu = Student()
-  stu.s_name = &#39;lorry&#39;
-  stu.s_age = 26
-  stu.s_gender = 1
-  stu.save()
-  return  HttpResponse(&#39;创建学生成功&#39;)
-</code></pre><h3 id="3-数据库的删操作"><a href="#3-数据库的删操作" class="headerlink" title="3.数据库的删操作"></a>3.数据库的删操作</h3></li>
-<li>a：进入url.py文件，在urlpatterns中增加路由路径。<pre><code>  #删除学生信息
-  path(&#39;del_stu/&#39;,views.del_stu),
+<li>方法二：<pre><code>  stu_info = StudentInfo()
+  stu_info.s_no = &#39;123456&#39;
+  stu_info.phone = &#39;18328099786&#39;
+  stu_info.name = &#39;小花22&#39;
+  stu_info.stu_id = 5
+  stu_info.save()
+  return HttpResponse(&#39;创建拓展信息成功&#39;)
+</code></pre><h4 id="（1）通过学生对象查询拓展表信息"><a href="#（1）通过学生对象查询拓展表信息" class="headerlink" title="（1）通过学生对象查询拓展表信息"></a>（1）通过学生对象查询拓展表信息</h4><h5 id="此处用于区分关联时id的写法"><a href="#此处用于区分关联时id的写法" class="headerlink" title="此处用于区分关联时id的写法"></a>此处用于区分关联时id的写法</h5></li>
+<li>（1）创建路由<pre><code>path(&#39;sel_phone_by_stu/&#39;,views.sel_phone_by_stu),
 </code></pre></li>
-<li>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：<pre><code>def del_stu(requset):
-  #实现删除
-  #1.获取删除的对象，filter(条件)
-  #2.实现删除方法，delete()
-  Student.objects.filter(id=3).delete()
-  return HttpResponse(&#39;删除学生成功&#39;)
-</code></pre><h3 id="4-数据库的更新操作"><a href="#4-数据库的更新操作" class="headerlink" title="4.数据库的更新操作"></a>4.数据库的更新操作</h3></li>
-<li>a：进入url.py文件，在urlpatterns中增加路径。<pre><code>  更新学生
-  path(&#39;up_stu/&#39;,views.up_stu),
+<li>（2）在views中写代码查询,方法一<pre><code>def sel_phone_by_stu(request):
+  # 1.查询学生对象
+  stu = Student.objects.filter(s_name=&#39;小花&#39;).first()
+  stu_info = StudentInfo.objects.filter(stu_id=stu.id).first() #在获取学生对象之后关联到StudentInfo；
+  phone = stu_info.phone
+  print(phone)
+  return  HttpResponse(&#39;查询成功&#39;)
 </code></pre></li>
-<li>b：进入views.py文件中导入模块以及写入相应函数方法<br>模块导入：<ul>
-<li>更新的第一种方法：</li>
-<li>说明：</li>
-<li>1.获取更新的数据，filter(条件)</li>
-<li>2.实现更新方法，update()<pre><code>def up_stu(requset):
-#Student.objects.filter(id=2).update(s_name=&#39;lorry&#39;)
+<li>（2）在views中写代码查询,方法二<pre><code>def sel_phone_by_stu(request):
+  stu = Student.objects.filter(s_name=&#39;小花&#39;).first()
+  stu_info = StudentInfo.objects.filter(stu=stu).first()
+  phone = stu_info.phone
+  print(phone)
+  return  HttpResponse(&#39;查询成功&#39;)
+</code></pre><h4 id="（2）通过学生对象查询拓展表信息"><a href="#（2）通过学生对象查询拓展表信息" class="headerlink" title="（2）通过学生对象查询拓展表信息"></a>（2）通过学生对象查询拓展表信息</h4><h5 id="此处用于区分关联时有无关联名称是的写法"><a href="#此处用于区分关联时有无关联名称是的写法" class="headerlink" title="此处用于区分关联时有无关联名称是的写法"></a>此处用于区分关联时有无关联名称是的写法</h5></li>
+<li>（1）创建路由,在urls.py中<pre><code>path(&#39;sel_phone_by_stu2/&#39;,views.sel_phone_by_stu2),
 </code></pre></li>
+<li><strong>没有</strong>关联名称时即》》在模型中拓展表的stu没有字段related_name=’info’,<pre><code>  stu = models.OneToOneField(Student,on_delete=models.SET_NULL,null=True)
+</code></pre>此时的查询代码为：<pre><code>def sel_phone_by_stu2(request):
+  # 1.查询学生对象
+  stu = Student.objects.filter(s_name=&#39;小花&#39;).first()
+  # 2.反向查询，关联模型对象，关联另外一个模型名称的小写
+  stu_inifo = stu.studentinfo
+  phone = stu_inifo.studentinfo
+  print(phone)
+  return HttpResponse(&#39;查询成功,没有关联名称&#39;)
+</code></pre></li>
+<li><strong>有</strong>关联名称时即》》在模型中拓展表的stu字段有related_name=’info’,<pre><code>def sel_phone_by_stu2(request):
+  # 1.查询学生对象
+  stu = Student.objects.filter(s_name=&#39;小花&#39;).first()
+  # 2.反向查询，直接学生对象到关联名称的名
+  stu_inifo = stu.info
+  phone = stu_inifo.phone
+  print(phone)
+  return HttpResponse(&#39;查询成功,有关联名称的查询&#39;)
+</code></pre><h4 id="（3）通过拓展表查询学生信息"><a href="#（3）通过拓展表查询学生信息" class="headerlink" title="（3）通过拓展表查询学生信息"></a>（3）通过拓展表查询学生信息</h4></li>
+<li>（1）创建路由，urls中<pre><code>path(&#39;sel_stu_by_info/&#39;,views.sel_stu_by_info),
+</code></pre></li>
+<li>（2）先在拓展表中取出对象，关联到stu字段中，因为彼此为一对一对应的<pre><code>def sel_stu_by_info(request):
+  stu_info = StudentInfo.objects.filter(s_no=&#39;123456&#39;).first()
+  stu = stu_info.stu
+  print(stu.s_name)
+  return HttpResponse(&#39;查询成功，拓展表查询学生对象。&#39;)
+</code></pre><h3 id="2-删除学生信息"><a href="#2-删除学生信息" class="headerlink" title="2 删除学生信息"></a>2 删除学生信息</h3></li>
+<li>（1）创建路由<pre><code>path(&#39;on_delete_stu/&#39;,views.on_delete_stu),
+</code></pre><strong>注意：</strong>在定义一对一的关联关系时，需要顶底on_delete的值</li>
+<li>models.CASCADE：删除主表，从表也会被删除<ul>
+<li>models.PROTECT:都会被保护，但是从表可以删除</li>
+<li>models.SET_NULL:主表被删除，从表的外键设置为空<pre><code>def on_delete_stu(request):
+# 删除小花的学生信息
+#删除小花信息，从表是否删除
+Student.objects.filter(s_name=&#39;小花2&#39;).delete()
+return HttpResponse(&#39;删除成功&#39;)
+</code></pre><h2 id="2班级表（一对多）"><a href="#2班级表（一对多）" class="headerlink" title="2班级表（一对多）"></a>2班级表（一对多）</h2><h4 id="（1）创建班级表"><a href="#（1）创建班级表" class="headerlink" title="（1）创建班级表"></a>（1）创建班级表</h4></li>
 </ul>
 </li>
-<li>更新的第二种方式,即可更新时间字段<pre><code>def up_stu(requset):
-  #更新的第二种方式,即可更新时间字段
-  stu = Student.objects.filter(id=2).first()
-  stu.s_name = &#39;lorrybz&#39;
-  stu.save()
-  return HttpResponse(&#39;更新学生成功&#39;)
-</code></pre><h3 id="5-数据库的查询操作"><a href="#5-数据库的查询操作" class="headerlink" title="5.数据库的查询操作"></a>5.数据库的查询操作</h3></li>
-<li>a：进入url.py文件，在urlpatterns中增加路径。<pre><code>  #查询学生
-  path(&#39;sel_stu/&#39;,views.sel_stu),
+<li>1在models.py文件中写入代码<pre><code>class Grade(models.Model):
+  g_name = models.CharField(max_length=10,unique=True)
+  class Meta:  #此处的是定义表名
+      db_table = &#39;grade&#39;
 </code></pre></li>
-<li>b：进入views.py文件中导入模块以及写入相应函数方法<br>######查询学生<pre><code>#导入模块
-from django.db.models import Avg, Max, Min, Sum, Count, Q, F
-def sel_stu(requset):
-  # 查询学生信息
-  #  查询所有的学生信息
-  stus = Student.objects.all()
+<li>（1）在前戏2中所创建的student类中<ul>
+<li>一对多的外键定义<pre><code>g = models.ForeignKey(Grade,null=True,on_delete=models.CASCADE,
+                      related_name=&#39;stu&#39;)
+</code></pre><strong>注意添加外键后要做迁移命令</strong><h4 id="（2）添加班级信息"><a href="#（2）添加班级信息" class="headerlink" title="（2）添加班级信息"></a>（2）添加班级信息</h4></li>
+</ul>
+</li>
+<li><strong>创建路由</strong>一对多操作,添加班级信息<pre><code>path(&#39;add_grade/&#39;,views.add_grade),
+</code></pre></li>
+<li>1.添加方法一<pre><code>  for i in range(1,5):
+  grade = Grade()
+      grade.g_name = &#39;java180&#39;+str(i)
+      grade.save()
+</code></pre></li>
+<li>2.添加方法二<pre><code>def add_grade(requset):
+for i in range(1,5):
+  Grade.objects.create(g_name=&#39;python180&#39;+str(i))
+return HttpResponse(&#39;添加成功&#39;)
+</code></pre><h4 id="（3）给学生分配班级信息"><a href="#（3）给学生分配班级信息" class="headerlink" title="（3）给学生分配班级信息"></a>（3）给学生分配班级信息</h4></li>
+<li>1.创建路由<pre><code>path(&#39;stu_grade/&#39;,views.stu_grade),
+</code></pre></li>
+<li>2.分配班级（两种方法）查询id=6的对象(对id为6的学生分配班级)<pre><code>def stu_grade(requset):
+  stu = Student.objects.get(pk=6)
+  #
+  # stu.g = Grade.objects.get(pk=1)
+  stu.g_id = 4
+  stu.save()
+  return HttpResponse(&#39;分配班级成功&#39;)
+</code></pre><h2 id="3-一对多的表单查询"><a href="#3-一对多的表单查询" class="headerlink" title="3.一对多的表单查询"></a>3.一对多的表单查询</h2><h4 id="（1）通过学生查询班级"><a href="#（1）通过学生查询班级" class="headerlink" title="（1）通过学生查询班级"></a>（1）通过学生查询班级</h4></li>
+<li>创建路由<pre><code>path(&#39;sel_grade_by_stu/&#39;,views.sel_grade_by_stu),
+</code></pre></li>
+<li>查询方法<pre><code>def sel_grade_by_stu(request):
+  # 1.查询姓名叫小明的对象
+  stu =  Student.objects.filter(s_name=&#39;小明&#39;).first()
+  grade = stu.g  #此处添加了一对多的外键，因此可以得到班级的对象
+  print(grade.g_name)
+  return  HttpResponse(&#39;查询成功&#39;)
+</code></pre><h4 id="（2）通过班级查询学生"><a href="#（2）通过班级查询学生" class="headerlink" title="（2）通过班级查询学生"></a>（2）通过班级查询学生</h4></li>
+<li>创建路由<pre><code>path(&#39;sel_stu_by_grade/&#39;,views.sel_stu_by_grade),
+</code></pre></li>
+<li>查询方法一（没有创建关联名称的情况）<pre><code>def sel_stu_by_grade(request):
+  grade = Grade.objects.filter(g_name=&#39;python1801&#39;).first()
+  stus = grade.student_set.all()  #
   for stu in stus:
-      print(stu.s_name)
-      print(stu.s_gender)
+  print(stu.s_name,stu.s_age,stu.s_gender)
+  return HttpResponse(&#39;查询学生成功，无关联名称&#39;)
 </code></pre></li>
-<li>使用过滤器查询学生fillter和git<pre><code>  # 查询id=2的学生，fillter
-  # 若是条件不成立不会报错，返回值为空
-  stu = Student.objects.filter(id=2).first()
-  print(stu.s_gender)
-  # 1.取唯一的一个对象
-  # 2.get(条件必须成立)，若是条件不成立会报错
-  stu = Student.objects.get(id=2)
-  print(stu)
-</code></pre></li>
-<li>过滤出满足条件和不满条件的fillter和exclude。<pre><code>  # 过滤出不满足条件的信息上面是满足条件，下面是不满足条件的
-  stus = Student.objects.filter(s_gender=1)
-  print(stus)
-  stus = Student.objects.exclude(s_gender=0)
-  print(stus)
-</code></pre></li>
-<li>排序：默认是升序，在id或者筛选条件前加 ‘-’即可将序<pre><code>  #排序order_by
-  stus = Student.objects.order_by(&#39;-id&#39;)
-  print(stus)
-</code></pre></li>
-<li>取出对象中的某个字段<pre><code> stus = Student.objects.all().values(&#39;s_name&#39;,&#39;s_age&#39;)
- print(stus)
- stus = Student.objects.all().values()
- print(stus)
-</code></pre></li>
-<li>判断查询结果是否存在<pre><code>  a = Student.objects.filter(s_name=&#39;校长&#39;).exists()
-  print(a)
-</code></pre></li>
-<li><p>对过滤的条件进行计数，有两种方法</p>
-<pre><code>方法1：
-  stus = Student.objects.filter(s_gender=1)
-  print(len(stus))
-方法2：
-  count = Student.objects.filter(s_gender=1).count()
-  print(count)
-
-  stus = Student.objects.filter(s_name=&#39;lorrybz&#39;).first()
-  print(stus)
-</code></pre></li>
-<li><p>第二大类模糊查询contains</p>
-<pre><code>  ##contains
-  # 字段——运算符
-  stus = Student.objects.filter(s_name__contains=&#39;小&#39;)
-  print(stus)
-
-  #like &#39;小%&#39;   &#39;%明&#39;
-  # startwith  endwith
-
-  stus = Student.objects.filter(s_name__startswith=&#39;小&#39;)
-  print(stus)
-  stus = Student.objects.filter(s_name__endswith=&#39;z&#39;)
-  print(stus)
-  # sql where id in (12345679)
-  # 模糊判断
-  stus = Student.objects.filter(id__in=[1,2,3,4,5])
-  print(stus)
-  stus = Student.objects.filter(pk__in=[1,2,3,4,5])
-  print(stus)
-</code></pre></li>
-<li>比较运算符<pre><code>  #gt &gt;;gte &gt;=;   lt &lt;; lte &lt;=;#并且操作
-  stus = Student.objects.filter(s_age__gte=18,s_age__lt=20)
-  print(stus)
-  stus = Student.objects.filter(s_age__gte=18).filter(s_age__lt=20)
-  print(stus)
-</code></pre></li>
-<li>聚合函数 avg max min sum count<ul>
-<li>语法: 模型名.objects.all().aggregate(Sum(字段))<pre><code># 聚合函数 avg max min sum count
-age_avg = Student.objects.all().aggregate(Avg(&#39;s_age&#39;))
-print(age_avg)
-sum_avg = Student.objects.all().aggregate(Sum(&#39;s_age&#39;))
-print(sum_avg)
-max_avg = Student.objects.all().aggregate(Max(&#39;s_age&#39;))
-print(max_avg)
-min_avg = Student.objects.all().aggregate(Min(&#39;s_age&#39;))
-print(min_avg)
-</code></pre></li>
-</ul>
-</li>
-<li><p>与或非的计算</p>
+<li>查询方法一（有创建关联名称的情况）;即学生表中 g = models.ForeignKey(Grade,null=True,on_delete=models.CASCADE,related_name=’stu’)中有<pre><code>def sel_stu_by_grade(request):
+  # 1.查询班级python1801
+  grade = Grade.objects.filter(g_name=&#39;python1801&#39;).first()
+  stus = grade.stu.all()
+  for stu in stus:
+      print(stu.s_name,stu.s_age,stu.s_gender)
+  return HttpResponse(&#39;查询学生成功,有关联名称&#39;)
+</code></pre><h2 id="4学生选课表（多对多）"><a href="#4学生选课表（多对多）" class="headerlink" title="4学生选课表（多对多）"></a>4学生选课表（多对多）</h2><h3 id="（1）创建选课表"><a href="#（1）创建选课表" class="headerlink" title="（1）创建选课表"></a>（1）创建选课表</h3></li>
+<li><p>在models.py中写入代码创建选课表,同时在终端中做迁移。</p>
 <ul>
-<li>要点（1）Q将条件包起来进行与或非函数的比较</li>
-<li>要点（2）与1: Q(条件1), Q(条件2)</li>
-<li>要点（3）与2: Q(条件1) &amp; Q(条件2) ；: Q(条件1)  and  Q(条件2) ；  </li>
-<li>要点（4）或: Q(条件1) | Q(条件2)   ；Q(条件1)  or  Q(条件2) </li>
-<li>要点（5）非: ~Q(条件1)</li>
-<li>要点（6）用于比较两个字段,可使用+,-符号</li>
-<li><p>模型名.objects.filter(wuli__gt=F(‘math’)-10)</p>
-<pre><code>#查询年龄大于等于18  且 小于20
-stus = Student.objects.filter(s_age__gte=18, s_age__lt=20)
-print(stus)
-#  ，&amp; 和and 是且的操作   or 或者， 查询年龄大于等于18 或者  小于等20
+<li>将会在数据库中多处一个course的 表</li>
+<li>同时会多出course_stu的表如下图</li>
+<li><p>(/images/manytomany.png)</p>
+<pre><code>class Course(models.Model):
+c_name = models.CharField(max_length=10,unique=True)
+# ManyToManyField字段定义在任何一个模型都可以
+stu = models.ManyToManyField(Student,null=True,related_name=&#39;cou&#39;)
 
-stus = Student.objects.filter(Q(s_age__gte=18) | Q(s_age__lte=20))
-print(stus)
-stus = Student.objects.filter(~Q(s_age__gt=18))
-print(stus)
-
-#查询物理成绩大于数学成绩的学生
-stus = Student.objects.all()
-for stu in stus:
-    if stu.wuli &gt; stu.math:
-        print(stu.s_name)
-stus = Student.objects.filter(wuli__gt=F(&#39;math&#39;)+10).first()
-print(stus.s_name)
-</code></pre></li>
+class Meta:
+    db_table = &#39;course&#39;
+</code></pre><h3 id="（2）添加课程信息"><a href="#（2）添加课程信息" class="headerlink" title="（2）添加课程信息"></a>（2）添加课程信息</h3></li>
 </ul>
 </li>
-<li>最后一句通用的：<pre><code>  return HttpResponse(&#39;查询所有学生信息&#39;)
+<li>创建路由<pre><code>path(&#39;add_course/&#39;,views.add_course),
 </code></pre></li>
+<li>写入添加课程的方法一：<pre><code>def add_course(request):
+  c_names = [&#39;大学英语&#39;,&#39;商务英语&#39;,&#39;线代&#39;,&#39;高数&#39;]
+  for i in c_names:
+      course = Course()
+      course.c_name =i
+      course.save()
+  return HttpResponse(&#39;添加课程成功&#39;)
+</code></pre></li>
+<li>写入添加课程的方法二：<pre><code>def add_course(request):
+  c_names = [&#39;大学英语&#39;,&#39;商务英语&#39;,&#39;线代&#39;,&#39;高数&#39;]
+  for i in c_names:
+      Course.objects.create(c_name=i)
+  return HttpResponse
+</code></pre><h4 id="（3）给中间表添加信息（学生添加课程）"><a href="#（3）给中间表添加信息（学生添加课程）" class="headerlink" title="（3）给中间表添加信息（学生添加课程）"></a>（3）给中间表添加信息（学生添加课程）</h4></li>
+<li>创建路由<pre><code>path(&#39;add_s_c/&#39;,views.add_s_c),
+</code></pre>两种方法的区别就在关联关系这儿</li>
+<li>添加方法一：（无关联名称）<pre><code>def add_s_c(request):
+  #1 查询课程对象
+  cou = Course.objects.filter(c_name=&#39;商务英语&#39;).first()
+  #2.查询学生对象
+  stu = Student.objects.filter(s_name=&#39;lorry&#39;).first()
+  # 3.加入关联关系
+  stu.course_set.add(cou)
+  return HttpResponse(&#39;添加中间信息表成功&#39;)
+</code></pre></li>
+<li>添加方法二：（有关联名称cou）<pre><code>def add_s_c(request):
+  #1 查询课程对象
+  cou = Course.objects.filter(c_name=&#39;商务英语&#39;).first()
+  #2.查询学生对象
+  stu = Student.objects.filter(s_name=&#39;lorry&#39;).first()
+  # 3.加入关联关系
+  stu.cou.add(cou)   
+  return HttpResponse(&#39;添加中间信息表成功&#39;)
+</code></pre><h4 id="4-给中间表添加信息（课程添加学生）"><a href="#4-给中间表添加信息（课程添加学生）" class="headerlink" title="4.给中间表添加信息（课程添加学生）"></a>4.给中间表添加信息（课程添加学生）</h4><pre><code>def add_s_c(request):
+  #将大学英语分配给小明
+  #1 查询课程对象
+  cou = Course.objects.filter(c_name=&#39;商务英语&#39;).first()
+  #2.查询学生对象
+  stu = Student.objects.filter(s_name=&#39;lorry&#39;).first()
+  cou.stu.add(stu)  #前面的stu是模型中定义的stu。
+  return HttpResponse(&#39;添加中间信息表成功&#39;)
+</code></pre><h4 id="5-删除中间表信息"><a href="#5-删除中间表信息" class="headerlink" title="5.删除中间表信息"></a>5.删除中间表信息</h4><ul>
+<li>创建路由<pre><code>path(&#39;del_s_c/&#39;,views.del_s_c)
+</code></pre></li>
+<li>写入方法<pre><code>def del_s_c(requset):
+cou = Course.objects.filter(c_name=&#39;商务英语&#39;).first()
+stu = Course.objects.filter(s_name=&#39;lorry&#39;).first()
+stu.cou.remove(cou)
+return HttpResponse(&#39;删除信息成功&#39;)
+</code></pre><h2 id="5-模板（HTML的操作）"><a href="#5-模板（HTML的操作）" class="headerlink" title="5.模板（HTML的操作）"></a>5.模板（HTML的操作）</h2></li>
+<li>创建路由<pre><code>path(&#39;index/&#39;,views.index)
+</code></pre>后续操作：</li>
+<li>a:在工程文件中创建templates的文件夹</li>
+<li>b:在文件夹中创建index.html文件</li>
+<li>c:进入文件操作解析内容<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;title&gt;Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;p&gt;欢迎lorry&lt;/p&gt;
+{% for stu in a%}
+    <p>
+        姓名：{{stu.s_name}}
+        年龄：{{stu.s_age}}
+        班级：{{ stu.g.g_name }}
+        选课：
+            {% for c in stu.cou.all %}
+                {{ c.c_name }}
+            {% endfor %}
+&lt;/p&gt;
+{% endfor %}
+&lt;/body&gt;
+&lt;/html&gt;
+</p></code></pre></li>
+</ul>
+</li>
 </ul>
 
             </div>
@@ -658,7 +709,7 @@ print(stus.s_name)
                     <span class="reprint-tip">转载请注明: </span>
                     <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/01/03/web-hou-duan-django-qian-xi-zhi-shu-ju-ku-zeng-shan-gai-cha/" class="b-link-green">web后端Django-前戏之数据库增删改查</a>
+                    <a href="/2019/01/04/web-hou-duan-django-qian-xi-3-guan-lian-biao-cao-zuo/" class="b-link-green">web后端Django-前戏3关联表操作</a>
                 </p>
             </div>
         </div>
@@ -682,21 +733,23 @@ print(stus.s_name)
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">本篇</div>
             <div class="card">
-                <a href="/2019/01/03/web-hou-duan-django-qian-xi-zhi-shu-ju-ku-zeng-shan-gai-cha/">
+                <a href="/2019/01/04/web-hou-duan-django-qian-xi-3-guan-lian-biao-cao-zuo/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="web后端Django-前戏之数据库增删改查">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="web后端Django-前戏3关联表操作">
                         
-                        <span class="card-title">web后端Django-前戏之数据库增删改查</span>
+                        <span class="card-title">web后端Django-前戏3关联表操作</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">概念引入ORM(objects relationship mapping): 对象关系映射；objects: 管理器，默认模型的属性；
-1.数据增加中间表（即自己需要管理的表）举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新</div>
+                    <div class="summary">操作背景：是在前戏2中已经创建有学生表，同时也完成了单表的查询，此篇的目的是创建关联表以及相关的关联操作
+1.创建拓展表（一对一）
+工程文件夹下app下modles.pyclass StudentInfo(models.Model):
+  </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-03
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-04
                             </span>
                         <span class="publish-author">
                             
@@ -727,28 +780,28 @@ print(stus.s_name)
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">下一篇</div>
             <div class="card">
-                <a href="/2019/01/02/fei-guan-xi-xing-shu-ju-ku-2redis/">
+                <a href="/2019/01/03/web-hou-duan-django-qian-xi-2-shu-ju-ku-zeng-shan-gai-cha/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="非关系型数据库">
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="web后端Django-前戏之数据库增删改查">
                         
-                        <span class="card-title">非关系型数据库</span>
+                        <span class="card-title">web后端Django-前戏之数据库增删改查</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">第一部分redis的安装以及挂载1.进入Linux系统或者在服务器中下载文件wget http://download.redis.io/releases/redis-5.0.3.tar.gz
-2.解压文件gunzip redis-5.0.3</div>
+                    <div class="summary">概念引入ORM(objects relationship mapping): 对象关系映射；objects: 管理器，默认模型的属性；
+1.数据增加中间表（即自己需要管理的表）举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-02
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-03
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Mysql/" class="post-category" target="_blank">
-                                    Mysql
+                            <a href="/categories/web后端/" class="post-category" target="_blank">
+                                    web后端
                                 </a>
                             
                             
@@ -758,8 +811,8 @@ print(stus.s_name)
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/redis/" target="_blank">
-                        <span class="chip bg-color">redis</span>
+                    <a href="/tags/Django/" target="_blank">
+                        <span class="chip bg-color">Django</span>
                     </a>
                     
                 </div>
