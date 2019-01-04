@@ -478,8 +478,7 @@ return HttpResponse(&#39;添加成功&#39;)
 <li><p>在models.py中写入代码创建选课表,同时在终端中做迁移。</p>
 <ul>
 <li>将会在数据库中多处一个course的 表</li>
-<li>同时会多出course_stu的表如下图</li>
-<li><p>(/images/manytomany.png)</p>
+<li><p>同时会多出course_stu的表如下图<br>(/images/manytomany.png)</p>
 <pre><code>class Course(models.Model):
 c_name = models.CharField(max_length=10,unique=True)
 # ManyToManyField字段定义在任何一个模型都可以
@@ -533,18 +532,18 @@ class Meta:
   stu = Student.objects.filter(s_name=&#39;lorry&#39;).first()
   cou.stu.add(stu)  #前面的stu是模型中定义的stu。
   return HttpResponse(&#39;添加中间信息表成功&#39;)
-</code></pre><h4 id="5-删除中间表信息"><a href="#5-删除中间表信息" class="headerlink" title="5.删除中间表信息"></a>5.删除中间表信息</h4><ul>
+</code></pre><h4 id="5-删除中间表信息"><a href="#5-删除中间表信息" class="headerlink" title="5.删除中间表信息"></a>5.删除中间表信息</h4></li>
 <li>创建路由<pre><code>path(&#39;del_s_c/&#39;,views.del_s_c)
 </code></pre></li>
 <li>写入方法<pre><code>def del_s_c(requset):
-cou = Course.objects.filter(c_name=&#39;商务英语&#39;).first()
-stu = Course.objects.filter(s_name=&#39;lorry&#39;).first()
-stu.cou.remove(cou)
-return HttpResponse(&#39;删除信息成功&#39;)
+  cou = Course.objects.filter(c_name=&#39;商务英语&#39;).first()
+  stu = Course.objects.filter(s_name=&#39;lorry&#39;).first()
+  stu.cou.remove(cou)
+  return HttpResponse(&#39;删除信息成功&#39;)
 </code></pre><h2 id="5-模板（HTML的操作）"><a href="#5-模板（HTML的操作）" class="headerlink" title="5.模板（HTML的操作）"></a>5.模板（HTML的操作）</h2></li>
 <li>创建路由<pre><code>path(&#39;index/&#39;,views.index)
 </code></pre>后续操作：</li>
-<li>a:在工程文件中创建templates的文件夹</li>
+<li>a:在工程文件中创建templates的文件夹<ul>
 <li>b:在文件夹中创建index.html文件</li>
 <li>c:进入文件操作解析内容<pre><code>&lt;!DOCTYPE html&gt;
 &lt;html lang=&quot;en&quot;&gt;
