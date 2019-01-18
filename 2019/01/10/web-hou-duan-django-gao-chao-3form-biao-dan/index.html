@@ -5,11 +5,10 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="数据库操作1-建表以及查询, lorry_python">
-    <meta name="description" content="1.创建数据库– 如果存在srs的数据库就删除它（慎重），之后创建数据库并且进入数据库。
-drop database if exists srs;
-create database srs default charset utf8;
-use ">
+    <meta name="keywords" content="web后端Django-高潮3form表单, lorry_python">
+    <meta name="description" content="实例背景form表单此处的应用实例，当对输入的学生信息要进行验证，如姓名长度，性别验证以及输入的不能为空。通常原始操作是需要些一堆if条件进行验证，而此处是使用form表单对其进行验证
+工程中学生类注意姓名，性别，以及头像
+from dja">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +16,7 @@ use ">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>数据库操作1-建表以及查询 | lorry_python</title>
+    <title>web后端Django-高潮3form表单 | lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -268,13 +267,13 @@ use ">
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        数据库操作1-建表以及查询
+                        web后端Django-高潮3form表单
                     </div>
                 </div>
             </div>
@@ -294,8 +293,8 @@ use ">
             
             <div class="article-tag">
                 
-                <a href="/tags/sql/" target="_blank">
-                    <span class="chip bg-color">sql</span>
+                <a href="/tags/Django/" target="_blank">
+                    <span class="chip bg-color">Django</span>
                 </a>
                 
             </div>
@@ -305,135 +304,152 @@ use ">
                 <span class="post-cate">
                     <i class="fa fa-bookmark fa-fw icon-category"></i>
                     
-                    <a href="/categories/MySql/" class="post-category" target="_blank">
-                        MySql
+                    <a href="/categories/web后端/" class="post-category" target="_blank">
+                        web后端
                     </a>
                     
                 </span>
                 
 
                 <span class="post-date">
-                    <i class="fa fa-clock-o fa-fw"></i>2018-12-26
+                    <i class="fa fa-clock-o fa-fw"></i>2019-01-10
                 </span>
             </div>
         </div>
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="1-创建数据库"><a href="#1-创建数据库" class="headerlink" title="1.创建数据库"></a>1.创建数据库</h3><p>– 如果存在srs的数据库就删除它（慎重），之后创建数据库并且进入数据库。</p>
-<pre><code>drop database if exists srs;
-create database srs default charset utf8;
-use srs;
-</code></pre><h3 id="2-创建二维表"><a href="#2-创建二维表" class="headerlink" title="2.创建二维表"></a>2.创建二维表</h3><p>例子：创建学生管理表并且添加信息</p>
-<h4 id="1-创建学员表"><a href="#1-创建学员表" class="headerlink" title="1.创建学员表"></a>1.创建学员表</h4><pre><code>create table tb_college
-(
-collid int not null auto_increment comment &#39;学院编号&#39;,
-collname varchar(50) not null comment &#39;学院名称&#39;,
-collmaster varchar(20) not null comment &#39;院长姓名&#39;,
-collweb varchar(511) default &#39;&#39; comment &#39;学院网站&#39;,
-primary key (collid)
-);
-</code></pre><ul>
-<li>添加唯一性约束到学院名称<pre><code>alter table tb_college add constraint uni_college_collname unique (collname);
-</code></pre><h4 id="2-创建学生表"><a href="#2-创建学生表" class="headerlink" title="2.创建学生表"></a>2.创建学生表</h4><pre><code>create table tb_student
-(
-stuid int not null comment &#39;学号&#39;,
-sname varchar(20) not null comment &#39;学生姓名&#39;,
-gender bit default 1 comment &#39;性别&#39;,
-birth date not null comment &#39;出生日期&#39;,
-addr varchar(255) default &#39;&#39; comment &#39;籍贯&#39;,
-collid int not null comment &#39;所属学院编号&#39;,
-primary key (stuid)
-);
-</code></pre></li>
-<li>检查约束，mysql不支持：<pre><code>alter table tb_student add constraint ck_student_birth check (birth between &#39;1990-1-1&#39; and &#39;1999-12-31&#39;);
-</code></pre></li>
-<li>添加外键约束<pre><code>alter table tb_student add constraint fk_student_collid foreign key (collid) references tb_college (collid);
-</code></pre><h4 id="3-创建教师表"><a href="#3-创建教师表" class="headerlink" title="3.创建教师表"></a>3.创建教师表</h4><pre><code>create table tb_teacher
-(
-teaid int not null comment &#39;教师工号&#39;,
-tname varchar(20) not null comment &#39;教师姓名&#39;,
-title varchar(10) default &#39;&#39; comment &#39;职称&#39;,
-collid int not null comment &#39;所属学院编号&#39;
-);
-</code></pre></li>
-<li>添加外键约束<pre><code>alter table tb_teacher add constraint pk_teacher primary key (teaid);
-</code></pre></li>
-<li>添加外键约束<pre><code>alter table tb_teacher add constraint fk_teacher_collid foreign key (collid) references tb_college (collid);
-</code></pre><h4 id="4-插入学院数据"><a href="#4-插入学院数据" class="headerlink" title="4.插入学院数据"></a>4.插入学院数据</h4></li>
-<li>插入学院数据<br><code>`</code><br>insert into tb_college (collname, collmaster, collweb) values<br>(‘计算机学院’, ‘左冷禅’, ‘<a href="http://www.abc.com" target="_blank" rel="noopener">http://www.abc.com</a> </li>
-</ul>
-<p>‘),<br>(‘外国语学院’, ‘岳不群’, ‘<a href="http://www.xyz.com" target="_blank" rel="noopener">http://www.xyz.com</a> </p>
-<p>‘),<br>(‘经济管理学院’, ‘风清扬’, ‘<a href="http://www.foo.com" target="_blank" rel="noopener">http://www.foo.com</a> </p>
-<p>‘);</p>
-<pre><code>#### 5.插入学生数据
-</code></pre><p>insert into tb_student (stuid, sname, gender, birth, addr, collid) values<br>(1001, ‘杨逍’, 1, ‘1990-3-4’, ‘四川成都’, 1),<br>(1002, ‘任我行’, 1, ‘1992-2-2’, ‘湖南长沙’, 1),<br>(1033, ‘王语嫣’, 0, ‘1989-12-3’, ‘四川成都’, 1),<br>(1572, ‘岳不群’, 1, ‘1993-7-19’, ‘陕西咸阳’, 1),<br>(1378, ‘纪嫣然’, 0, ‘1995-8-12’, ‘四川绵阳’, 1),<br>(1954, ‘林平之’, 1, ‘1994-9-20’, ‘福建莆田’, 1),<br>(2035, ‘东方不败’, 1, ‘1988-6-30’, null, 2),<br>(3011, ‘林震南’, 1, ‘1985-12-12’, ‘福建莆田’, 3),<br>(3755, ‘项少龙’, 1, ‘1993-1-25’, null, 3),<br>(3923, ‘杨不悔’, 0, ‘1985-4-17’, ‘四川成都’, 3);</p>
-<pre><code>#### 6.插入老师数据
-</code></pre><p>insert into tb_teacher (teaid, tname, title, collid) values<br>(1122, ‘张三丰’, ‘教授’, 1),<br>(1133, ‘宋远桥’, ‘副教授’, 1),<br>(1144, ‘杨逍’, ‘副教授’, 1),<br>(2255, ‘范遥’, ‘副教授’, 2),<br>(3366, ‘韦一笑’, ‘讲师’, 3);</p>
-<pre><code>#### 7. 插入课程数据
-</code></pre><p>insert into tb_course (couid, cname, credit, teaid) values<br>(1111, ‘Python程序设计’, 3, 1122),<br>(2222, ‘Web前端开发’, 2, 1122),<br>(3333, ‘操作系统’, 4, 1122),<br>(4444, ‘计算机网络’, 2, 1133),<br>(5555, ‘编译原理’, 4, 1144),<br>(6666, ‘算法和数据结构’, 3, 1144),<br>(7777, ‘经贸法语’, 3, 2255),<br>(8888, ‘成本会计’, 2, 3366),<br>(9999, ‘审计学’, 3, 3366);</p>
-<pre><code>#### 8.插入选课数据
-</code></pre><p>insert into tb_score (sid, cid, seldate, mark) values<br>(1001, 1111, ‘2017-09-01’, 95),<br>(1001, 2222, ‘2017-09-01’, 87.5),<br>(1001, 3333, ‘2017-09-01’, 100),<br>(1001, 4444, ‘2018-09-03’, null),<br>(1001, 6666, ‘2017-09-02’, 100),<br>(1002, 1111, ‘2017-09-03’, 65),<br>(1002, 5555, ‘2017-09-01’, 42),<br>(1033, 1111, ‘2017-09-03’, 92.5),<br>(1033, 4444, ‘2017-09-01’, 78),<br>(1033, 5555, ‘2017-09-01’, 82.5),<br>(1572, 1111, ‘2017-09-02’, 78),<br>(1378, 1111, ‘2017-09-05’, 82),<br>(1378, 7777, ‘2017-09-02’, 65.5),<br>(2035, 7777, ‘2018-09-03’, 88),<br>(2035, 9999, curdate(now()), null),<br>(3755, 1111, date(now()), null),<br>(3755, 8888, date(now()), null),<br>(3755, 9999, ‘2017-09-01’, 92);</p>
-<pre><code>### 相关sql语句练习
--- **总结** 分组之前的筛选用where子句，分组之后的子句筛选用having。
-  - 查询所有学生信息
-</code></pre><p>select * from tb-student;</p>
-<pre><code>  - 查询所有课程名称及学分(投影和别名)
-</code></pre><p>select cname as 课程名称,credit from tb_corse</p>
-<pre><code>  - 查询所有女学生的姓名和出生日期(筛选)
-</code></pre><p>select sname,birth from tb_student where gender=0;</p>
-<pre><code>  - 查询所有80后学生的姓名、性别和出生日期(筛选)
-</code></pre><p>select sname,case gender when 1 then ‘男’ when 2 then ‘女’ else then ‘未知’,birth where birth between ‘1980-1-1 ‘ and ‘1989-12-31’;</p>
-<pre><code>  - 查询所有80后学生的姓名、性别和出生日期(筛选)，使用mysql中的分支函数
-</code></pre><p>select sname,if(gender,’男’,’女’),birth where birth between ‘1980-1-1 ‘ and ‘1989-12-31’;</p>
-<pre><code>  - 查询名字有四个中文字符字符的学生学号和姓名,一个中文三个字节
-</code></pre><p>select stuid,sname from tb_student where length(sname)/3=4;</p>
-<pre><code>  - 查询姓”杨“的学生姓名和性别(模糊)
-</code></pre><p>select sname,if(gender,’男’,’女’) from tb_student where sname like ‘杨%’</p>
-<pre><code>  - 查询姓”杨“名字两个字的学生姓名和性别(模糊)
-</code></pre><p>select sname,if(gender,’男’,’女’) from tb_student where sname like ‘杨_’</p>
-<pre><code>  - 查询姓”杨“名字三个字的学生姓名和性别(模糊)
-</code></pre><p>select sname,if(gender,’男’,’女’) from tb_student where sname like ‘杨__’</p>
-<pre><code>  - 查询名字中有”不“字或“嫣”字的学生的姓名(模糊)
-</code></pre><p>select sname from tb)student where sname like ‘%不%’ or sname like ‘%嫣%’</p>
-<pre><code>  - 查询没有录入家庭住址的学生姓名(空值)  更加的严谨
-</code></pre><p>select sname from tb_student where addr is null or addr=’’;</p>
-<pre><code>  - 查询录入了家庭住址的学生姓名(空值) 摩根定律
-</code></pre><p>select sname from tb_student where addr is not null or addr&lt;&gt;’’;</p>
-<pre><code>  - 查询学生选课的所有日期(去重)-- distinct
-</code></pre><p>select distinct seldate from tb_score</p>
-<pre><code>  - 查询学生的家庭住址(去重)
-</code></pre><p>select distinct addr from tb_student where addr is not null and addr&lt;&gt;””;</p>
-<pre><code>  - 查询男学生的姓名和生日按年龄从大到小排列(排序)-- 升序   asc 默认
-</code></pre><p>select sname,birth from tb_student where gender=1 order by birth;<br>select sname,birth from tb_student where gender=1 order by birth desc;<br>select sname,year(now())-year(birth) as 年龄 from tb_student where gender=1 order by 年龄 asc;</p>
-<pre><code>  - 聚合函数 max min sum avg count
-  - 查询年龄最大的学生的出生日期(聚合函数)
-</code></pre><p>select min(birth) from tb_student;</p>
-<p>selecr sname,birth from tb_student where birth=(select min(birth) from tb_student)</p>
-<pre><code>  - 查询男女学生的人数(分组和聚合函数)
-</code></pre><p>select gender,count(gender) from tb_student group by gender;</p>
-<pre><code>  - 查询课程编号为1111的课程的平均成绩(筛选和聚合函数)
-</code></pre><p>select avg(mark) from tb_score where cid=1111;</p>
-<pre><code>  - 查询学号为1001的学生所有课程的平均分(筛选和聚合函数)
-</code></pre><p>select sid,avg(mark) from tb_sscore where sid=1001;</p>
-<pre><code>  - 查询每个学生的学号和平均成绩(分组和聚合函数)
-</code></pre><p>select sid,avg(mark) from tb_score group by sid;</p>
-<pre><code>  - 查询平均成绩大于等于90分的且学号为1,2,3开头的学生的学号和平均成绩
-</code></pre><p>select sid,avg(mark) as 平均分 from tb_score where 平均分&gt;90 and sid between 1000 and 3999 order by 平均分 desc;</p>
-<pre><code>  - 查询年龄最大的学生的姓名(子查询) 把一个查询的结果当做另一个查询的一部分来使用
-</code></pre><p>select sname from tb_student where birth=(select min(birth) from tb_student);</p>
-<pre><code>  - 查询年龄最大的学生姓名和年龄(子查询+运算)
-</code></pre><p>select sname,year(now())-year(birth) from tb_student where birth=(selct min(birth) from tb_student);</p>
-<pre><code>  - 查询选了两门以上的课程的学生姓名(子查询/分组条件/集合运算)
-</code></pre><p>select sname from tb_student where stuid in(select sid from tb_score group by sid having count(sid)&gt;2)</p>
-<pre><code>  - 查询学生姓名、课程名称以及成绩(链接查询) 链接查询时，如果不使用链接条件，将会产生笛卡尔积
-</code></pre><p>三表联查<br>select sname,cname,mark from tb_student inner join tb_score on sid=stuid inner jion tb_course on couid=cid limit 5 offset 15;</p>
-<p>select sname,cname,mark from tb_student,tb_course,tb_score where stuid=sid and couid=cid order by sname,mark desc;</p>
-<pre><code>  - 查询选课学生的姓名和平均成绩(子查询和连接查询)
-</code></pre><p>select sname,avgmark from tb_student as t1 inner join<br>(select sid,avg(mark) as avgmark from tb_score group by sid) as t2 where t1.stuid=t2.sid;</p>
-<pre><code>  - 查询每个学生的姓名和选课数量(左外连接和子查询)
-</code></pre><p>select sname,ifnull(total,0),ifnull(avgmark,0) from tb_student as t1 left join (select sid,count(sid) as total,avg(mark) as avgmark from tb_score group by sid) as t2 on stuid=sid order by total<br><code>`</code><br>    (左表：多表查询时，写在前面的表称为左表left outer join，right outer join ，mysql不支持全外连接 ：full outer join<br>    – 左外连接，将左表不满足连接条件的记录也要查出来，不满足链表条件的的地方补null<br>    – 右外连接，将右表不满足连接条件的记录也要查出来，不满足链表条件的的地方补null<br>    – 内连接只能将满足条件的表链接起来，不满足的链接条件的不能查出)</p>
+                <h3 id="实例背景"><a href="#实例背景" class="headerlink" title="实例背景"></a>实例背景</h3><p>form表单此处的应用实例，当对输入的学生信息要进行验证，如姓名长度，性别验证以及输入的不能为空。通常原始操作是需要些一堆if条件进行验证，而此处是使用form表单对其进行验证</p>
+<h3 id="工程中学生类"><a href="#工程中学生类" class="headerlink" title="工程中学生类"></a>工程中学生类</h3><p>注意姓名，性别，以及头像</p>
+<pre><code>from django.db import models
+# Create your models here.
+class Student(models.Model):
+    s_name = models.CharField(max_length=10,unique=True)
+    s_age = models.IntegerField(default=20)
+    s_gender = models.BooleanField(default=0)
+    create_time = models.DateTimeField(auto_now_add=True)
+    # auto_now_add   创建时，默认字段赋值为最新的事件
+    # create_time = models.DateField
+    updata_time = models.DateTimeField(auto_now=True)
+    # 修改数据是，自动赋值为更新字段时 的时间。
+    math = models.DecimalField(max_digits=3,decimal_places=1,null=True)
+    wuli = models.DecimalField(max_digits=3,decimal_places=1,null=True)
+    # 存图片地址,数据库中字段类型为varchar
+    icon = models.ImageField(upload_to=&#39;upload&#39;,null=True)
+    class Meta:
+        db_table = &#39;student&#39;
+</code></pre><h3 id="在html中写出提交即将添加学生的代码"><a href="#在html中写出提交即将添加学生的代码" class="headerlink" title="在html中写出提交即将添加学生的代码"></a>在html中写出提交即将添加学生的代码</h3><p>注意事项：<br>1.：日后再说<br>2.因为要提交图片，需要加入enctype=”multipart/form-data”<br>3.errors.icon.0是用表单校验后如有异常需要解析的异常<br>4.submit提交的是name键以及对应输入的值。</p>
+<pre><code>    &lt;form action=&quot;&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
+        {% csrf_token %}
+        &lt;p&gt;姓名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;{{ errors.username.0 }}&lt;/p&gt;
+        &lt;p&gt;性别：&lt;input type=&quot;text&quot; name=&quot;gender&quot;&gt;{{ errors.gender.0 }}&lt;/p&gt;
+        &lt;p&gt;图片：&lt;input type=&quot;file&quot; name=&quot;icon&quot;&gt;{{ errors.icon.0 }}&lt;/p&gt;
+        &lt;p&gt;&lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;&lt;/p&gt;
+    &lt;/form&gt;
+</code></pre><h3 id="form表单操作"><a href="#form表单操作" class="headerlink" title="form表单操作"></a>form表单操作</h3><p>在文件夹中创建forms.py之后写入代码<br>注意：此处给出了单独校验性别姓名，以及合在一起校验的方法<br>并且在此处校验之后将会重新赋值，比如将性别改成存入数据库的布尔值0或1；</p>
+<pre><code>from django import forms
 
+from app.models import Student
+
+
+class StuForm(forms.Form):
+    username = forms.CharField(max_length=10,
+                               min_length=2,
+                               required=True,
+                               error_messages={
+                                   &#39;required&#39;:&#39;姓名字段必填&#39;,
+                                   &#39;min_length&#39;:&#39;不能少于两个字符&#39;,
+                                   &#39;max_length&#39;:&#39;不能超过10个字符&#39;,
+                               })
+    icon = forms.ImageField(required=True,
+                            error_messages={
+                                &#39;required&#39;:&#39;头像必填&#39;
+                            })
+    gender = forms.CharField(required=True,
+                             error_messages={
+                                 &#39;required&#39;:&#39;性别必填&#39;
+                             })
+
+    # def clean(self):
+    #      # 这是校验所有的
+    #     # 转换性别为1或者是0
+    #     gender = self.cleaned_data.get(&#39;gender&#39;)
+    #     if gender == &#39;男&#39;:
+    #         self.cleaned_data[&#39;gender&#39;] = 1
+    #     else:
+    #         self.cleaned_data[&#39;gender&#39;] = 0
+    #
+    #     # 校验姓名是唯一的
+    #     username = self.cleaned_data.get(&#39;username&#39;)
+    #     stu = Student.objects.filter(s_name=username).first()
+    #     if stu:
+    #         raise forms.ValidationError({&#39;username&#39;:&#39;姓名重复&#39;})
+    #
+    #     return self.cleaned_data
+
+    def clean_username(self):
+        # 只是校验姓名
+        username = self.cleaned_data.get(&#39;username&#39;)
+        stu = Student.objects.filter(s_name=username).first()
+        if stu:
+            raise forms.ValidationError(&#39;姓名重复&#39;)
+        return self.cleaned_data[&#39;username&#39;]
+
+    def clean_gender(self):
+        # 只是检验性别
+        gender = self.cleaned_data.get(&#39;gender&#39;)
+        if gender == &#39;男&#39;:
+            self.cleaned_data[&#39;gender&#39;] = 1
+        else:
+            self.cleaned_data[&#39;gender&#39;] = 0
+        return self.cleaned_data[&#39;gender&#39;]
+</code></pre><h3 id="校验全部成功后，写入数据库的操作以及跳转操作"><a href="#校验全部成功后，写入数据库的操作以及跳转操作" class="headerlink" title="校验全部成功后，写入数据库的操作以及跳转操作"></a>校验全部成功后，写入数据库的操作以及跳转操作</h3><pre><code>def add_stu_info(request):
+    if request.method == &#39;GET&#39;:
+        return render(request,&#39;add_stus.html&#39;)
+
+    if request.method == &#39;POST&#39;:
+        form = StuForm(request.POST,request.FILES)
+        if form.is_valid():
+            username = form.cleaned_data[&#39;username&#39;]
+            icon = form.cleaned_data[&#39;icon&#39;]
+            # 获取的字段为1或者0
+            gender = form.cleaned_data[&#39;gender&#39;]
+            Student.objects.create(s_name=username,
+                                   icon=icon,
+                                   s_gender=gender)
+
+            return  HttpResponseRedirect(reverse(&#39;app:all_stu&#39;))
+        else:
+            errors = form.errors
+            return render(request,&#39;add_stus.html&#39;,{&#39;errors&#39;:errors})
+</code></pre><p><strong>分析</strong>：如果请求为GET请求，则跳转到学生创建页面stu_form.html。当用户在学生创建页面中填写的学生姓名、年龄、性别并点击提交后，视图函数将接收POST请求，并做如下的处理。</p>
+<p>接收POST请求，可以分以下三步骤分析：</p>
+<p><strong>步骤1：</strong>在POST请求中，通过请求request中的POST属性获取页面中通过表单form提交的数据，数据中包括姓名name、年龄age、性别sex。</p>
+<p><strong>步骤2：</strong> 使用StudentForm表单验证request.POST中提交的数据。在表单中定义了name、age、sex字段是必填字段，并且姓名的长度不能超过10个字符，如果在页面中没有填写其中任何一个参数，或者姓名字段填写太长，则表单验证不通过。</p>
+<p><strong>步骤3</strong>：判断表单是否验证通过，可以使用is_valid()方法。如果表单验证成功，则返回True，否则返回False。</p>
+<p><strong>步骤4：</strong>如果验证表单成功，则通过Student模型进行数据存储。如果验证失败，则返回stu_form.html页面，并将form参数传递给页面。</p>
+<p><strong>3. 表单的错误提示</strong><br>定义了校验页面中传递参数的StudentForm表单类，并且使用is_valid()方法判断表单校验是否成功。如果is_valid()的结果为False,则表示表单校验失败。form表单验证可以通过使用form.errors查询验证的错误信息。</p>
+<h3 id="删除学生"><a href="#删除学生" class="headerlink" title="删除学生"></a>删除学生</h3><p>当在查看学生信息的页面，可以对学生进行删除的操作</p>
+<h4 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h4><p>在此处html中添加操作列</p>
+<pre><code>        &lt;thread&gt;
+            &lt;th&gt;编号&lt;/th&gt;
+            &lt;th&gt;姓名&lt;/th&gt;
+            &lt;th&gt;年龄&lt;/th&gt;
+            &lt;th&gt;性别&lt;/th&gt;
+            &lt;th&gt;头像&lt;/th&gt;
+            &lt;th&gt;操作&lt;/th&gt;
+        &lt;/thread&gt;
+</code></pre><h4 id="然后"><a href="#然后" class="headerlink" title="然后"></a>然后</h4><p>在此处添加删除的按钮</p>
+<pre><code>                    &lt;td&gt;&lt;img src=&quot;/media/{{ stu.icon }}&quot;&gt;&lt;/td&gt;
+                    &lt;td&gt;
+                        &lt;a href=&quot;{% url 'app:del_stu' stu.id %}&quot;&gt;删除&lt;/a&gt;
+                    &lt;/td&gt;
+</code></pre><h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>在查看全部学生的页面中，即可直接操作管理员。</p>
+<pre><code>def del_stu(request,id):
+    if request.method == &#39;GET&#39;:
+        Student.objects.filter(pk=id).delete()
+        return HttpResponseRedirect(reverse(&#39;app:all_stu&#39;))-
+</code></pre>
             </div>
             <hr>
 
@@ -571,7 +587,7 @@ collid int not null comment &#39;所属学院编号&#39;
                     <span class="reprint-tip">转载请注明: </span>
                     <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2018/12/26/shu-ju-ku-cao-zuo-jian-biao/" class="b-link-green">数据库操作1-建表以及查询</a>
+                    <a href="/2019/01/10/web-hou-duan-django-gao-chao-3form-biao-dan/" class="b-link-green">web后端Django-高潮3form表单</a>
                 </p>
             </div>
         </div>
@@ -593,42 +609,43 @@ collid int not null comment &#39;所属学院编号&#39;
     <div class="row article-row">
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">上一篇</div>
+            <div class="article-badge left-badge text-color">本篇</div>
             <div class="card">
-                <a href="/2018/12/27/shu-ju-ku-cao-zuo-2-jian-biao-yi-ji-cha-xun-lian-xi/">
+                <a href="/2019/01/10/web-hou-duan-django-gao-chao-3form-biao-dan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="数据库操作-建表">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="web后端Django-高潮3form表单">
                         
-                        <span class="card-title">数据库操作-建表</span>
+                        <span class="card-title">web后端Django-高潮3form表单</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">1.创建数据库– 如果存在renliziyuan的数据库就删除它（慎重），之后创建数据库并且进入数据库。
-drop database if exists renliziyuan;
-create database renliziyuan de</div>
+                    <div class="summary">实例背景form表单此处的应用实例，当对输入的学生信息要进行验证，如姓名长度，性别验证以及输入的不能为空。通常原始操作是需要些一堆if条件进行验证，而此处是使用form表单对其进行验证
+工程中学生类注意姓名，性别，以及头像
+from dja</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-27
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-10
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/MySql/" class="post-category" target="_blank">
-                                    MySql
+                            <a href="/categories/web后端/" class="post-category" target="_blank">
+                                    web后端
                                 </a>
                             
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/sql/" target="_blank">
-                        <span class="chip bg-color">sql</span>
+                    <a href="/tags/Django/" target="_blank">
+                        <span class="chip bg-color">Django</span>
                     </a>
                     
                 </div>
@@ -640,30 +657,30 @@ create database renliziyuan de</div>
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">下一篇</div>
             <div class="card">
-                <a href="/2018/12/26/shu-ju-ku-cao-zuo-1-jian-biao-yi-ji-cha-xun-lian-xi/">
+                <a href="/2019/01/09/web-hou-duan-django-gao-chao-2request-responsecookie-he-session/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="数据库操作-建表">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="web后端Django-高潮2request,responsecookie和session,">
                         
-                        <span class="card-title">数据库操作-建表</span>
+                        <span class="card-title">web后端Django-高潮2request,responsecookie和session,</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">1.创建数据库– 如果存在srs的数据库就删除它（慎重），之后创建数据库并且进入数据库。
-drop database if exists srs;
-create database srs default charset utf8;
-use </div>
+                    <div class="summary">创建配置当前的项目是为了创建账户登录以及保存在数据库方
+
+参考高潮1，在templates中创建login.html以及register.html文件。同时拷贝高潮1中的index相关文件到当前文件夹
+使用python manage.py </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2018-12-26
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-09
                             </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/MySql/" class="post-category" target="_blank">
-                                    MySql
+                            <a href="/categories/web后端/" class="post-category" target="_blank">
+                                    web后端
                                 </a>
                             
                             
@@ -673,8 +690,8 @@ use </div>
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/sql/" target="_blank">
-                        <span class="chip bg-color">sql</span>
+                    <a href="/tags/Django/" target="_blank">
+                        <span class="chip bg-color">Django</span>
                     </a>
                     
                 </div>

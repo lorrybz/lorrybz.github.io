@@ -5,11 +5,9 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="web后端Django-前戏3关联表操作, lorry_python">
-    <meta name="description" content="操作背景：是在前戏2中已经创建有学生表，同时也完成了单表的查询，此篇的目的是创建关联表以及相关的关联操作
-1.创建拓展表（一对一）
-工程文件夹下app下modles.pyclass StudentInfo(models.Model):
-  ">
+    <meta name="keywords" content="web后端Django-高潮3中间件, lorry_python">
+    <meta name="description" content="前言面向切面编程AOP中的中间件是一个最好的例子。官方的说法：中间件是一个用来处理Django的请求和响应的框架级别的钩子。它是一个轻量、低级别的插件系统，用于在全局范围内改变Django的输入和输出。
+1. 中间件Middleware描述">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +15,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>web后端Django-前戏3关联表操作 | lorry_python</title>
+    <title>web后端Django-高潮3中间件 | lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -268,13 +266,13 @@
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/14.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/23.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        web后端Django-前戏3关联表操作
+                        web后端Django-高潮3中间件
                     </div>
                 </div>
             </div>
@@ -313,264 +311,239 @@
                 
 
                 <span class="post-date">
-                    <i class="fa fa-clock-o fa-fw"></i>2019-01-04
+                    <i class="fa fa-clock-o fa-fw"></i>2019-01-09
                 </span>
             </div>
         </div>
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p><strong>操作背景：是在前戏2中已经创建有学生表，同时也完成了单表的查询，此篇的目的是创建关联表以及相关的关联操作</strong></p>
-<h2 id="1-创建拓展表（一对一）"><a href="#1-创建拓展表（一对一）" class="headerlink" title="1.创建拓展表（一对一）"></a>1.创建拓展表（一对一）</h2><ul>
-<li>工程文件夹下app下modles.py<pre><code>class StudentInfo(models.Model):
-  s_no = models.CharField(max_length=10,null=False)
-  phone = models.CharField(max_length=11,null=True)
-  name = models.CharField(max_length=10,null=True)
-  #定义一对一的关联关系
-  # on_delete：
-  # models.CASCADE：删除主表，从表也会被删除
-  # models.PROTECT:都会被保护，但是从表可以删除
-  # models.SET_NULL:主表被删除，从表的外键设置为空
-  stu = models.OneToOneField(Student,
-                            on_delete=models.SET_NULL,
-                            related_name=&#39;info&#39;,
-                            null=True)
-</code></pre></li>
-<li>对表做修改以及添加新表后都需要迁移文件，在终端中执行代码进行迁移命令<ul>
-<li>python manage.py makemigrations</li>
-<li>python manage.py migrate<h3 id="先观察数据库"><a href="#先观察数据库" class="headerlink" title="先观察数据库"></a>先观察数据库</h3>查看当前数据库中有哪些表格查看图片如下：<br>(/images/stu_orige.png)<h3 id="1-添加学生拓展表信息"><a href="#1-添加学生拓展表信息" class="headerlink" title="1.添加学生拓展表信息"></a>1.添加学生拓展表信息</h3><h4 id="进入urls-py添加路由"><a href="#进入urls-py添加路由" class="headerlink" title="进入urls.py添加路由"></a>进入urls.py添加路由</h4><pre><code>path(&#39;add_stu_info/&#39;,views.add_stu_info),
-</code></pre><h4 id="进入views-py创建拓展信息表"><a href="#进入views-py创建拓展信息表" class="headerlink" title="进入views.py创建拓展信息表"></a>进入views.py创建拓展信息表</h4></li>
-</ul>
-</li>
-<li>方法一：<pre><code>  stu_info = StudentInfo()
-  stu_info.s_no = &#39;123456&#39;
-  stu_info.phone = &#39;18328099786&#39;
-  stu_info.name = &#39;小花22&#39;    #此处模型中定义为紧急联系人
-  stu_info.stu = Student.objects.get(id=4) # 获取学生对象进行关联
-  stu_info.save()
-  return HttpResponse(&#39;创建拓展信息成功&#39;)
-</code></pre></li>
-<li>方法二：<pre><code>  stu_info = StudentInfo()
-  stu_info.s_no = &#39;123456&#39;
-  stu_info.phone = &#39;18328099786&#39;
-  stu_info.name = &#39;小花22&#39;
-  stu_info.stu_id = 5
-  stu_info.save()
-  return HttpResponse(&#39;创建拓展信息成功&#39;)
-</code></pre><h4 id="（1）通过学生对象查询拓展表信息"><a href="#（1）通过学生对象查询拓展表信息" class="headerlink" title="（1）通过学生对象查询拓展表信息"></a>（1）通过学生对象查询拓展表信息</h4><h5 id="此处用于区分关联时id的写法"><a href="#此处用于区分关联时id的写法" class="headerlink" title="此处用于区分关联时id的写法"></a>此处用于区分关联时id的写法</h5></li>
-<li>（1）创建路由<pre><code>path(&#39;sel_phone_by_stu/&#39;,views.sel_phone_by_stu),
-</code></pre></li>
-<li>（2）在views中写代码查询,方法一<pre><code>def sel_phone_by_stu(request):
-  # 1.查询学生对象
-  stu = Student.objects.filter(s_name=&#39;小花&#39;).first()
-  stu_info = StudentInfo.objects.filter(stu_id=stu.id).first() #在获取学生对象之后关联到StudentInfo；
-  phone = stu_info.phone
-  print(phone)
-  return  HttpResponse(&#39;查询成功&#39;)
-</code></pre></li>
-<li>（2）在views中写代码查询,方法二<pre><code>def sel_phone_by_stu(request):
-  stu = Student.objects.filter(s_name=&#39;小花&#39;).first()
-  stu_info = StudentInfo.objects.filter(stu=stu).first()
-  phone = stu_info.phone
-  print(phone)
-  return  HttpResponse(&#39;查询成功&#39;)
-</code></pre><h4 id="（2）通过学生对象查询拓展表信息"><a href="#（2）通过学生对象查询拓展表信息" class="headerlink" title="（2）通过学生对象查询拓展表信息"></a>（2）通过学生对象查询拓展表信息</h4><h5 id="此处用于区分关联时有无关联名称是的写法"><a href="#此处用于区分关联时有无关联名称是的写法" class="headerlink" title="此处用于区分关联时有无关联名称是的写法"></a>此处用于区分关联时有无关联名称是的写法</h5></li>
-<li>（1）创建路由,在urls.py中<pre><code>path(&#39;sel_phone_by_stu2/&#39;,views.sel_phone_by_stu2),
-</code></pre></li>
-<li><strong>没有</strong>关联名称时即》》在模型中拓展表的stu没有字段related_name=’info’,<pre><code>  stu = models.OneToOneField(Student,on_delete=models.SET_NULL,null=True)
-</code></pre>此时的查询代码为：<pre><code>def sel_phone_by_stu2(request):
-  # 1.查询学生对象
-  stu = Student.objects.filter(s_name=&#39;小花&#39;).first()
-  # 2.反向查询，关联模型对象，关联另外一个模型名称的小写
-  stu_inifo = stu.studentinfo
-  phone = stu_inifo.studentinfo
-  print(phone)
-  return HttpResponse(&#39;查询成功,没有关联名称&#39;)
-</code></pre></li>
-<li><strong>有</strong>关联名称时即》》在模型中拓展表的stu字段有related_name=’info’,<pre><code>def sel_phone_by_stu2(request):
-  # 1.查询学生对象
-  stu = Student.objects.filter(s_name=&#39;小花&#39;).first()
-  # 2.反向查询，直接学生对象到关联名称的名
-  stu_inifo = stu.info
-  phone = stu_inifo.phone
-  print(phone)
-  return HttpResponse(&#39;查询成功,有关联名称的查询&#39;)
-</code></pre><h4 id="（3）通过拓展表查询学生信息"><a href="#（3）通过拓展表查询学生信息" class="headerlink" title="（3）通过拓展表查询学生信息"></a>（3）通过拓展表查询学生信息</h4></li>
-<li>（1）创建路由，urls中<pre><code>path(&#39;sel_stu_by_info/&#39;,views.sel_stu_by_info),
-</code></pre></li>
-<li>（2）先在拓展表中取出对象，关联到stu字段中，因为彼此为一对一对应的<pre><code>def sel_stu_by_info(request):
-  stu_info = StudentInfo.objects.filter(s_no=&#39;123456&#39;).first()
-  stu = stu_info.stu
-  print(stu.s_name)
-  return HttpResponse(&#39;查询成功，拓展表查询学生对象。&#39;)
-</code></pre><h3 id="2-删除学生信息"><a href="#2-删除学生信息" class="headerlink" title="2 删除学生信息"></a>2 删除学生信息</h3></li>
-<li>（1）创建路由<pre><code>path(&#39;on_delete_stu/&#39;,views.on_delete_stu),
-</code></pre><strong>注意：</strong>在定义一对一的关联关系时，需要顶底on_delete的值</li>
-<li>models.CASCADE：删除主表，从表也会被删除<ul>
-<li>models.PROTECT:都会被保护，但是从表可以删除</li>
-<li>models.SET_NULL:主表被删除，从表的外键设置为空<pre><code>def on_delete_stu(request):
-# 删除小花的学生信息
-#删除小花信息，从表是否删除
-Student.objects.filter(s_name=&#39;小花2&#39;).delete()
-return HttpResponse(&#39;删除成功&#39;)
-</code></pre><h2 id="2班级表（一对多）"><a href="#2班级表（一对多）" class="headerlink" title="2班级表（一对多）"></a>2班级表（一对多）</h2><h4 id="（1）创建班级表"><a href="#（1）创建班级表" class="headerlink" title="（1）创建班级表"></a>（1）创建班级表</h4></li>
-</ul>
-</li>
-<li>1在models.py文件中写入代码<pre><code>class Grade(models.Model):
-  g_name = models.CharField(max_length=10,unique=True)
-  class Meta:  #此处的是定义表名
-      db_table = &#39;grade&#39;
-</code></pre></li>
-<li>（1）在前戏2中所创建的student类中<ul>
-<li>一对多的外键定义<pre><code>g = models.ForeignKey(Grade,null=True,on_delete=models.CASCADE,
-                      related_name=&#39;stu&#39;)
-</code></pre><strong>注意添加外键后要做迁移命令</strong><h4 id="（2）添加班级信息"><a href="#（2）添加班级信息" class="headerlink" title="（2）添加班级信息"></a>（2）添加班级信息</h4></li>
-</ul>
-</li>
-<li><strong>创建路由</strong>一对多操作,添加班级信息<pre><code>path(&#39;add_grade/&#39;,views.add_grade),
-</code></pre></li>
-<li>1.添加方法一<pre><code>  for i in range(1,5):
-  grade = Grade()
-      grade.g_name = &#39;java180&#39;+str(i)
-      grade.save()
-</code></pre></li>
-<li>2.添加方法二<pre><code>def add_grade(requset):
-for i in range(1,5):
-  Grade.objects.create(g_name=&#39;python180&#39;+str(i))
-return HttpResponse(&#39;添加成功&#39;)
-</code></pre><h4 id="（3）给学生分配班级信息"><a href="#（3）给学生分配班级信息" class="headerlink" title="（3）给学生分配班级信息"></a>（3）给学生分配班级信息</h4></li>
-<li>1.创建路由<pre><code>path(&#39;stu_grade/&#39;,views.stu_grade),
-</code></pre></li>
-<li>2.分配班级（两种方法）查询id=6的对象(对id为6的学生分配班级)<pre><code>def stu_grade(requset):
-  stu = Student.objects.get(pk=6)
-  #
-  # stu.g = Grade.objects.get(pk=1)
-  stu.g_id = 4
-  stu.save()
-  return HttpResponse(&#39;分配班级成功&#39;)
-</code></pre><h2 id="3-一对多的表单查询"><a href="#3-一对多的表单查询" class="headerlink" title="3.一对多的表单查询"></a>3.一对多的表单查询</h2><h4 id="（1）通过学生查询班级"><a href="#（1）通过学生查询班级" class="headerlink" title="（1）通过学生查询班级"></a>（1）通过学生查询班级</h4></li>
-<li>创建路由<pre><code>path(&#39;sel_grade_by_stu/&#39;,views.sel_grade_by_stu),
-</code></pre></li>
-<li>查询方法<pre><code>def sel_grade_by_stu(request):
-  # 1.查询姓名叫小明的对象
-  stu =  Student.objects.filter(s_name=&#39;小明&#39;).first()
-  grade = stu.g  #此处添加了一对多的外键，因此可以得到班级的对象
-  print(grade.g_name)
-  return  HttpResponse(&#39;查询成功&#39;)
-</code></pre><h4 id="（2）通过班级查询学生"><a href="#（2）通过班级查询学生" class="headerlink" title="（2）通过班级查询学生"></a>（2）通过班级查询学生</h4></li>
-<li>创建路由<pre><code>path(&#39;sel_stu_by_grade/&#39;,views.sel_stu_by_grade),
-</code></pre></li>
-<li>查询方法一（没有创建关联名称的情况）<pre><code>def sel_stu_by_grade(request):
-  grade = Grade.objects.filter(g_name=&#39;python1801&#39;).first()
-  stus = grade.student_set.all()  #
-  for stu in stus:
-  print(stu.s_name,stu.s_age,stu.s_gender)
-  return HttpResponse(&#39;查询学生成功，无关联名称&#39;)
-</code></pre></li>
-<li>查询方法一（有创建关联名称的情况）;即学生表中 g = models.ForeignKey(Grade,null=True,on_delete=models.CASCADE,related_name=’stu’)中有<pre><code>def sel_stu_by_grade(request):
-  # 1.查询班级python1801
-  grade = Grade.objects.filter(g_name=&#39;python1801&#39;).first()
-  stus = grade.stu.all()
-  for stu in stus:
-      print(stu.s_name,stu.s_age,stu.s_gender)
-  return HttpResponse(&#39;查询学生成功,有关联名称&#39;)
-</code></pre><h2 id="4学生选课表（多对多）"><a href="#4学生选课表（多对多）" class="headerlink" title="4学生选课表（多对多）"></a>4学生选课表（多对多）</h2><h3 id="（1）创建选课表"><a href="#（1）创建选课表" class="headerlink" title="（1）创建选课表"></a>（1）创建选课表</h3></li>
-<li><p>在models.py中写入代码创建选课表,同时在终端中做迁移。</p>
-<ul>
-<li>将会在数据库中多处一个course的 表</li>
-<li><p>同时会多出course_stu的表如下图<br>(/images/manytomany.png)</p>
-<pre><code>class Course(models.Model):
-c_name = models.CharField(max_length=10,unique=True)
-# ManyToManyField字段定义在任何一个模型都可以
-stu = models.ManyToManyField(Student,null=True,related_name=&#39;cou&#39;)
+                <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>面向切面编程AOP中的中间件是一个最好的例子。官方的说法：中间件是一个用来处理Django的请求和响应的框架级别的钩子。它是一个轻量、低级别的插件系统，用于在全局范围内改变Django的输入和输出。</p>
+<h4 id="1-中间件Middleware描述"><a href="#1-中间件Middleware描述" class="headerlink" title="1. 中间件Middleware描述"></a>1. 中间件Middleware描述</h4><p>中间件：</p>
+<p>1) 是一个轻量级的，底层的插件，可以介入Django的请求和响应的过程（面向切面编程)</p>
+<p>2) 中间件的本质就是一个python类</p>
+<p>注意：中间件是帮助我们在视图函数执行之前和执行之后都可以做一些额外的操作，它本质上就是一个自定义类，类中定义了几个方法，Django框架会在请求的特定的时间去执行这些方法。</p>
+<p>思考：</p>
+<p>什么是中间件，在settings.py中有很多的中间件，主要是用来做什么功能的呢，他们处理请求的url的过程在那些阶段呢，一般用来做那些数据的处理呢</p>
+<h4 id="2-中间件类函数描述"><a href="#2-中间件类函数描述" class="headerlink" title="2. 中间件类函数描述"></a>2. 中间件类函数描述</h4><p>在Django项目中，在settings.py中可以查看到已经定义好的中间件，并加入我们自定义的两个中间件。</p>
+<pre><code>MIDDLEWARE = [
+    &#39;django.middleware.security.SecurityMiddleware&#39;,
+    &#39;django.contrib.sessions.middleware.SessionMiddleware&#39;,
+    &#39;django.middleware.common.CommonMiddleware&#39;,
+    &#39;django.middleware.csrf.CsrfViewMiddleware&#39;,
+    &#39;django.contrib.auth.middleware.AuthenticationMiddleware&#39;,
+    &#39;django.contrib.messages.middleware.MessageMiddleware&#39;,
+    &#39;django.middleware.clickjacking.XFrameOptionsMiddleware&#39;,
 
-class Meta:
-    db_table = &#39;course&#39;
-</code></pre><h3 id="（2）添加课程信息"><a href="#（2）添加课程信息" class="headerlink" title="（2）添加课程信息"></a>（2）添加课程信息</h3></li>
-</ul>
-</li>
-<li>创建路由<pre><code>path(&#39;add_course/&#39;,views.add_course),
-</code></pre></li>
-<li>写入添加课程的方法一：<pre><code>def add_course(request):
-  c_names = [&#39;大学英语&#39;,&#39;商务英语&#39;,&#39;线代&#39;,&#39;高数&#39;]
-  for i in c_names:
-      course = Course()
-      course.c_name =i
-      course.save()
-  return HttpResponse(&#39;添加课程成功&#39;)
-</code></pre></li>
-<li>写入添加课程的方法二：<pre><code>def add_course(request):
-  c_names = [&#39;大学英语&#39;,&#39;商务英语&#39;,&#39;线代&#39;,&#39;高数&#39;]
-  for i in c_names:
-      Course.objects.create(c_name=i)
-  return HttpResponse
-</code></pre><h4 id="（3）给中间表添加信息（学生添加课程）"><a href="#（3）给中间表添加信息（学生添加课程）" class="headerlink" title="（3）给中间表添加信息（学生添加课程）"></a>（3）给中间表添加信息（学生添加课程）</h4></li>
-<li>创建路由<pre><code>path(&#39;add_s_c/&#39;,views.add_s_c),
-</code></pre>两种方法的区别就在关联关系这儿</li>
-<li>添加方法一：（无关联名称）<pre><code>def add_s_c(request):
-  #1 查询课程对象
-  cou = Course.objects.filter(c_name=&#39;商务英语&#39;).first()
-  #2.查询学生对象
-  stu = Student.objects.filter(s_name=&#39;lorry&#39;).first()
-  # 3.加入关联关系
-  stu.course_set.add(cou)
-  return HttpResponse(&#39;添加中间信息表成功&#39;)
-</code></pre></li>
-<li>添加方法二：（有关联名称cou）<pre><code>def add_s_c(request):
-  #1 查询课程对象
-  cou = Course.objects.filter(c_name=&#39;商务英语&#39;).first()
-  #2.查询学生对象
-  stu = Student.objects.filter(s_name=&#39;lorry&#39;).first()
-  # 3.加入关联关系
-  stu.cou.add(cou)   
-  return HttpResponse(&#39;添加中间信息表成功&#39;)
-</code></pre><h4 id="4-给中间表添加信息（课程添加学生）"><a href="#4-给中间表添加信息（课程添加学生）" class="headerlink" title="4.给中间表添加信息（课程添加学生）"></a>4.给中间表添加信息（课程添加学生）</h4><pre><code>def add_s_c(request):
-  #将大学英语分配给小明
-  #1 查询课程对象
-  cou = Course.objects.filter(c_name=&#39;商务英语&#39;).first()
-  #2.查询学生对象
-  stu = Student.objects.filter(s_name=&#39;lorry&#39;).first()
-  cou.stu.add(stu)  #前面的stu是模型中定义的stu。
-  return HttpResponse(&#39;添加中间信息表成功&#39;)
-</code></pre><h4 id="5-删除中间表信息"><a href="#5-删除中间表信息" class="headerlink" title="5.删除中间表信息"></a>5.删除中间表信息</h4></li>
-<li>创建路由<pre><code>path(&#39;del_s_c/&#39;,views.del_s_c)
-</code></pre></li>
-<li>写入方法<pre><code>def del_s_c(requset):
-  cou = Course.objects.filter(c_name=&#39;商务英语&#39;).first()
-  stu = Course.objects.filter(s_name=&#39;lorry&#39;).first()
-  stu.cou.remove(cou)
-  return HttpResponse(&#39;删除信息成功&#39;)
-</code></pre><h2 id="5-模板（HTML的操作）"><a href="#5-模板（HTML的操作）" class="headerlink" title="5.模板（HTML的操作）"></a>5.模板（HTML的操作）</h2></li>
-<li>创建路由<pre><code>path(&#39;index/&#39;,views.index)
-</code></pre>后续操作：</li>
-<li>a:在工程文件中创建templates的文件夹<ul>
-<li>b:在文件夹中创建index.html文件</li>
-<li>c:进入文件操作解析内容<pre><code>&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
-&lt;head&gt;
-&lt;meta charset=&quot;UTF-8&quot;&gt;
-&lt;title&gt;Title&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-&lt;p&gt;欢迎lorry&lt;/p&gt;
-{% for stu in a%}
-    <p>
-        姓名：{{stu.s_name}}
-        年龄：{{stu.s_age}}
-        班级：{{ stu.g.g_name }}
-        选课：
-            {% for c in stu.cou.all %}
-                {{ c.c_name }}
-            {% endfor %}
-&lt;/p&gt;
-{% endfor %}
-&lt;/body&gt;
-&lt;/html&gt;
-</p></code></pre></li>
-</ul>
-</li>
-</ul>
+    &#39;utils.middleware.TestMiddlware1&#39;,  # 加载中间件TestMiddlware1
+    &#39;utils.middleware.TestMiddlware2&#39;,  # 加载中间件TestMiddlware2
+]
+</code></pre><p>每个中间件是一个独立的类, 有几下几个方法</p>
+<pre><code>1. process_request(self, request)
+    执行时机在django接收到request之后, 但仍未解析出url以确定运行哪个视图函数view之前
 
+2. process_view(self, request, view_func, view_args, view_kwargs)
+    执行时机在django执行完request预处理函数并确定待执行的view之后, 但在视图函数view之前
+    request: HttpRequest对象
+    view_fun: 是django将要调用的视图函数, 是真实的函数对象本身
+    view_args: 将传入view的位置参数列表, 不包括request参数
+    view_kwargs: 将传入view的字典参数
+
+3. process_response(self, request, response)
+    该方法必须返回HttpResponse对象, 可以是原来的, 也可以是修改后的
+
+    调用时机在django执行完view函数并生成response之后, 该中间件能修改response的内容, 常见用途比如压缩内容
+    request是request对象
+    response是从view中返回的response对象
+
+4. process_exception(self, request, exception)
+    默认不主动调用，该方法只有在request处理过程中出了问题并且view函数抛出了一个未捕获的异常才会被调用, 可以用来发送错误通知, 将相关信息输出到日志文件, 或者甚至尝试从错误中自动恢复
+    参数包括request对象, 还有view函数抛出的异常对象exception
+    必须返回None或HttpResponse对象
+
+5. process_template_response(self, request, response)
+    默认不主动调用，在视图执行render()返回后进行调用，必须返回None或HttpResponse对象
+</code></pre><p>以上方法的返回值可以是None或一个HttpResponse对象，如果是None，则继续按照django定义的规则向后继续执行，如果是HttpResponse对象，则直接将该对象返回给用户。</p>
+<h4 id="3-process-request-函数"><a href="#3-process-request-函数" class="headerlink" title="3. process_request()函数"></a>3. process_request()函数</h4><p>process_request方法中有一个request参数，其表示请求。该方法中可以返回None或不用返回任何参数，或返回HttpResponse对象。如果返回None或不返回任何参数则表示继续执行其余中间件，如果是返回HttpResponse对象则直接返回HttpResponse对象给客户端，而不再执行视图函数。</p>
+<p>访问index路由地址，在Pycharm的控制台中可以打印如下的内容：<br>​<br>    test1 process_request<br>    test2 process_request<br>    index views</p>
+<p>从结果中可以发现，中间件TestMiddlware1的process_request比TestMiddlware2的process_request方法先执行，并且视图函数是最后才执行。<br>通过以上的打印可以得出总结：</p>
+<pre><code>1）    中间件的process_request方法是按照在MIDDLEWARE中定义的先后顺序执行的。
+2）    视图函数在process_request方法执行之后才执行。
+</code></pre><h4 id="4-process-response-self-request-response-函数"><a href="#4-process-response-self-request-response-函数" class="headerlink" title="4. process_response(self, request, response)函数"></a>4. process_response(self, request, response)函数</h4><p>process_ response方法中两个参数，一个是请求request参数，一个是响应response参数，该response参数就是视图函数返回的HttpResponse对象。</p>
+<p>修改中间件TestMiddlware1和TestMiddlware2，修改代码如下：</p>
+<pre><code>class TestMiddlware1(MiddlewareMixin):
+
+    def process_request(self, request):
+        print(&#39;test1 process_request&#39;)
+
+    def process_response(self, request, response):
+        print(&#39;test1 process_response&#39;)
+        return response
+
+class TestMiddlware2(MiddlewareMixin):
+
+    def process_request(self, request):
+        print(&#39;test2 process_request&#39;)
+
+    def process_response(self, request, response):
+        print(&#39;test2 process_response&#39;)
+        return response
+</code></pre><p>访问inde路由地址，在控制台中可以打印如下的内容: </p>
+<pre><code>test1 process_request
+test2 process_request
+index views
+test2 process_response
+test1 process_response
+</code></pre><p>从结果中可以发现，中间件的process_request在访问视图函数之前执行，而process_reponse在视图函数之后执行。并且从执行顺序中可以得出以下结论:</p>
+<pre><code>1）    多个中间件的process_request的执行顺序是按照在MIDDLEWARE中定义的先后顺序执行的。
+2）    多个中间件的process_response的执行顺序是按照MIDDLEWARE中定义的顺序逆序执行的。也就是说第一个中间件的process_request先执行，而第一个中间件的process_response最后执行。
+3）    视图函数在process_request之后执行。
+4）    视图函数在process_response之前执行。
+5）    process_response必须返回响应对象。
+</code></pre><h4 id="5-process-view-self-view-func-view-args-view-kwargs-讲解及处理流程"><a href="#5-process-view-self-view-func-view-args-view-kwargs-讲解及处理流程" class="headerlink" title="5.    process_view(self, view_func, view_args, view_kwargs) 讲解及处理流程"></a>5.    process_view(self, view_func, view_args, view_kwargs) 讲解及处理流程</h4><p>该方法接收四个参数:</p>
+<pre><code>请求request
+view_func: 即将被执行的函数
+view_args：传递给视图函数的列表参数
+view_kwargs：传递给视图函数的字典参数
+</code></pre><p>修改中间件TestMiddlware1和TestMiddlware2，修改代码如下：<br>​<br>    class TestMiddlware1(MiddlewareMixin):</p>
+<pre><code>    def process_request(self, request):
+        print(&#39;test1 process_request&#39;)
+
+    def process_response(self, request, response):
+        print(&#39;test1 process_response&#39;)
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        print(&#39;test1 process_view&#39;)
+
+class TestMiddlware2(MiddlewareMixin):
+
+    def process_request(self, request):
+        print(&#39;test2 process_request&#39;)
+
+    def process_response(self, request, response):
+        print(&#39;test2 process_response&#39;)
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        print(&#39;test2 process_view&#39;)
+</code></pre><p>访问index路由地址，在控制台中可以打印如下的内容: </p>
+<pre><code>test1 process_request
+test2 process_request
+test1 process_view
+test2 process_view
+index views
+test2 process_response
+test1 process_response
+</code></pre><p>从结果中可以发现，中间件中的process_view方法在视图函数之前执行，在process_request方法之后执行，process_view执行的顺序按照MIDDLEWARE中定义中间件的顺序执行的。并且从执行的结果中可以得出以下结论:<br>​<br>    1）    process_request执行后才执行process_view<br>    2）    视图函数在process_view方法执行后执行<br>    3）    process_view方法在process_response方法之后执行，并且执行的顺序按照MIDDLEWARE中定义中间件的顺序执行</p>
+<h4 id="6-process-template-response-self-request-response-讲解及处理流程"><a href="#6-process-template-response-self-request-response-讲解及处理流程" class="headerlink" title="6.    process_template_response(self, request, response) 讲解及处理流程"></a>6.    process_template_response(self, request, response) 讲解及处理流程</h4><p>该方法中接收两个参数，一个是请求request，一个是响应response，该响应response由视图函数产生。process_template_response方法默认是不执行的，只会在视图函数返回对象有一个render方法时才会被调用。</p>
+<p>修改index视图函数<br>    def index(request):<br>        print(‘ index views’)<br>        def index_render():<br>            return render(request, ‘index.html’)</p>
+<pre><code>    rep = HttpResponse()
+    rep.render = index_render
+    return rep
+</code></pre><p>修改中间件TestMiddlware1和TestMiddlware2，修改代码如下：</p>
+<pre><code>class TestMiddlware1(MiddlewareMixin):
+
+    def process_request(self, request):
+        print(&#39;test1 process_request&#39;)
+
+    def process_response(self, request, response):
+        print(&#39;test1 process_response&#39;)
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        print(&#39;test1 process_view&#39;)
+
+    def process_exception(self, request, exception):
+        print(&#39;test1 process_except&#39;)
+
+    def process_template_response(self, request, response):
+        print(&#39;test1 process_template_response&#39;)
+        return response
+
+class TestMiddlware2(MiddlewareMixin):
+
+    def process_request(self, request):
+        print(&#39;test2 process_request&#39;)
+
+    def process_response(self, request, response):
+        print(&#39;test2 process_response&#39;)
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        print(&#39;test2 process_view&#39;)
+
+    def process_exception(self, request, exception):
+        print(&#39;test2 process_except&#39;)
+
+    def process_template_response(self, request, response):
+        print(&#39;test2 process_template_response&#39;)
+        return response
+</code></pre><p>访问index路由地址，在控制台中可以打印如下的内容: </p>
+<pre><code>test1 process_request
+test2 process_request
+test1 process_view
+test2 process_view
+index views
+test2 process_template_response
+test1 process_template_response
+test2 process_response
+test1 process_response
+</code></pre><p>从结果中可以得出以下结论:</p>
+<pre><code>1）    process_template_response在视图函数执行完后。并且执行的顺序按照MIDDLEWARE中定义中间件的顺序逆序执行。
+2）    process_response方法是最后执行的，并且执行的顺序按照MIDDLEWARE中定义中间件的顺序逆序执行。
+</code></pre><h4 id="7-process-exception-self-request-exception-讲解及处理流程"><a href="#7-process-exception-self-request-exception-讲解及处理流程" class="headerlink" title="7.    process_exception(self, request, exception) 讲解及处理流程"></a>7.    process_exception(self, request, exception) 讲解及处理流程</h4><p>该方法中接收两个参数，一个是请求request，一个是异常exception，该exception是视图函数产生的异常Exception对象。process_exception方法默认是不执行的，只会在视图函数出现异常的情况才会执行。</p>
+<p>修改index视图函数，使得index方法抛出一个异常:</p>
+<pre><code>def index(request):
+    if request.method == &#39;GET&#39;:
+        print(&#39;index views&#39;)
+        1/0
+        return HttpResponse(&#39;我是index方法&#39;)
+</code></pre><p>修改中间件TestMiddlware1和TestMiddlware2，修改代码如下：<br>​<br>    class TestMiddlware1(MiddlewareMixin):</p>
+<pre><code>    def process_request(self, request):
+        print(&#39;test1 process_request&#39;)
+
+    def process_response(self, request, response):
+        print(&#39;test1 process_response&#39;)
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        print(&#39;test1 process_view&#39;)
+
+    def process_exception(self, request, exception):
+        print(&#39;test1 process_except&#39;)
+
+class TestMiddlware2(MiddlewareMixin):
+
+    def process_request(self, request):
+        print(&#39;test2 process_request&#39;)
+
+    def process_response(self, request, response):
+        print(&#39;test2 process_response&#39;)
+        return response
+
+    def process_view(self, request, view_func, view_args, view_kwargs):
+        print(&#39;test2 process_view&#39;)
+
+    def process_exception(self, request, exception):
+        print(&#39;test2 process_except&#39;)
+</code></pre><p>访问index路由地址，在控制台中可以打印如下的内容: </p>
+<pre><code>test1 process_request
+test2 process_request
+test1 process_view
+test2 process_view
+index views
+test2 process_except
+test1 process_except
+test2 process_response
+test1 process_response
+</code></pre><p>从结果中可以得出以下结论:</p>
+<pre><code>1）    process_request最先执行。并且执行的顺序按照MIDDLEWARE中定义中间件的顺序执行。
+2）    process_view在视图函数之前执行，并且执行的顺序按照MIDDLEWARE中定义中间件的顺序执行。
+3）    视图函数在process_view方法执行后执行，在process_exception方法之前执行。
+4）    process_exception方法在process_response方法之前执行，并且执行的顺序按照MIDDLEWARE中定义中间件的顺序逆序执行。
+5）    process_response方法是最后执行的，并且执行的顺序按照MIDDLEWARE中定义中间件的顺序逆序执行。
+</code></pre>
             </div>
             <hr>
 
@@ -708,7 +681,7 @@ class Meta:
                     <span class="reprint-tip">转载请注明: </span>
                     <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/01/04/web-hou-duan-django-qian-xi-3-guan-lian-biao-cao-zuo/" class="b-link-green">web后端Django-前戏3关联表操作</a>
+                    <a href="/2019/01/09/web-hou-duan-django-gao-chao-3-zhong-jian-jian/" class="b-link-green">web后端Django-高潮3中间件</a>
                 </p>
             </div>
         </div>
@@ -732,18 +705,20 @@ class Meta:
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">上一篇</div>
             <div class="card">
-                <a href="/2019/01/09/web-hou-duan-django-gao-chao-3-zhong-jian-jian/">
+                <a href="/2019/01/09/web-hou-duan-django-gao-chao-2request-responsecookie-he-session/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/23.jpg" class="responsive-img" alt="web后端Django-高潮3中间件">
+                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="web后端Django-高潮2request,responsecookie和session,">
                         
-                        <span class="card-title">web后端Django-高潮3中间件</span>
+                        <span class="card-title">web后端Django-高潮2request,responsecookie和session,</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">前言面向切面编程AOP中的中间件是一个最好的例子。官方的说法：中间件是一个用来处理Django的请求和响应的框架级别的钩子。它是一个轻量、低级别的插件系统，用于在全局范围内改变Django的输入和输出。
-1. 中间件Middleware描述</div>
+                    <div class="summary">创建配置当前的项目是为了创建账户登录以及保存在数据库方
+
+参考高潮1，在templates中创建login.html以及register.html文件。同时拷贝高潮1中的index相关文件到当前文件夹
+使用python manage.py </div>
                     <div class="publish-info">
                         <span class="publish-date">
                             <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-09
@@ -776,21 +751,23 @@ class Meta:
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">下一篇</div>
             <div class="card">
-                <a href="/2019/01/03/web-hou-duan-django-qian-xi-2-shu-ju-ku-zeng-shan-gai-cha/">
+                <a href="/2019/01/04/web-hou-duan-django-qian-xi-3-guan-lian-biao-cao-zuo/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="web后端Django-前戏之数据库增删改查">
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="web后端Django-前戏3关联表操作">
                         
-                        <span class="card-title">web后端Django-前戏之数据库增删改查</span>
+                        <span class="card-title">web后端Django-前戏3关联表操作</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">概念引入ORM(objects relationship mapping): 对象关系映射；objects: 管理器，默认模型的属性；
-1.数据增加中间表（即自己需要管理的表）举例操作：创建一张学生表，包含名字，性别，年龄，创立日期以及更新</div>
+                    <div class="summary">操作背景：是在前戏2中已经创建有学生表，同时也完成了单表的查询，此篇的目的是创建关联表以及相关的关联操作
+1.创建拓展表（一对一）
+工程文件夹下app下modles.pyclass StudentInfo(models.Model):
+  </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-03
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-04
                             </span>
                         <span class="publish-author">
                             
