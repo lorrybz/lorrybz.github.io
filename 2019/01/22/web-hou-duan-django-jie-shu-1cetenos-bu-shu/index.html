@@ -5,10 +5,11 @@
 
 <head><meta name="generator" content="Hexo 3.8.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="web后端Django-高潮3form表单, lorry_python">
-    <meta name="description" content="实例背景form表单此处的应用实例，当对输入的学生信息要进行验证，如姓名长度，性别验证以及输入的不能为空。通常原始操作是需要些一堆if条件进行验证，而此处是使用form表单对其进行验证
-工程中学生类注意姓名，性别，以及头像
-from dja">
+    <meta name="keywords" content="lorry_python">
+    <meta name="description" content="使用centos部署django项目
+layout: wtitle: web后端Django-前戏4html模板操作date: 2019-1-4 12:03:10tags: Djangocategories: web后端
+
+前言项目从0到1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -16,7 +17,7 @@ from dja">
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>web后端Django-高潮3form表单 | lorry_python</title>
+    <title>lorry_python</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -267,13 +268,13 @@ from dja">
 
 
 
-<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
+<div class="bg-cover post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        web后端Django-高潮3form表单
+                        
                     </div>
                 </div>
             </div>
@@ -291,164 +292,220 @@ from dja">
     <div class="card">
         <div class="card-content article-info">
             
-            <div class="article-tag">
-                
-                <a href="/tags/Django/" target="_blank">
-                    <span class="chip bg-color">Django</span>
-                </a>
-                
-            </div>
-            
             <div class="post-info">
-                
-                <span class="post-cate">
-                    <i class="fa fa-bookmark fa-fw icon-category"></i>
-                    
-                    <a href="/categories/web后端/" class="post-category" target="_blank">
-                        web后端
-                    </a>
-                    
-                </span>
                 
 
                 <span class="post-date">
-                    <i class="fa fa-clock-o fa-fw"></i>2019-01-10
+                    <i class="fa fa-clock-o fa-fw"></i>2019-01-22
                 </span>
             </div>
         </div>
         <hr>
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="实例背景"><a href="#实例背景" class="headerlink" title="实例背景"></a>实例背景</h3><p>form表单此处的应用实例，当对输入的学生信息要进行验证，如姓名长度，性别验证以及输入的不能为空。通常原始操作是需要些一堆if条件进行验证，而此处是使用form表单对其进行验证</p>
-<h3 id="工程中学生类"><a href="#工程中学生类" class="headerlink" title="工程中学生类"></a>工程中学生类</h3><p>注意姓名，性别，以及头像</p>
-<pre><code>from django.db import models
-# Create your models here.
-class Student(models.Model):
-    s_name = models.CharField(max_length=10,unique=True)
-    s_age = models.IntegerField(default=20)
-    s_gender = models.BooleanField(default=0)
-    create_time = models.DateTimeField(auto_now_add=True)
-    # auto_now_add   创建时，默认字段赋值为最新的事件
-    # create_time = models.DateField
-    updata_time = models.DateTimeField(auto_now=True)
-    # 修改数据是，自动赋值为更新字段时 的时间。
-    math = models.DecimalField(max_digits=3,decimal_places=1,null=True)
-    wuli = models.DecimalField(max_digits=3,decimal_places=1,null=True)
-    # 存图片地址,数据库中字段类型为varchar
-    icon = models.ImageField(upload_to=&#39;upload&#39;,null=True)
-    class Meta:
-        db_table = &#39;student&#39;
-</code></pre><h3 id="在html中写出提交即将添加学生的代码"><a href="#在html中写出提交即将添加学生的代码" class="headerlink" title="在html中写出提交即将添加学生的代码"></a>在html中写出提交即将添加学生的代码</h3><p>注意事项：<br>1.：日后再说<br>2.因为要提交图片，需要加入enctype=”multipart/form-data”<br>3.errors.icon.0是用表单校验后如有异常需要解析的异常<br>4.submit提交的是name键以及对应输入的值。</p>
-<pre><code>    &lt;form action=&quot;&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;
-        {% csrf_token %}
-        &lt;p&gt;姓名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;{{ errors.username.0 }}&lt;/p&gt;
-        &lt;p&gt;性别：&lt;input type=&quot;text&quot; name=&quot;gender&quot;&gt;{{ errors.gender.0 }}&lt;/p&gt;
-        &lt;p&gt;图片：&lt;input type=&quot;file&quot; name=&quot;icon&quot;&gt;{{ errors.icon.0 }}&lt;/p&gt;
-        &lt;p&gt;&lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;&lt;/p&gt;
-    &lt;/form&gt;
-</code></pre><h3 id="form表单操作"><a href="#form表单操作" class="headerlink" title="form表单操作"></a>form表单操作</h3><p>在文件夹中创建forms.py之后写入代码<br>注意：此处给出了单独校验性别姓名，以及合在一起校验的方法<br>并且在此处校验之后将会重新赋值，比如将性别改成存入数据库的布尔值0或1；</p>
-<pre><code>from django import forms
+                <h1 id="使用centos部署django项目"><a href="#使用centos部署django项目" class="headerlink" title="使用centos部署django项目"></a>使用centos部署django项目</h1><hr>
+<p>layout: w<br>title: web后端Django-前戏4html模板操作<br>date: 2019-1-4 12:03:10<br>tags: Django<br>categories: web后端</p>
+<hr>
+<h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>项目从0到1的过程需要产品、测试、前端、后端、运维共同维护，如下展示项目的设计流程:</p>
+<p><img src="../django/images/项目设计流程.png" alt="项目设计流程"></p>
+<h3 id="安装MariaDB"><a href="#安装MariaDB" class="headerlink" title="安装MariaDB"></a>安装MariaDB</h3><p>安装命令</p>
+<pre><code>yum -y install mariadb mariadb-server
+</code></pre><p>安装完成MariaDB，首先启动MariaDB</p>
+<pre><code>systemctl start mariadb
+</code></pre><p>设置开机启动</p>
+<pre><code>systemctl enable mariadb
+</code></pre><h3 id="设置密码"><a href="#设置密码" class="headerlink" title="设置密码"></a>设置密码</h3><p>命令: mysql_secure_installation</p>
+<pre><code>Enter current password for root:&lt;–初次运行直接回车
 
-from app.models import Student
+设置密码
+
+Set root password? [Y/n] &lt;– 是否设置root用户密码，输入y并回车或直接回车
+
+New password: &lt;– 设置root用户的密码
+Re-enter new password: &lt;– 再输入一次你设置的密码
+
+其他配置
+
+Remove anonymous users? [Y/n] &lt;– 是否删除匿名用户，回车
+
+Disallow root login remotely? [Y/n] &lt;–是否禁止root远程登录,回车,
+
+Remove test database and access to it? [Y/n] &lt;– 是否删除test数据库，回车
+
+Reload privilege tables now? [Y/n] &lt;– 是否重新加载权限表，回车
+
+初始化MariaDB完成，接下来测试登录
+
+mysql -u root -p
+</code></pre><h3 id="开启远程连接"><a href="#开启远程连接" class="headerlink" title="开启远程连接"></a>开启远程连接</h3><p>在mysql数据库中的user表中可以看到默认是只能本地连接的，所有可以添加一个新的用户，该用户可以远程访问</p>
+<h4 id="1-创建用户"><a href="#1-创建用户" class="headerlink" title="1. 创建用户"></a>1. 创建用户</h4><pre><code># 先使用数据库
+use mysql;
+
+# 针对ip
+create user &#39;root&#39;@&#39;192.168.10.10&#39; identified by &#39;password&#39;;
+
+#全部
+ create user &#39;root&#39;@&#39;%&#39; identified by &#39;password&#39;;
+</code></pre><h4 id="2-授权"><a href="#2-授权" class="headerlink" title="2. 授权"></a>2. 授权</h4><pre><code># 给用户最大权限
+grant all privileges on *.* to &#39;root&#39;@&#39;%&#39; identified by &#39;password&#39;;
+
+# 给部分权限(test 数据库)
+
+grant all privileges on test.* to &#39;root&#39;@&#39;%&#39; identified by &#39;password&#39; with grant option;
+
+# 刷新权限表
+ flush privileges;
+
+# 查看
+show grants for &#39;root&#39;@&#39;localhost&#39;;
+</code></pre><p>接下来就可以在远程的数据库可视化工具中直接访问该服务器中的mysql了。</p>
+<pre><code># 访问数据库
+mysql -u root -p
+</code></pre><h3 id="安装python3-6"><a href="#安装python3-6" class="headerlink" title="安装python3.6"></a>安装python3.6</h3><p>在centos中，系统默认只提供python2.7的版本，但是项目我们使用的python3.6的版本。所有我们自己安装python3</p>
+<h4 id="安装Python3的方法"><a href="#安装Python3的方法" class="headerlink" title="安装Python3的方法"></a>安装Python3的方法</h4><p>首先安装依赖包</p>
+<p>安装Python3.6所需要的依赖包：</p>
+<pre><code>yum -y groupinstall &quot;Development tools&quot;
+
+yum -y install zlib-devel bzip2-devel openssl-devel ncurses-devel sqlite-devel readline-devel tk-devel gdbm-devel db4-devel libpcap-devel xz-devel
+</code></pre><p>安装Python3.7还需额外安装依赖包：</p>
+<pre><code>yum install libffi-devel -y
+</code></pre><p>然后根据自己需求下载不同版本的Python3，我下载的是Python3.6.2</p>
+<pre><code>wget https://www.python.org/ftp/python/3.6.2/Python-3.6.2.tar.xz
+
+然后解压压缩包，进入该目录，安装Python3
+
+tar -xvJf  Python-3.6.2.tar.xz
+cd Python-3.6.2
+./configure --prefix=/usr/local/python3
+make &amp;&amp; make install
+</code></pre><p>最后创建软链接</p>
+<pre><code>ln -s /usr/local/python3/bin/python3 /usr/bin/python3
+
+ln -s /usr/local/python3/bin/pip3 /usr/bin/pip3
+</code></pre><h3 id="安装环境"><a href="#安装环境" class="headerlink" title="安装环境"></a>安装环境</h3><h4 id="1-安装virtualenv"><a href="#1-安装virtualenv" class="headerlink" title="1. 安装virtualenv"></a>1. 安装virtualenv</h4><pre><code>yum install python-virtualenv
+</code></pre><h4 id="2-创建虚拟环境"><a href="#2-创建虚拟环境" class="headerlink" title="2. 创建虚拟环境"></a>2. 创建虚拟环境</h4><pre><code>virtualenv --no-site-packages env
+
+cd env
+
+# 激活虚拟环境
+source bin/activate
+</code></pre><h4 id="3-安装环境需要的包"><a href="#3-安装环境需要的包" class="headerlink" title="3. 安装环境需要的包"></a>3. 安装环境需要的包</h4><pre><code>pip3 install -r re_install.txt
+
+其中re_install.txt文件中记录的是需要安装包的名称以及对应的版本
+</code></pre><h3 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h3><p>该部署采用的是cenots7系统来部署</p>
+<p>Django的项目中，在工程目录下settings.py文件中有一个DEBUG=True参数，如果DEBUG=False则会出现js,css，img无法加载的情况出现。</p>
+<p>原因如下：</p>
+<p>Django框架仅在开发模式下提供静态文件服务。当我开启DEBUG模式时，Django内置的服务器是提供静态文件的服务的，所以css等文件访问都没有问题，但是关闭DEBUG模式后，Django便不提供静态文件服务了。想一想这是符合Django的哲学的：这部分事情标准服务器都很擅长，就让服务器去做吧！</p>
+<h4 id="1-测试环境中部署方式"><a href="#1-测试环境中部署方式" class="headerlink" title="1. 测试环境中部署方式"></a>1. 测试环境中部署方式</h4><h5 id="urls-py中的修改"><a href="#urls-py中的修改" class="headerlink" title="urls.py中的修改"></a>urls.py中的修改</h5><p>在测试环境中一般都直接使用python manage.py runserver的方式去运行项目。其中就涉及到DEBUG=False的修改，静态目录的修改等，具体修改如下：</p>
+<pre><code>a) 修改settings.py配置文件中的DEBUG=False模式，修改ALLOEWD_HOST=[&#39;*&#39;]
+
+b) 修改工程目录下的urls.py
+
+from django.views.static import serve
+
+urlpatterns = [
+    url(r&#39;^admin/&#39;, admin.site.urls),
+    url(r&#39;^axf/&#39;, include(&#39;axf.urls&#39;, namespace=&#39;axf&#39;)),
+
+    # 增加以下的url路由
+    url(r&#39;^static/(?P&lt;path&gt;.*)$&#39;, serve, {&quot;document_root&quot;: settings.STATICFILES_DIRS[0]}),
+
+    url(r&#39;^media/(?P&lt;path&gt;.*)$&#39;, serve, {&quot;document_root&quot;: settings.MEDIA_ROOT}),
 
 
-class StuForm(forms.Form):
-    username = forms.CharField(max_length=10,
-                               min_length=2,
-                               required=True,
-                               error_messages={
-                                   &#39;required&#39;:&#39;姓名字段必填&#39;,
-                                   &#39;min_length&#39;:&#39;不能少于两个字符&#39;,
-                                   &#39;max_length&#39;:&#39;不能超过10个字符&#39;,
-                               })
-    icon = forms.ImageField(required=True,
-                            error_messages={
-                                &#39;required&#39;:&#39;头像必填&#39;
-                            })
-    gender = forms.CharField(required=True,
-                             error_messages={
-                                 &#39;required&#39;:&#39;性别必填&#39;
-                             })
+    url(r&#39;^$&#39;, views.home)
+]
+</code></pre><h5 id="中间件的修改"><a href="#中间件的修改" class="headerlink" title="中间件的修改"></a>中间件的修改</h5><p>如果中间件是过滤哪些地址不需要登录验证的话，可以设置如下的static和media过滤地址的参数：</p>
+<pre><code># 验证用户的登录状态
+paths = [&#39;/user/login/&#39;, &#39;/user/register/&#39;,
+         &#39;/axf/market/&#39;, &#39;/axf/marketparams/(\d+)/(\d+)/(\d+)/&#39;,
+        &#39;/static/[0-9a-zA-Z/\.]&#39;, &#39;/media/[0-9a-zA-Z/\.]&#39;]
 
-    # def clean(self):
-    #      # 这是校验所有的
-    #     # 转换性别为1或者是0
-    #     gender = self.cleaned_data.get(&#39;gender&#39;)
-    #     if gender == &#39;男&#39;:
-    #         self.cleaned_data[&#39;gender&#39;] = 1
-    #     else:
-    #         self.cleaned_data[&#39;gender&#39;] = 0
-    #
-    #     # 校验姓名是唯一的
-    #     username = self.cleaned_data.get(&#39;username&#39;)
-    #     stu = Student.objects.filter(s_name=username).first()
-    #     if stu:
-    #         raise forms.ValidationError({&#39;username&#39;:&#39;姓名重复&#39;})
-    #
-    #     return self.cleaned_data
+for path in paths:
+    if re.match(path, request.path):
+        return None
+</code></pre><h4 id="2-正式环境中部署方式"><a href="#2-正式环境中部署方式" class="headerlink" title="2. 正式环境中部署方式"></a>2. 正式环境中部署方式</h4><p>正式环境中部署为nginx+uwsgi来部署django项目</p>
+<h5 id="2-1-安装nginx"><a href="#2-1-安装nginx" class="headerlink" title="2.1 安装nginx"></a>2.1 安装nginx</h5><p>a）添加nginx存储库<br>​<br>    yum install epel-release<br>​    </p>
+<p>b) 安装nginx</p>
+<pre><code>yum install nginx
+</code></pre><p>c) 运行nginx</p>
+<p>Nginx不会自行启动。要运行Nginx<br>​<br>    systemctl start nginx</p>
+<p>nginx的运行命令：</p>
+<pre><code> systemctl status nginx 查看nginx的状态
+ systemctl start/stop/enable/disable nginx 启动/关闭/设置开机启动/禁止开机启动
+</code></pre><p>d）系统启动时启用Nginx<br>​<br>    systemctl enable nginx</p>
+<p>e）如果您正在运行防火墙，请运行以下命令以允许HTTP和HTTPS通信：<br>​<br>    sudo firewall-cmd –permanent –zone=public –add-service=http </p>
+<pre><code>sudo firewall-cmd --permanent --zone=public --add-service=https
 
-    def clean_username(self):
-        # 只是校验姓名
-        username = self.cleaned_data.get(&#39;username&#39;)
-        stu = Student.objects.filter(s_name=username).first()
-        if stu:
-            raise forms.ValidationError(&#39;姓名重复&#39;)
-        return self.cleaned_data[&#39;username&#39;]
+sudo firewall-cmd --reload
+</code></pre><p>运行结果如下:</p>
+<p><img src="../django/images/django_centos_nginx.png" alt="图"></p>
+<h4 id="3-配置uwsgi"><a href="#3-配置uwsgi" class="headerlink" title="3.配置uwsgi"></a>3.配置uwsgi</h4><h5 id="3-1-安装uwsgi"><a href="#3-1-安装uwsgi" class="headerlink" title="3.1 安装uwsgi"></a>3.1 安装uwsgi</h5><p>在虚拟环境中安装uwsgi，假设虚拟环境安装在/home/env/axfenv中</p>
+<pre><code>/home/env/axfeng/bin/python3/pip3 install uwsgi
+</code></pre><h4 id="4-配置项目代码，配置项目nginx，配置uwsgi-ini等"><a href="#4-配置项目代码，配置项目nginx，配置uwsgi-ini等" class="headerlink" title="4. 配置项目代码，配置项目nginx，配置uwsgi.ini等"></a>4. 配置项目代码，配置项目nginx，配置uwsgi.ini等</h4><p>本案例的配置文件，都习惯将每一个项目的配置文件，日志文件，虚拟环境放在一起，这样开发方便，运维也方便维护</p>
+<p>项目的目录结构如下：</p>
+<p><img src="../django/images/django_centos_project_mulu.png" alt="图"></p>
+<p>其中：</p>
+<p>conf是配置文件，用于存放项目的nginx.conf文件，uwsgi.ini文件</p>
+<p>logs是日志文件，用于存放nginx的启动成功和失败文件，以及uwsgi的运行日志文件</p>
+<p>env是用于存放虚拟环境</p>
+<p>src是项目文件，该目录下上传的是目录代码</p>
+<h4 id="4-1-配置nginx-conf文件"><a href="#4-1-配置nginx-conf文件" class="headerlink" title="4.1 配置nginx.conf文件"></a>4.1 配置nginx.conf文件</h4><p><b>首先</b>：编写自己项目的nginx.conf文件如下：</p>
+<p>每一个项目对应有一个自己定义的nginx的配置文件，比如爱鲜蜂项目，我定义为axfnginx.conf文件</p>
+<pre><code>server {
+     listen       80;
+     server_name 39.104.176.9 localhost;
 
-    def clean_gender(self):
-        # 只是检验性别
-        gender = self.cleaned_data.get(&#39;gender&#39;)
-        if gender == &#39;男&#39;:
-            self.cleaned_data[&#39;gender&#39;] = 1
-        else:
-            self.cleaned_data[&#39;gender&#39;] = 0
-        return self.cleaned_data[&#39;gender&#39;]
-</code></pre><h3 id="校验全部成功后，写入数据库的操作以及跳转操作"><a href="#校验全部成功后，写入数据库的操作以及跳转操作" class="headerlink" title="校验全部成功后，写入数据库的操作以及跳转操作"></a>校验全部成功后，写入数据库的操作以及跳转操作</h3><pre><code>def add_stu_info(request):
-    if request.method == &#39;GET&#39;:
-        return render(request,&#39;add_stus.html&#39;)
+     access_log /home/logs/access.log;
+     error_log /home/logs/error.log;
 
-    if request.method == &#39;POST&#39;:
-        form = StuForm(request.POST,request.FILES)
-        if form.is_valid():
-            username = form.cleaned_data[&#39;username&#39;]
-            icon = form.cleaned_data[&#39;icon&#39;]
-            # 获取的字段为1或者0
-            gender = form.cleaned_data[&#39;gender&#39;]
-            Student.objects.create(s_name=username,
-                                   icon=icon,
-                                   s_gender=gender)
+     location / {
+         include uwsgi_params;
+         uwsgi_pass 127.0.0.1:8890;
+     }
+     location /static/ {
+         alias /home/src/axf/static/;
+         expires 30d;
+     }
 
-            return  HttpResponseRedirect(reverse(&#39;app:all_stu&#39;))
-        else:
-            errors = form.errors
-            return render(request,&#39;add_stus.html&#39;,{&#39;errors&#39;:errors})
-</code></pre><p><strong>分析</strong>：如果请求为GET请求，则跳转到学生创建页面stu_form.html。当用户在学生创建页面中填写的学生姓名、年龄、性别并点击提交后，视图函数将接收POST请求，并做如下的处理。</p>
-<p>接收POST请求，可以分以下三步骤分析：</p>
-<p><strong>步骤1：</strong>在POST请求中，通过请求request中的POST属性获取页面中通过表单form提交的数据，数据中包括姓名name、年龄age、性别sex。</p>
-<p><strong>步骤2：</strong> 使用StudentForm表单验证request.POST中提交的数据。在表单中定义了name、age、sex字段是必填字段，并且姓名的长度不能超过10个字符，如果在页面中没有填写其中任何一个参数，或者姓名字段填写太长，则表单验证不通过。</p>
-<p><strong>步骤3</strong>：判断表单是否验证通过，可以使用is_valid()方法。如果表单验证成功，则返回True，否则返回False。</p>
-<p><strong>步骤4：</strong>如果验证表单成功，则通过Student模型进行数据存储。如果验证失败，则返回stu_form.html页面，并将form参数传递给页面。</p>
-<p><strong>3. 表单的错误提示</strong><br>定义了校验页面中传递参数的StudentForm表单类，并且使用is_valid()方法判断表单校验是否成功。如果is_valid()的结果为False,则表示表单校验失败。form表单验证可以通过使用form.errors查询验证的错误信息。</p>
-<h3 id="删除学生"><a href="#删除学生" class="headerlink" title="删除学生"></a>删除学生</h3><p>当在查看学生信息的页面，可以对学生进行删除的操作</p>
-<h4 id="首先"><a href="#首先" class="headerlink" title="首先"></a>首先</h4><p>在此处html中添加操作列</p>
-<pre><code>        &lt;thread&gt;
-            &lt;th&gt;编号&lt;/th&gt;
-            &lt;th&gt;姓名&lt;/th&gt;
-            &lt;th&gt;年龄&lt;/th&gt;
-            &lt;th&gt;性别&lt;/th&gt;
-            &lt;th&gt;头像&lt;/th&gt;
-            &lt;th&gt;操作&lt;/th&gt;
-        &lt;/thread&gt;
-</code></pre><h4 id="然后"><a href="#然后" class="headerlink" title="然后"></a>然后</h4><p>在此处添加删除的按钮</p>
-<pre><code>                    &lt;td&gt;&lt;img src=&quot;/media/{{ stu.icon }}&quot;&gt;&lt;/td&gt;
-                    &lt;td&gt;
-                        &lt;a href=&quot;{% url 'app:del_stu' stu.id %}&quot;&gt;删除&lt;/a&gt;
-                    &lt;/td&gt;
-</code></pre><h4 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h4><p>在查看全部学生的页面中，即可直接操作管理员。</p>
-<pre><code>def del_stu(request,id):
-    if request.method == &#39;GET&#39;:
-        Student.objects.filter(pk=id).delete()
-        return HttpResponseRedirect(reverse(&#39;app:all_stu&#39;))-
+ }
+</code></pre><p><b>其次</b>：修改总的nginx的配置文件，让总的nginx文件包含我们自定义的项目的axfnginx.conf文件</p>
+<p>总的nginx配置文件在：/etc/nginx/nginx.conf中</p>
+<p><img src="../django/images/django_centos_nginx_peizhi.png" alt="图"></p>
+<p>以上步骤操作完成以后，需要重启nginx：</p>
+<pre><code>systemctl restart nginx
+</code></pre><p>如果自定义的axfnginx.conf文件没有错误的话，查看nginx的运行状态会有如下的结果：</p>
+<p><img src="../django/images/django_centos_nginx_status.png" alt="图"></p>
+<h4 id="4-2-配置uwsgi文件"><a href="#4-2-配置uwsgi文件" class="headerlink" title="4.2 配置uwsgi文件"></a>4.2 配置uwsgi文件</h4><p>在conf文件夹下除了包含自定义的axfnginx.conf文件，还有我们定义的uwsgi.ini文件</p>
+<pre><code>[uwsgi]
+projectname = axf
+base = /home/src
+
+# 守护进程
+master = true
+
+# 进程个数
+processes = 4
+
+# 虚拟环境
+pythonhome = /home/env/axfenv
+
+# 项目地址
+chdir = %(base)/%(projectname)
+
+# 指定python版本
+pythonpath = /usr/local/python3/bin/python3
+
+# 指定uwsgi文件
+module = %(projectname).wsgi
+
+# 和nginx通信地址:端口
+socket = 127.0.0.1:8890
+
+# 日志文件地址
+logto = /home/logs/uwsgi.log
+</code></pre><p>运行项目:</p>
+<pre><code>/home/env/axfeng/bin/python3/uwsgi --ini uwsgi.ini
 </code></pre>
             </div>
             <hr>
@@ -587,7 +644,7 @@ class StuForm(forms.Form):
                     <span class="reprint-tip">转载请注明: </span>
                     <a href="http://yoursite.com" class="b-link-green">lorry_python</a>
                     <i class="fa fa-angle-right fa-lg fa-fw text-color"></i>
-                    <a href="/2019/01/10/web-hou-duan-django-gao-chao-3form-biao-dan/" class="b-link-green">web后端Django-高潮3form表单</a>
+                    <a href="/2019/01/22/web-hou-duan-django-jie-shu-1cetenos-bu-shu/" class="b-link-green"></a>
                 </p>
             </div>
         </div>
@@ -609,7 +666,7 @@ class StuForm(forms.Form):
     <div class="row article-row">
         
         <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge left-badge text-color">上一篇</div>
+            <div class="article-badge left-badge text-color">本篇</div>
             <div class="card">
                 <a href="/2019/01/22/web-hou-duan-django-jie-shu-1cetenos-bu-shu/">
                     <div class="card-image">
@@ -626,9 +683,9 @@ layout: wtitle: web后端Django-前戏4html模板操作date: 2019-1-4 12:03:10ta
 
 前言项目从0到1</div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -637,6 +694,7 @@ layout: wtitle: web后端Django-前戏4html模板操作date: 2019-1-4 12:03:10ta
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -645,23 +703,22 @@ layout: wtitle: web后端Django-前戏4html模板操作date: 2019-1-4 12:03:10ta
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">下一篇</div>
             <div class="card">
-                <a href="/2019/01/09/web-hou-duan-django-gao-chao-2request-responsecookie-he-session/">
+                <a href="/2019/01/10/web-hou-duan-django-gao-chao-3form-biao-dan/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/7.jpg" class="responsive-img" alt="web后端Django-高潮2request,responsecookie和session,">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="web后端Django-高潮3form表单">
                         
-                        <span class="card-title">web后端Django-高潮2request,responsecookie和session,</span>
+                        <span class="card-title">web后端Django-高潮3form表单</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
-                    <div class="summary">创建配置当前的项目是为了创建账户登录以及保存在数据库方
-
-参考高潮1，在templates中创建login.html以及register.html文件。同时拷贝高潮1中的index相关文件到当前文件夹
-使用python manage.py </div>
+                    <div class="summary">实例背景form表单此处的应用实例，当对输入的学生信息要进行验证，如姓名长度，性别验证以及输入的不能为空。通常原始操作是需要些一堆if条件进行验证，而此处是使用form表单对其进行验证
+工程中学生类注意姓名，性别，以及头像
+from dja</div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-09
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-01-10
                             </span>
                         <span class="publish-author">
                             
